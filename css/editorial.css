@@ -1,0 +1,200 @@
+/* ============================================================
+   FLEISCHEREI EICHENHOF — EDITORIAL CRAFT LAYER
+   Lädt NACH light.css. Hebt die Seite auf Magazin-Niveau:
+   asymmetrischer Hero, Editorial-Typo-Skala, weniger Karten-Look.
+   ============================================================ */
+
+:root {
+  --ed-ink:       #1c140d;          /* tiefes Warmbraun-Schwarz für Headlines */
+  --ed-ink-soft:  rgba(28,20,13,0.74);
+  --ed-paper:     #f5efe4;          /* warmes Papier */
+  --ed-paper-2:   #efe7d8;
+  --ed-line:      rgba(28,20,13,0.14);
+  --ed-red:       #A81820;
+  --ed-gold:      #b08620;
+}
+
+/* ---- Editorial-Typo-Skala: mehr Kontrast zwischen den Stufen ---- */
+.hero-editorial h1,
+.ed-h2 {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 0.98;
+  color: var(--ed-ink);
+  text-wrap: balance;
+}
+.ed-h2 { font-size: clamp(2.2rem, 5vw, 4rem); margin: 0; }
+.ed-h2 em { font-style: normal; color: var(--ed-red); }
+
+.ed-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 0.74rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--ed-gold);
+}
+.ed-kicker::before {
+  content: ''; width: 26px; height: 1.5px; background: var(--ed-gold); display: inline-block;
+}
+
+/* =========================================================
+   HERO — asymmetrischer Editorial-Split
+   ========================================================= */
+.hero-editorial {
+  position: relative;
+  min-height: auto;
+  background:
+    radial-gradient(ellipse 70% 60% at 12% 0%, rgba(176,134,32,0.07), transparent 60%),
+    var(--ed-paper);
+  padding: clamp(120px, 14vh, 180px) 0 clamp(70px, 9vh, 110px);
+  overflow: hidden;
+}
+.hero-editorial .he-grid {
+  max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 64px);
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: center;
+}
+.he-text { position: relative; z-index: 2; }
+.he-eyebrow { margin-bottom: 26px; }
+.hero-editorial h1 {
+  font-size: clamp(2.9rem, 6.6vw, 6rem);
+  margin: 0 0 28px;
+}
+.hero-editorial h1 em { font-style: normal; color: var(--ed-red); }
+.he-lead {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: clamp(1.02rem, 1.35vw, 1.22rem);
+  line-height: 1.6; color: var(--ed-ink-soft);
+  max-width: 30em; margin: 0 0 36px;
+}
+.he-lead strong { color: var(--ed-ink); font-weight: 700; }
+.he-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 44px; }
+
+/* Editorial-Meta-Reihe statt Glas-Kacheln */
+.he-meta {
+  display: flex; gap: clamp(20px, 4vw, 48px);
+  border-top: 1px solid var(--ed-line); padding-top: 26px;
+}
+.he-meta-item .n {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800; font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  color: var(--ed-ink); line-height: 1; letter-spacing: -0.02em;
+}
+.he-meta-item .l {
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--ed-ink-soft); margin-top: 8px;
+}
+
+/* Foto rechts mit überlappendem Award-Siegel */
+.he-photo { position: relative; z-index: 1; }
+.he-photo-frame {
+  position: relative; border-radius: 8px; overflow: hidden;
+  box-shadow: 0 40px 80px -30px rgba(28,20,13,0.5), 0 12px 30px -12px rgba(28,20,13,0.3);
+  aspect-ratio: 886 / 1100;
+}
+.he-photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.he-photo-frame::after {  /* subtiler warmer Lichtverlauf für Tiefe */
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(160deg, transparent 55%, rgba(28,20,13,0.22));
+}
+.he-seal {
+  position: absolute; left: -28px; bottom: 36px; z-index: 3;
+  width: clamp(96px, 11vw, 132px); height: clamp(96px, 11vw, 132px);
+  border-radius: 50%;
+  display: grid; place-content: center; text-align: center;
+  background: radial-gradient(circle at 38% 32%, #2a2018, #120c08);
+  border: 1px solid rgba(232,201,106,0.5);
+  box-shadow: 0 18px 40px -12px rgba(0,0,0,0.6);
+  color: #E8C96A;
+  transform: rotate(-7deg);
+}
+.he-seal .star { font-size: 1.05rem; line-height: 1; }
+.he-seal .big {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800;
+  font-size: 0.92rem; letter-spacing: 0.04em; margin: 4px 0 2px; line-height: 1.05;
+}
+.he-seal .sm { font-family: 'Hanken Grotesk', sans-serif; font-size: 0.56rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(232,201,106,0.8); }
+
+/* Headline darf nie breiter als der Viewport werden */
+.hero-editorial h1 { overflow-wrap: break-word; }
+
+@media (max-width: 880px) {
+  .hero-editorial .he-grid { grid-template-columns: 1fr; gap: 40px; min-width: 0; }
+  .he-text { min-width: 0; }
+  .he-photo { order: -1; max-width: min(440px, 100%); margin: 0 auto; width: 100%; }
+  .he-photo-frame { aspect-ratio: 4 / 3; }
+  .he-meta { gap: 24px; flex-wrap: wrap; }
+}
+
+@media (max-width: 560px) {
+  .hero-editorial { padding: clamp(92px, 13vh, 116px) 0 56px; }
+  .hero-editorial .he-grid { padding: 0 20px; gap: 30px; }
+  .hero-editorial h1 { font-size: clamp(2.15rem, 8.6vw, 3.1rem); line-height: 1.04; margin-bottom: 22px; }
+  .he-eyebrow { font-size: 0.6rem !important; letter-spacing: 0.12em; margin-bottom: 18px; }
+  .he-lead { font-size: 1rem; margin-bottom: 28px; }
+  .he-actions { gap: 10px; margin-bottom: 32px; }
+  .he-actions .btn { width: 100%; justify-content: center; }
+  .he-meta { gap: 18px 26px; padding-top: 22px; }
+  .he-social { margin-top: 24px; padding-top: 20px; gap: 8px 12px; }
+  .he-photo-frame { aspect-ratio: 3 / 2; }
+  .he-seal { left: -14px; bottom: 20px; }
+}
+
+/* =========================================================
+   GHOST-BUTTON — editorial, klare Kante statt Milchglas
+   ========================================================= */
+.btn-ghost {
+  background: transparent;
+  color: var(--ed-ink);
+  border: 1.5px solid rgba(28,20,13,0.3);
+  box-shadow: none;
+}
+.btn-ghost:hover { background: rgba(28,20,13,0.06); border-color: var(--ed-ink); }
+.btn-ghost::after { display: none; }
+
+/* =========================================================
+   SORTIMENT — full-bleed Editorial-Bild mit Text
+   ========================================================= */
+.ed-sortiment {
+  position: relative; margin: clamp(40px,7vh,90px) 0;
+  min-height: clamp(420px, 60vh, 600px);
+  display: flex; align-items: center;
+  background: var(--ed-ink);
+  overflow: hidden;
+}
+.ed-sortiment img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; opacity: 0.5;
+}
+.ed-sortiment::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(18,12,8,0.85) 0%, rgba(18,12,8,0.5) 45%, rgba(18,12,8,0.2) 100%);
+}
+.ed-sortiment .ed-sortiment-inner {
+  position: relative; z-index: 2;
+  max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px,5vw,64px); width: 100%;
+}
+.ed-sortiment .ed-sortiment-box { max-width: 30em; }
+.ed-sortiment .ed-h2 { color: #fff; }
+.ed-sortiment .ed-h2 em { color: #E8C96A; }
+.ed-sortiment p {
+  color: rgba(255,255,255,0.82); font-family: 'Hanken Grotesk', sans-serif;
+  font-size: 1.08rem; line-height: 1.65; margin: 20px 0 32px;
+}
+.ed-sortiment .ed-kicker { color: #E8C96A; }
+.ed-sortiment .ed-kicker::before { background: #E8C96A; }
+
+/* === Hero: Social-Kanäle + WhatsApp (07.08.2026) === */
+.he-social { display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:30px; padding-top:24px; border-top:1px solid rgba(31,18,8,.12); }
+.he-social-label { font-size:.7rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#8a6a18; }
+.he-social a { font-size:.92rem; font-weight:600; color:#1c140d; text-decoration:none; transition:color .2s; }
+.he-social a:hover { color:#c8202b; }
+.he-social a.he-wa { background:#25D366; color:#fff; padding:6px 15px; border-radius:999px; font-weight:700; display:inline-flex; align-items:center; gap:6px; }
+.he-social a.he-wa::before { content:''; width:8px; height:8px; border-radius:50%; background:#fff; box-shadow:0 0 0 0 rgba(255,255,255,.8); animation:heWaDot 2s ease-out infinite; }
+.he-social a.he-wa:hover { background:#1eb457; }
+@keyframes heWaDot { 0%{box-shadow:0 0 0 0 rgba(255,255,255,.7)} 70%{box-shadow:0 0 0 7px rgba(255,255,255,0)} 100%{box-shadow:0 0 0 0 rgba(255,255,255,0)} }
+@media (prefers-reduced-motion:reduce){ .he-social a.he-wa::before{ animation:none; } }

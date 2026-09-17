@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt — Fleischerei Eichenhof Musterstadt | Marktstraße 14, 09000 Musterstadt</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23A81820'/><text x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='bold' fill='%23F4EDE6' text-anchor='middle'>F</text></svg>">
+<meta name="description" content="Fleischerei Eichenhof kontaktieren — Telefon, WhatsApp, E-Mail oder Kontaktformular. Marktstraße 14, 09000 Musterstadt. Tel: 0123 456 78 90.">
+<link rel="stylesheet" href="css/styles.css?v=rk37">
+<link rel="stylesheet" href="css/premium.css?v=rk37">
+<link rel="stylesheet" href="css/light.css?v=rk37">
+
+<style>
+.page-hero { min-height:38vh; display:flex; align-items:center; position:relative; overflow:hidden; padding:120px 32px 60px; }
+.page-hero-bg { position:absolute; inset:0; background:url('assets/img/px-4550141.jpg') center/cover; filter:brightness(0.25) saturate(1.2); z-index:0; }
+.page-hero-overlay { position:absolute; inset:0; background:linear-gradient(140deg, rgba(7,7,7,0.9), rgba(168,24,32,0.2)); z-index:1; }
+.page-hero-content { position:relative; z-index:2; }
+
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+.contact-panel { padding:40px; }
+
+.contact-method {
+  display:flex; align-items:center; gap:20px; padding:22px 26px; margin-bottom:14px;
+  border-radius:var(--radius); background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.07);
+  text-decoration:none; color:var(--text); transition:all 0.25s;
+}
+.contact-method:hover { background:rgba(255,255,255,0.07); border-color:rgba(255,255,255,0.14); transform:translateX(4px); }
+.contact-method:hover .contact-arrow { opacity:1; transform:translateX(0); }
+.cm-icon {
+  width:44px; height:44px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg, rgba(168,24,32,0.16), rgba(168,24,32,0.08));
+  border:1px solid rgba(168,24,32,0.25);
+  color:var(--red-vivid);
+}
+.cm-icon svg { width:19px; height:19px; }
+.cm-label { font-size:0.72rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+.cm-value { font-size:1rem; font-weight:700; }
+.contact-arrow { margin-left:auto; color:var(--text-muted); opacity:0; transform:translateX(-4px); transition:all 0.2s; }
+
+.map-container { border-radius:var(--radius); overflow:hidden; margin-top:24px; }
+.map-container iframe { display:block; width:100%; height:320px; border:none; filter:grayscale(0.8) contrast(1.1) brightness(0.7); }
+.map-consent { min-height:320px; display:flex; align-items:center; justify-content:center; text-align:center; padding:28px 22px;
+  background:linear-gradient(160deg, rgba(32,26,19,.06), rgba(32,26,19,.13)); }
+.map-consent-inner { max-width:360px; }
+.map-consent .map-pin { font-size:1.9rem; margin-bottom:10px; }
+.map-consent h4 { margin-bottom:8px; font-size:1.05rem; }
+.map-consent p { font-size:.82rem; line-height:1.55; color:var(--text-muted); margin-bottom:16px; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Fleischerei Eichenhof","description":"Handgemachte Fleisch- und Wurstspezialitäten aus dem Meisterbetrieb, goldprämierte Wurstqualität.","address":{"@type":"PostalAddress","streetAddress":"Marktstraße 14","addressLocality":"Musterstadt","postalCode":"09000","addressCountry":"DE"},"telephone":"+491234567890","email":"info@fleischerei-eichenhof.de","openingHours":["Tu 11:00-18:00","We 10:00-18:00","Th 08:00-18:00","Fr 08:00-18:00","Sa 08:00-12:00"]}</script>
+<link rel="stylesheet" href="css/valoris-demo.css?v=rk37">
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader" aria-hidden="true">
+  <div class="loader-mark">
+    <span>D</span><span>e</span><span>r</span>
+    <em><span style="display:inline-block;width:0.4em"></span></em>
+    <span style="color:var(--red-vivid)">F</span><span style="color:var(--red-vivid)">l</span><span style="color:var(--red-vivid)">e</span><span style="color:var(--red-vivid)">i</span><span style="color:var(--red-vivid)">s</span><span style="color:var(--red-vivid)">c</span><span style="color:var(--red-vivid)">h</span><span style="color:var(--red-vivid)">i</span>
+  </div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  <div class="loader-sub">Goldprämiert · Musterstadt</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav glass">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-name">Fleischerei <em>Eichenhof</em></span>
+      <span class="logo-award">Meisterbetrieb · Musterstadt</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Start</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="partyservice.html">Partyservice</a></li>
+      <li><a href="ueber-uns.html">Über uns</a></li>
+      <li><a href="kontakt.html" class="active">Kontakt</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="shop.html" class="btn btn-red btn-sm">Shop</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <button class="mobile-nav-close" aria-label="Schliessen">&#x2715;</button>
+  <a href="index.html">Start</a>
+  <a href="shop.html">Shop</a>
+  <a href="partyservice.html">Partyservice</a>
+  <a href="ueber-uns.html">Über uns</a>
+  <a href="kontakt.html">Kontakt</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="container page-hero-content">
+        <h1>Sag uns <em>Hallo</em>.</h1>
+    <p style="font-size:1.05rem; color:rgba(244,237,230,0.72); max-width:480px; margin-top:16px;">
+      Fragen, Vorbestellungen, Partyservice-Anfragen: Michael und sein Team helfen schnell und persönlich weiter.
+    </p>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section>
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- LEFT: Contact methods + Hours + Map -->
+      <div class="reveal">
+
+        <!-- Quick Contact -->
+        <span class="label" style="margin-bottom:20px; display:block;">Direkt erreichen</span>
+
+        <a href="tel:+491234567890" class="contact-method">
+          <div class="cm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div>
+            <div class="cm-label">Telefon</div>
+            <div class="cm-value">0123 456 78 90</div>
+          </div>
+          <div class="contact-arrow">→</div>
+        </a>
+
+        <a href="https://wa.me/4915254190819" target="_blank" rel="noopener" class="contact-method">
+          <div class="cm-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35z"/><path d="M12 2a10 10 0 0 0-8.6 15.07L2 22l5.07-1.33A10 10 0 1 0 12 2zm0 18.3a8.28 8.28 0 0 1-4.22-1.15l-.3-.18-3.01.79.8-2.93-.2-.31A8.3 8.3 0 1 1 12 20.3z"/></svg></div>
+          <div>
+            <div class="cm-label">WhatsApp</div>
+            <div class="cm-value">Direkt schreiben</div>
+          </div>
+          <div class="contact-arrow">→</div>
+        </a>
+
+        <a href="mailto:info@fleischerei-eichenhof.de" class="contact-method">
+          <div class="cm-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m22 7-10 6L2 7"/></svg></div>
+          <div>
+            <div class="cm-label">E-Mail</div>
+            <div class="cm-value">info@fleischerei-eichenhof.de</div>
+          </div>
+          <div class="contact-arrow">→</div>
+        </a>
+
+        <a href="#" target="_blank" rel="noopener" class="contact-method">
+          <div class="cm-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.2 2.23.2v2.46H15.2c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></div>
+          <div>
+            <div class="cm-label">Facebook</div>
+            <div class="cm-value">facebook.com/Wendt</div>
+          </div>
+          <div class="contact-arrow">→</div>
+        </a>
+
+        <!-- Öffnungszeiten -->
+        <div class="glass" style="padding:32px; margin-top:24px;">
+          <span class="label">Öffnungszeiten</span>
+          <ul class="hours-list">
+            <li class="hours-row"><span class="hours-day">Montag</span><span class="hours-time closed">Geschlossen</span></li>
+            <li class="hours-row"><span class="hours-day">Dienstag</span><span class="hours-time">11:00 – 18:00</span></li>
+            <li class="hours-row"><span class="hours-day">Mittwoch</span><span class="hours-time">10:00 – 18:00</span></li>
+            <li class="hours-row"><span class="hours-day">Donnerstag</span><span class="hours-time">08:00 – 18:00</span></li>
+            <li class="hours-row"><span class="hours-day">Freitag</span><span class="hours-time">08:00 – 18:00</span></li>
+            <li class="hours-row"><span class="hours-day">Samstag</span><span class="hours-time">08:00 – 12:00</span></li>
+            <li class="hours-row"><span class="hours-day">Sonntag</span><span class="hours-time closed">Geschlossen</span></li>
+          </ul>
+        </div>
+
+        <!-- Karte — DSGVO Zwei-Klick-Lösung: Google lädt erst nach Einwilligung -->
+        <div class="map-container glass" style="margin-top:24px;">
+          <div class="map-consent" id="mapConsent">
+            <div class="map-consent-inner">
+              <div class="map-pin" aria-hidden="true">📍</div>
+              <h4>Karte von Google Maps</h4>
+              <p>Beim Laden wird eine Verbindung zu Google hergestellt und Ihre IP-Adresse übertragen. Details in der Datenschutzerklärung.</p>
+              <button type="button" class="btn btn-red" onclick="loadMap()">Karte laden</button>
+            </div>
+          </div>
+        </div>
+        <div style="padding:16px 20px; text-align:center; font-size:0.85rem; color:var(--text-muted);">
+          Marktstraße 14 · 09000 Musterstadt
+          <a href="https://maps.google.com/?q=Marktstra%C3%9Fe+14,+09000+Musterstadt" target="_blank" rel="noopener" style="color:var(--gold); margin-left:12px; font-weight:600;">In Google Maps öffnen →</a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Contact Form -->
+      <div class="glass contact-panel reveal reveal-d1">
+                <h3 style="margin-bottom:6px;">Schreib uns direkt</h3>
+        <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:28px;">Wir antworten innerhalb von 24 Stunden, meist viel schneller.</p>
+
+        <form id="contactForm" action="https://formspree.io/f/mlgpooqw" method="POST">
+          <input type="hidden" name="subject" value="Kontaktanfrage — Fleischerei Eichenhof Website">
+
+          <div class="form-group">
+            <label class="form-label" for="c-name">Euer Name *</label>
+            <input class="form-input" type="text" id="c-name" name="name" placeholder="Max Mustermann" required>
+          </div>
+
+          <div class="date-row" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+            <div class="form-group">
+              <label class="form-label" for="c-tel">Telefon</label>
+              <input class="form-input" type="tel" id="c-tel" name="telefon" placeholder="0171 234 567 8">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-email">E-Mail *</label>
+              <input class="form-input" type="email" id="c-email" name="email" placeholder="max@beispiel.de" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="c-betreff">Betreff</label>
+            <select class="form-input" id="c-betreff" name="betreff">
+              <option value="">Bitte wählen</option>
+              <option>Allgemeine Anfrage</option>
+              <option>Vorbestellung Produkte</option>
+              <option>Partyservice anfragen</option>
+              <option>Versand / Lieferung</option>
+              <option>Feedback & Lob</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="c-nachricht">Eure Nachricht *</label>
+            <textarea class="form-input" id="c-nachricht" name="nachricht" rows="5" required
+              placeholder="Was können wir für euch tun? Bestellmengen, Termine, spezielle Wünsche, einfach drauflos schreiben." style="resize:vertical;"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-red btn-lg" style="width:100%; justify-content:center;">
+            Nachricht senden
+          </button>
+          <p style="font-size:0.75rem; color:var(--text-muted); text-align:center; margin-top:14px; line-height:1.6;">
+            Eure Daten werden nur zur Beantwortung eurer Anfrage verwendet. Keine Werbung. <button data-open="datenschutz" style="background:none;border:none;color:var(--gold);cursor:pointer;font-size:0.75rem;">Datenschutz →</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADDRESS BLOCK -->
+<section style="padding-top:0; padding-bottom:90px;">
+  <div class="container">
+    <div class="grid-3">
+      <div class="glass usp-card reveal" style="padding:32px 28px;">
+        <div class="usp-icon"></div>
+        <h4>Adresse</h4>
+        <p>Marktstraße 14<br>09000 Musterstadt<br>(Ortsteil Musterdorf)</p>
+      </div>
+      <div class="glass usp-card reveal reveal-d1" style="padding:32px 28px;">
+        <div class="usp-icon"></div>
+        <h4>Anfahrt</h4>
+        <p>Gute Erreichbarkeit mit PKW. Kostenlose Parkmöglichkeiten direkt vor dem Laden verfügbar.</p>
+      </div>
+      <div class="glass usp-card reveal reveal-d2" style="padding:32px 28px;">
+        <div class="usp-icon"></div>
+        <h4>Vorbestellungen</h4>
+        <p>Für große Mengen oder spezielle Wünsche bitte 1–2 Tage vorher anrufen oder WhatsApp schreiben.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-name">Fleischerei <em>Eichenhof</em></div>
+        <div class="logo-award">Meisterbetrieb · Michael Wendt</div>
+        <p>Handgemachte Fleisch- und Wurstspezialitäten aus Musterstadt.</p>
+        <address>Marktstraße 14, 09000 Musterstadt<br>Tel: <a href="tel:+491234567890" style="color:var(--text-muted);">0123 456 78 90</a></address>
+      </div>
+      <div><div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Startseite</a><a href="shop.html">Shop</a>
+          <a href="partyservice.html">Partyservice</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a>
+        </div>
+      </div>
+      <div><div class="footer-col-title">Öffnungszeiten</div>
+        <div class="footer-links" style="gap:8px;">
+          <span style="font-size:0.8rem; color:var(--text-muted);">Mo: Geschlossen</span>
+          <span style="font-size:0.8rem; color:var(--text-muted);">Di: 11–18 Uhr</span>
+          <span style="font-size:0.8rem; color:var(--text-muted);">Mi: 10–18 Uhr</span>
+          <span style="font-size:0.8rem; color:var(--text-muted);">Do–Fr: 08–18 Uhr</span>
+          <span style="font-size:0.8rem; color:var(--text-muted);">Sa: 08–12 Uhr</span>
+        </div>
+      </div>
+      <div><div class="footer-col-title">Social Media</div>
+        <div class="footer-links">
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">Facebook</a>
+          <a href="#" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://wa.me/4915254190819" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span class="year"></span> Fleischerei Eichenhof</div>
+      <div class="footer-legal">
+        <button data-open="impressum">Impressum</button>
+        <button data-open="datenschutz">Datenschutz</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" href="https://wa.me/4915254190819" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div class="drawer-overlay"></div>
+<aside class="legal-drawer" id="drawer-impressum" role="dialog"><button class="drawer-close"></button><h2>Impressum</h2><h3>§ 5 TMG</h3><address>Michael Wendt — Fleischerei Eichenhof<br>Marktstraße 14, 09000 Musterstadt<br>Tel: 0123 456 78 90 | info@fleischerei-eichenhof.de</address><h3>USt-IdNr.</h3><p>wird bei Beauftragung ergänzt (Beispieldaten)</p><h3>Kammer</h3><p>Handwerkskammer Chemnitz, Limbacher Str. 195, 09116 Chemnitz</p></aside>
+<aside class="legal-drawer" id="drawer-datenschutz" role="dialog"><button class="drawer-close"></button><h2>Datenschutz</h2><h3>Verantwortlich</h3><address>Michael Wendt, Marktstraße 14, 09000 Musterstadt | info@fleischerei-eichenhof.de</address><h3>Kontaktformular</h3><p>Daten aus dem Formular werden nur zur Bearbeitung eurer Anfrage gespeichert und nicht weitergegeben.</p><h3>Eure Rechte</h3><p>Auskunft, Berichtigung, Löschung: info@fleischerei-eichenhof.de</p></aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js?v=rk37"></script>
+<script src="js/premium.js?v=rk37"></script>
+<script>
+document.getElementById('contactForm')?.addEventListener('submit', function() {
+  setTimeout(() => {
+    this.innerHTML = '<div class="form-success"><h3>Nachricht gesendet.</h3><p>Danke! Wir melden uns innerhalb von 24 Stunden, meist viel schneller.</p></div>';
+  }, 100);
+});
+
+/* Today highlight */
+(function() {
+  const days = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  const today = days[new Date().getDay()];
+  document.querySelectorAll('.hours-day').forEach(el => {
+    if (el.textContent.trim() === today) {
+      el.closest('.hours-row')?.classList.add('today');
+      const badge = document.createElement('span');
+      badge.className = 'today-badge';
+      badge.textContent = 'Heute';
+      el.appendChild(badge);
+    }
+  });
+})();
+</script>
+<script>
+function loadMap(){
+  var box = document.getElementById('mapConsent');
+  if(!box) return;
+  var f = document.createElement('iframe');
+  f.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2526.5!2d12.473!3d50.742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!2sMarktstra%C3%9Fe+14!5e0!3m2!1sde!2sde!4v1620000000000!5m2!1sde!2sde";
+  f.loading = "lazy"; f.allowFullscreen = true; f.referrerPolicy = "no-referrer-when-downgrade";
+  f.title = "Standort Fleischerei Eichenhof";
+  box.parentNode.replaceChild(f, box);
+}
+</script>
+
+<!-- ===== VALORIS DEMO-LEISTE (nur Showcase — beim Kundenprojekt entfernen) ===== -->
+<div class="vd-bar" role="complementary" aria-label="Hinweis: Demo-Website">
+  <div class="vd-bar__text">
+    <span class="vd-bar__dot" aria-hidden="true"></span>
+    <span class="vd-bar__label"><b>Demo-Website</b> — Musterbetrieb, kein echtes Unternehmen.
+      <span>So kann Ihre Fleischerei online aussehen.</span></span>
+  </div>
+  <div class="vd-bar__actions">
+    <a class="vd-bar__cta" href="https://wa.me/4915254190819" target="_blank" rel="noopener">Für meinen Betrieb anfragen</a>
+    <a class="vd-bar__link" href="https://www.valoris-auftragsstruktur.de" target="_blank" rel="noopener">VALORIS Webdesign &amp; SEO</a>
+  </div>
+</div>
+</body>
+</html>

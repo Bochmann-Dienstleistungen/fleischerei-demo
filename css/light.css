@@ -1,0 +1,239 @@
+/* ============================================================
+   FLEISCHEREI EICHENHOF — Helles Layout (Light Theme)
+   EIN SCHALTER: dieses Stylesheet einbinden = hell, Link entfernen = dunkel.
+   Beeinflusst alle Seiten (gemeinsam eingebunden).
+   ============================================================ */
+
+:root{
+  --bg:#f3ede2;
+  --surface:#ffffff;
+  --text:#201a13;
+  --text-muted:rgba(32,26,19,0.74);
+  --glass:rgba(255,255,255,0.80);
+  --glass-border:rgba(0,0,0,0.10);
+}
+
+body{ background:var(--bg) !important; color:var(--text); }
+
+/* Verlaufs-Überschriften -> solide dunkel */
+h1,h2{ background:none !important; -webkit-text-fill-color:currentColor !important; color:var(--text) !important; }
+em{ color:var(--red-vivid) !important; }
+
+/* Glas-Karten: sauberes Weiß, wenig Blur (kein Milchglas auf hell) */
+.glass{
+  background:rgba(255,255,255,0.80) !important;
+  -webkit-backdrop-filter:blur(6px) saturate(120%) !important;
+  backdrop-filter:blur(6px) saturate(120%) !important;
+  border-color:rgba(0,0,0,0.08) !important;
+  box-shadow:0 10px 30px rgba(70,55,35,0.10) !important;
+}
+
+/* Dunkle Foto-Sektionen -> ruhiges Hell */
+.sect-bg-grill,.sect-bg-butcher,.sect-bg-fire{ background:#efe7d9 !important; }
+
+/* NAV: klares helles Glas */
+.nav{
+  background:rgba(255,255,255,0.72) !important;
+  -webkit-backdrop-filter:blur(8px) saturate(125%) !important;
+  backdrop-filter:blur(8px) saturate(125%) !important;
+  border:1px solid rgba(0,0,0,0.06) !important;
+  box-shadow:0 8px 26px rgba(60,45,30,0.12) !important;
+}
+.nav.scrolled{ background:rgba(255,255,255,0.85) !important; box-shadow:0 10px 30px rgba(60,45,30,0.14) !important; }
+.nav-logo .logo-name{ color:#201a13 !important; }
+.nav-links a{ color:rgba(32,26,19,0.72) !important; }
+.nav-links a.active,.nav-links a:hover{ color:#201a13 !important; background:rgba(0,0,0,0.05) !important; }
+.nav-toggle span{ background:#201a13 !important; }
+
+/* BUTTONS: solide & knackig (kein durchscheinendes Glas) */
+.btn-red{ background:var(--red) !important; color:#fff !important; border:none !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important; box-shadow:0 8px 22px rgba(168,24,32,0.28) !important; }
+.btn-red:hover{ background:var(--red-vivid) !important; }
+.btn-gold{ background:var(--gold) !important; color:#1a1208 !important; border:none !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important; box-shadow:0 8px 22px rgba(197,160,40,0.28) !important; }
+.btn-gold:hover{ background:var(--gold-light) !important; }
+.btn-glass{ background:rgba(255,255,255,0.72) !important; color:#201a13 !important; border:1px solid rgba(0,0,0,0.10) !important;
+  -webkit-backdrop-filter:blur(6px) !important; backdrop-filter:blur(6px) !important; box-shadow:0 6px 18px rgba(60,45,30,0.10) !important; }
+.btn-glass:hover{ background:rgba(255,255,255,0.9) !important; }
+.btn-outline-gold{ background:transparent !important; color:#8a6a18 !important; border:1px solid rgba(197,160,40,0.5) !important; }
+.add-btn{ background:var(--red) !important; color:#fff !important; border:none !important;
+  -webkit-backdrop-filter:none !important; backdrop-filter:none !important; }
+
+/* FOOTER hell */
+.footer{ background:#e9e0d0 !important; border-top:1px solid rgba(0,0,0,0.08) !important; }
+.footer, .footer p, .footer address, .footer a{ color:var(--text-muted) !important; }
+.footer .logo-name{ color:#201a13 !important; }
+
+/* UNTERSEITEN-HERO (page-hero) aufhellen + Text dunkel */
+.page-hero-bg{ filter:brightness(0.95) saturate(1.05) !important; }
+.page-hero-overlay{ background:linear-gradient(140deg, rgba(243,237,226,0.60), rgba(243,237,226,0.84)) !important; }
+.page-hero-content, .page-hero-content h1, .page-hero-content .text-lead{ color:var(--text) !important; }
+.page-hero-content .label{ color:#8a6a18 !important; }
+
+/* ============ STARTSEITEN-HERO: Ken-Burns-Slider (echte Fotos) ============ */
+.hero-slider{ position:absolute; inset:0; z-index:0; overflow:hidden; background:#1a1410; }
+.hero-slide{ position:absolute; inset:0; background-size:cover; background-position:center; opacity:0;
+  animation:kenburns 28s infinite; will-change:opacity,transform; }
+.hero-slide:nth-child(1){ animation-delay:0s; }
+.hero-slide:nth-child(2){ animation-delay:7s; }
+.hero-slide:nth-child(3){ animation-delay:14s; }
+.hero-slide:nth-child(4){ animation-delay:21s; }
+@keyframes kenburns{
+  0%{ opacity:0; transform:scale(1.06); }
+  3%{ opacity:1; }
+  22%{ opacity:1; transform:scale(1.14); }
+  27%{ opacity:0; }
+  100%{ opacity:0; transform:scale(1.14); }
+}
+@media (prefers-reduced-motion:reduce){ .hero-slide{ animation:none; opacity:1; } .hero-slide:not(:first-child){ display:none; } }
+
+/* Hellerer Scrim über dem Slider (Essen sichtbar, Text lesbar) */
+.hero-overlay{ background:
+  radial-gradient(ellipse 64% 58% at 50% 54%, rgba(10,8,6,0.46) 0%, transparent 72%),
+  linear-gradient(to bottom, rgba(12,9,7,0.38) 0%, rgba(12,9,7,0.42) 45%, rgba(12,9,7,0.74) 100%) !important; }
+.hero-grain{ opacity:0.05 !important; }
+.hero-aurora{ opacity:0.5 !important; }
+/* Hero-Text bleibt hell (Bilder dahinter) */
+.hero h1,.hero .hero-sub,.hero-badge,.hero-stat,.hero-stat .num,.hero-stat .unit,.hero .hero-sub strong{
+  color:#F4EDE6 !important; -webkit-text-fill-color:#F4EDE6 !important; }
+.hero h1,.hero .hero-sub{ text-shadow:0 2px 24px rgba(0,0,0,0.45); }
+/* Editorial-Hero steht auf CREME (kein Foto dahinter) → Überschrift dunkel, kein dunkler Schatten */
+.hero-editorial h1, .hero-editorial h1 .line, .hero-editorial h1 .line-inner {
+  color:#1c140d !important; -webkit-text-fill-color:#1c140d !important; text-shadow:none !important; }
+.hero-editorial h1 em { color:#c8202b !important; -webkit-text-fill-color:#c8202b !important; }
+
+
+/* === Material: Metzgerpapier statt flacher Creme === */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: url('../assets/textures/papier.webp') center/cover no-repeat;
+  mix-blend-mode: multiply;
+  opacity: .30;
+}
+
+/* === Nav: feinere Glaskante === */
+.nav.glass {
+  box-shadow: 0 10px 34px rgba(31,18,8,.10), inset 0 1px 0 rgba(255,255,255,.75);
+  border-bottom: 1px solid rgba(31,18,8,.07);
+}
+
+/* === Sekundär-CTA im Hero: klar lesbar auf Foto === */
+.hero .btn-glass {
+  background: rgba(250,246,238,.92) !important;
+  color: #241a10 !important;
+  border: 1px solid rgba(255,255,255,.5) !important;
+  box-shadow: 0 10px 26px rgba(10,6,3,.35), inset 0 1px 0 rgba(255,255,255,.8) !important;
+}
+.hero .btn-glass:hover { background: #fff !important; }
+
+/* ============================================================
+   KONTRAST-FIX (14.06.2026) — Lesbarkeit Light-Theme
+   ============================================================ */
+
+/* 1. Helle Body-Texte, die auf hellem Grund unsichtbar waren → dunkel */
+.text-lead, .review-text { color: rgba(28,20,13,0.74) !important; }
+/* Dunkle Sektionen behalten helle Lead-Texte */
+.award-showcase .text-lead, .sect-party .text-lead { color: rgba(255,255,255,0.85) !important; }
+
+/* 2. Gold-Kleintext / Labels: dunkles Gold auf hellem Grund (≥4.5:1) */
+.label, .row-meta, .step-num, .pkg-tag, .pkg-label, .tl-year, .team-role,
+.today-badge, .calc-line-val, .range-val, .ed-kicker, .special-tag,
+.nav .logo-award, .footer .logo-award, .footer-col-title, .hours-time.closed,
+.product-tag.champ, .qv-tag, .calc-line-name { color: #7a5d12 !important; }
+
+/* 3. In DUNKLEN Sektionen helles Gold wiederherstellen */
+.award-showcase .label, .ed-sortiment .ed-kicker { color: #E8C96A !important; }
+
+/* 4. ed-sortiment Headline (war dunkel auf dunkel) */
+.ed-sortiment .ed-h2 { color: #fff !important; }
+.ed-sortiment .ed-h2 em { color: #E8C96A !important; }
+
+/* 5. Rote Mini-Labels & Avatare auf hellem Grund → kräftiges Rot */
+.product-tag.hot { color: #fff !important; background: var(--red) !important; }
+.reviewer-avatar, .team-avatar { color: #fff !important; background: var(--red) !important; }
+
+/* 6. Legal-Drawer (Impressum/Datenschutz) ist dunkel → Text hell */
+.legal-drawer, .legal-drawer p, .legal-drawer li, .legal-drawer address,
+.legal-drawer div, .legal-drawer span { color: rgba(244,237,230,0.82) !important; }
+.legal-drawer h2 { color: #fff !important; }
+.legal-drawer h3 { color: #E8C96A !important; }
+
+/* 7. Schließen-Buttons auf dunklen Overlays sichtbar */
+.mobile-nav-close, .drawer-close { color: #f4ede6 !important; }
+.mobile-nav a { color: rgba(244,237,230,0.9) !important; }
+
+/* --- Kontrast-Fix Runde 2 (14.06) --- */
+/* Page-Hero Lead-Absätze (inline hell) → dunkel auf hellem Overlay */
+.page-hero-content p { color: rgba(28,20,13,0.82) !important; }
+.page-hero-content .label { color: #6a5110 !important; }
+
+/* --- Kontrast-Fix Runde 3 (07.08): Formularfelder im Hell-Theme lesbar machen --- */
+/* Basis-.form-input erbte Dark-Theme (heller Text, dunkler Options-BG) → auf Creme unsichtbar */
+.form-input, select.form-input, textarea.form-input,
+input.form-input, .booking-panel .form-input {
+  background: #fff !important;
+  border: 1px solid rgba(31,18,8,0.20) !important;
+  color: #201a13 !important;
+}
+.form-input::placeholder { color: rgba(31,18,8,0.42) !important; }
+.form-input:focus { border-color: var(--red, #A81820) !important; background: #fff !important; }
+.form-input option { background: #fff !important; color: #201a13 !important; }
+.form-label, label.form-label { color: #201a13 !important; }
+/* Öffnungszeiten (Gold auf Creme, 2.49:1) → dunkles Gold, gut lesbar */
+.hours-time { color: #6a5110 !important; }
+/* Rotes Laufband: Text war dunkel auf Rot → hell/creme, gut lesbar */
+.award-strip .award-item { color: #fbe6bf !important; }
+/* Award-Karten sind helles Glas → Text war helles Creme (hell auf hell) → dunkel */
+.award-item-pro .award-desc-pro { color: rgba(28,20,13,0.78) !important; }
+.award-item-pro .award-title-pro { color: #201a13 !important; }
+.award-item-pro .award-place-pro { color: #6a5110 !important; }
+/* Große Zähler-Zahlen (5.000+/2019/7) verliefen ins Creme-Transparente → dunkler, lesbarer Verlauf */
+.counter-num-xxl {
+  background: linear-gradient(180deg, #241d15 0%, #6a5236 100%) !important;
+  -webkit-background-clip: text !important; background-clip: text !important;
+  -webkit-text-fill-color: transparent !important; color: transparent !important;
+}
+/* tilo-story ist #050505 dunkel → Überschrift/Text erbten dunkel (dunkel auf dunkel) → hell */
+.tilo-story .tilo-text h2 { color: #f4ede6 !important; }
+.tilo-story .tilo-text h2 em { color: #E8C96A !important; }
+.tilo-story .tilo-text p { color: rgba(244,237,230,0.82) !important; }
+.tilo-story .tilo-text .label { color: #E8C96A !important; }
+.tilo-story .tilo-quote { color: #f4ede6 !important; }
+.tilo-story .tilo-quote cite { color: rgba(244,237,230,0.7) !important; }
+/* Shop-Hinweis „Keine Online-Vorkasse." (muted strong 3.32:1) → dunkler */
+.cart-hint strong, .step-card strong { color: #3a2f22 !important; }
+
+/* Porträt-Meta liegt auf dunklem Foto → helle Schrift */
+.tilo-portrait-meta .who { color: #fff !important; }
+.tilo-portrait-meta .role, .tilo-portrait-meta .since { color: rgba(255,255,255,0.82) !important; }
+
+/* weitere Gold-Texte auf hellem Grund → dunkles Gold */
+.counter-eyebrow, .product-price, .cart-link, .cm-value,
+.btn-outline-gold, .pkg-price .amount, .pkg-price .per { color: #7a5d12 !important; }
+.product-price span { color: var(--text-muted) !important; }
+
+/* Paket-/Feature-Listen auf hellen Karten → dunkel */
+.pkg-features li { color: rgba(28,20,13,0.80) !important; }
+
+/* Bild-Tag auf Foto → heller Chip statt schwaches Gold */
+.usp-img-tag { color: #fff !important; background: rgba(20,14,8,0.6) !important; }
+
+/* --- Kontrast-Fix Runde 3 (14.06) --- */
+/* USP-Zeilen-Beschreibung auf hellem #efe7d9 → dunkel */
+.usp-row-text p { color: rgba(28,20,13,0.78) !important; }
+/* Inline-Gold-Texte auf hellem Grund → dunkles Gold (≥4.5:1) */
+[style*="color:var(--gold)"], [style*="color: var(--gold)"] { color: #7a5d12 !important; }
+
+/* --- Kontrast-Fix Runde 4: sect-party ist dunkles Foto → helle Schrift --- */
+.sect-party h1, .sect-party h2 { color: #fff !important; }
+.sect-party .label { color: #E8C96A !important; }
+.sect-party h2 em { color: #E8C96A !important; }
+
+
+/* === Demo-Hinweis in den Rechtstexten === */
+.legal-drawer .demo-note{
+  margin:0 0 20px; padding:13px 15px; border-radius:10px;
+  background:rgba(197,160,40,.12); border:1px solid rgba(122,93,18,.35);
+  font-size:.82rem; line-height:1.55; color:#4a3c22;
+}
+.legal-drawer .demo-note a{ color:#7a5d12; }

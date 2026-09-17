@@ -1,0 +1,51 @@
+/* ============================================================
+   VALORIS DEMO-LEISTE — nur in der Showcase-Version.
+   Beim echten Kundenprojekt: diese Datei und den <div class="vd-bar">
+   am Seitenende ersatzlos entfernen.
+   ============================================================ */
+.vd-bar{
+  position:fixed; left:0; right:0; bottom:0; z-index:1200;
+  display:flex; align-items:center; justify-content:center; gap:18px; flex-wrap:wrap;
+  padding:10px 20px calc(10px + env(safe-area-inset-bottom, 0px));
+  background:linear-gradient(180deg,#221b13,#171109);
+  border-top:1px solid rgba(197,160,40,.45);
+  box-shadow:0 -10px 34px rgba(0,0,0,.28);
+  font-family:'Hanken Grotesk',system-ui,sans-serif;
+}
+.vd-bar__text{ display:flex; align-items:center; gap:10px; min-width:0; }
+.vd-bar__dot{ width:8px; height:8px; border-radius:50%; background:#C5A028; flex:none;
+  box-shadow:0 0 0 0 rgba(197,160,40,.6); animation:vdPulse 2.6s ease-out infinite; }
+@keyframes vdPulse{ 70%{ box-shadow:0 0 0 9px rgba(197,160,40,0);} 100%{ box-shadow:0 0 0 0 rgba(197,160,40,0);} }
+.vd-bar__label{ color:#F4EDE6; font-size:.83rem; line-height:1.35; }
+.vd-bar__label b{ color:#E8C96A; font-weight:700; }
+.vd-bar__label span{ color:rgba(244,237,230,.62); }
+.vd-bar__actions{ display:flex; align-items:center; gap:10px; flex:none; }
+.vd-bar__cta{
+  display:inline-block; padding:9px 17px; border-radius:999px; text-decoration:none;
+  background:#C5A028; color:#1b1509; font-weight:700; font-size:.82rem; white-space:nowrap;
+  transition:transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s;
+}
+.vd-bar__cta:hover{ transform:translateY(-2px); box-shadow:0 8px 20px rgba(197,160,40,.32); }
+.vd-bar__cta:active{ transform:translateY(0); }
+.vd-bar__link{ color:rgba(244,237,230,.72); font-size:.78rem; text-decoration:none; border-bottom:1px solid rgba(244,237,230,.28); white-space:nowrap; }
+.vd-bar__link:hover{ color:#E8C96A; border-color:#E8C96A; }
+
+/* Platz schaffen, damit die Leiste nichts überdeckt */
+body{ padding-bottom:64px; }
+.fab-whatsapp{ bottom:90px !important; }
+.cart-fab{ bottom:88px !important; }
+.scroll-top, .back-to-top{ bottom:156px !important; }
+
+@media (max-width:640px){
+  .vd-bar{ gap:10px; padding:9px 14px calc(9px + env(safe-area-inset-bottom, 0px)); }
+  .vd-bar__label{ font-size:.76rem; }
+  .vd-bar__label span{ display:none; }
+  .vd-bar__link{ display:none; }
+  body{ padding-bottom:74px; }
+  .fab-whatsapp{ bottom:104px !important; }
+  .cart-fab{ bottom:102px !important; }
+}
+@media (prefers-reduced-motion: reduce){
+  .vd-bar__dot{ animation:none; }
+  .vd-bar__cta{ transition:none; }
+}

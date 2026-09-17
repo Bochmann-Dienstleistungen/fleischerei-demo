@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partyservice & Grillbuffet — Fleischerei Eichenhof Musterstadt</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23A81820'/><text x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='bold' fill='%23F4EDE6' text-anchor='middle'>F</text></svg>">
+<meta name="description" content="Grillbuffet-Pakete & Partyservice vom Meisterbetrieb. Inkl. Preiskalkulator, Anfahrt, Personal. Termin online anfragen.">
+<link rel="stylesheet" href="css/styles.css?v=rk37">
+<link rel="stylesheet" href="css/premium.css?v=rk37">
+<link rel="stylesheet" href="css/light.css?v=rk37">
+
+<style>
+/* === PAGE SPECIFIC === */
+.page-hero {
+  min-height: 46vh; display:flex; align-items:center;
+  position:relative; overflow:hidden; padding: clamp(110px,15vh,150px) 32px clamp(56px,8vh,80px);
+}
+/* scharfes Grill-Bild rechts — kein Milchglas (überschreibt light.css) */
+.page-hero-bg {
+  position:absolute; inset:0; background:url('assets/img/px-12473068.jpg') center right/cover !important;
+  filter:saturate(1.06) contrast(1.03) !important; z-index:0; transform:scale(1.02);
+}
+/* Creme links (Text lesbar), Bild scharf rechts, unten weicher Übergang */
+.page-hero-overlay {
+  position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(180deg, rgba(243,237,226,0) 60%, rgba(243,237,226,0.55) 84%, var(--ed-paper,#f3ede2) 100%),
+    linear-gradient(96deg, var(--ed-paper,#f3ede2) 0%, var(--ed-paper,#f3ede2) 40%, rgba(243,237,226,0.72) 57%, rgba(243,237,226,0.28) 76%, rgba(243,237,226,0.06) 100%) !important;
+}
+.page-hero-content { position:relative; z-index:2; max-width:640px; }
+
+/* Time option buttons */
+.time-opts { display:flex; gap:10px; flex-wrap:wrap; }
+.time-btn {
+  padding:10px 18px; border-radius:12px; font-size:0.875rem; font-weight:600;
+  background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1);
+  color:var(--text-muted); cursor:pointer; transition:all 0.2s;
+}
+.time-btn.active { background:rgba(168,24,32,0.15); border-color:rgba(168,24,32,0.4); color:var(--text); }
+
+/* Booking calendar placeholder */
+.cal-wrap {
+  display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-bottom:24px;
+}
+.cal-day {
+  aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+  border-radius:10px; font-size:0.8rem; font-weight:600;
+  background:rgba(32,26,19,0.04); border:1px solid rgba(32,26,19,0.12);
+  cursor:pointer; transition:all 0.2s; color:var(--text);
+}
+.cal-day:hover:not(.disabled):not(.header) { background:rgba(168,24,32,0.10); border-color:rgba(168,24,32,0.45); color:var(--red); }
+.cal-day.selected { background:rgba(168,24,32,0.16); border-color:var(--red); color:#7a1414; }
+.cal-day.today { border-color:#b9932a; color:#7a5d12; }
+.cal-day.header { background:none; border:none; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; cursor:default; color:var(--text-muted); font-weight:700; }
+.cal-day.disabled { opacity:0.42; cursor:not-allowed; }
+.cal-day:focus-visible { outline:2px solid var(--red); outline-offset:2px; }
+.cal-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+.cal-nav button { background:rgba(32,26,19,0.05); border:1px solid rgba(32,26,19,0.14); color:var(--text); padding:8px 14px; border-radius:10px; cursor:pointer; font-size:0.875rem; transition:background 0.2s; }
+.cal-nav button:hover { background:rgba(32,26,19,0.10); }
+.cal-month { font-weight:700; font-size:1rem; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Fleischerei Eichenhof","description":"Handgemachte Fleisch- und Wurstspezialitäten aus dem Meisterbetrieb, goldprämierte Wurstqualität.","address":{"@type":"PostalAddress","streetAddress":"Marktstraße 14","addressLocality":"Musterstadt","postalCode":"09000","addressCountry":"DE"},"telephone":"+491234567890","email":"info@fleischerei-eichenhof.de","openingHours":["Tu 11:00-18:00","We 10:00-18:00","Th 08:00-18:00","Fr 08:00-18:00","Sa 08:00-12:00"]}</script>
+<link rel="stylesheet" href="css/valoris-demo.css?v=rk37">
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader" aria-hidden="true">
+  <div class="loader-mark">
+    <span>D</span><span>e</span><span>r</span>
+    <em><span style="display:inline-block;width:0.4em"></span></em>
+    <span style="color:var(--red-vivid)">F</span><span style="color:var(--red-vivid)">l</span><span style="color:var(--red-vivid)">e</span><span style="color:var(--red-vivid)">i</span><span style="color:var(--red-vivid)">s</span><span style="color:var(--red-vivid)">c</span><span style="color:var(--red-vivid)">h</span><span style="color:var(--red-vivid)">i</span>
+  </div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  <div class="loader-sub">Goldprämiert · Musterstadt</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav glass">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-name">Fleischerei <em>Eichenhof</em></span>
+      <span class="logo-award">Meisterbetrieb · Musterstadt</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Start</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="partyservice.html" class="active">Partyservice</a></li>
+      <li><a href="ueber-uns.html">Über uns</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="#buchung" class="btn btn-gold btn-sm">Termin anfragen</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <button class="mobile-nav-close" aria-label="Schliessen">&#x2715;</button>
+  <a href="index.html">Start</a>
+  <a href="shop.html">Shop</a>
+  <a href="partyservice.html">Partyservice</a>
+  <a href="ueber-uns.html">Über uns</a>
+  <a href="kontakt.html">Kontakt</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="container page-hero-content">
+    <span class="label">Für euren besonderen Tag</span>
+    <h1 style="margin-bottom:20px;">Partyservice &<br><span class="text-red">Grillbuffet</span></h1>
+    <p style="font-size:1.1rem; color:rgba(244,237,230,0.75); max-width:580px; margin-bottom:36px;">
+      Vom Geburtstag bis zur Firmenfeier: Michael und sein Team kommen zu euch. Frische Produkte, professioneller Service, unvergessliche Momente.
+    </p>
+    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+      <a href="#pakete" class="btn btn-red btn-lg">Pakete ansehen</a>
+      <a href="#kalkulator" class="btn btn-glass btn-lg">Preis berechnen</a>
+    </div>
+  </div>
+</div>
+
+<!-- PAKETE -->
+<section id="pakete">
+  <div class="container">
+    <div class="section-head text-center reveal">
+      <span class="label">Grillbuffet-Pakete</span>
+      <h2>Das richtige Paket für jeden Anlass</h2>
+      <p>Alle Preise pro Person. Personal &amp; Auf-/Abbau pauschal <strong>160 €</strong>, zzgl. Anfahrt. Mindestbestellmenge: 20 Personen.</p>
+    </div>
+    <div class="pkg-grid">
+
+      <!-- BASIS -->
+      <div class="glass pkg-card reveal">
+        <div class="pkg-head">
+          <span class="pkg-label">Eber Klassik</span>
+          <div class="pkg-name">Eber Klassik</div>
+          <div class="pkg-price">
+            <span class="amount">25</span>
+            <span class="per">€ / Person</span>
+          </div>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-features">
+            <li><span class="check"></span>Klassische Bratwurst (handgemacht)</li>
+            <li><span class="check"></span>Nackensteaks mariniert</li>
+            <li><span class="check"></span>2 hausgemachte Delikatesssalate</li>
+            <li><span class="check"></span>Frisches Brot & Soßen</li>
+            <li><span class="check"></span>Einweggeschirr & Serviermaterial</li>
+            <li><span class="check"></span>Grill-Aufbau vor Ort</li>
+          </ul>
+          <a href="#buchung" class="btn btn-glass" style="width:100%; justify-content:center;">Anfragen</a>
+        </div>
+      </div>
+
+      <!-- KLASSIK (FEATURED) -->
+      <div class="glass glass-red pkg-card reveal reveal-d1" style="position:relative;">
+        <div class="pkg-tag" style="position:absolute; top:20px; right:20px;">Beliebteste Wahl</div>
+        <div class="pkg-head">
+          <span class="pkg-label gold">Eber Royal · Empfohlen</span>
+          <div class="pkg-name">Eber Royal</div>
+          <div class="pkg-price">
+            <span class="amount">30</span>
+            <span class="per">€ / Person</span>
+          </div>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-features">
+            <li><span class="check"></span>Alles aus Basis</li>
+            <li><span class="check"></span>+ Spareribs nach Hausrezept</li>
+            <li><span class="check"></span>+ 3 Delikatesssalate</li>
+            <li><span class="check"></span>+ Grillgemüse</li>
+            <li><span class="check"></span>Echte Teller & Besteck</li>
+            <li><span class="check"></span>Garnitur & Dekoration</li>
+          </ul>
+          <a href="#buchung" class="btn btn-red" style="width:100%; justify-content:center;">Jetzt anfragen</a>
+        </div>
+      </div>
+
+      <!-- PREMIUM -->
+      <div class="glass pkg-card reveal reveal-d2">
+        <div class="pkg-head">
+          <span class="pkg-label">Goldener Eber</span>
+          <div class="pkg-name">Goldener Eber</div>
+          <div class="pkg-price">
+            <span class="amount">38</span>
+            <span class="per">€ / Person</span>
+          </div>
+        </div>
+        <div class="pkg-body">
+          <ul class="pkg-features">
+            <li><span class="check"></span>Alles aus Klassik</li>
+            <li><span class="check"></span>+ Scharfer Eber (Goldprämiert)</li>
+            <li><span class="check"></span>+ 5 Delikatesssalate</li>
+            <li><span class="check"></span>+ Dessert-Buffet</li>
+            <li><span class="check"></span>Vollständige Bestuhlung</li>
+            <li><span class="check"></span>Premium-Dekoration & Tische</li>
+            <li><span class="check"></span>Abschluss-Reinigung vor Ort</li>
+          </ul>
+          <a href="#buchung" class="btn btn-glass" style="width:100%; justify-content:center;">Anfragen</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Custom Package Note -->
+    <div class="glass" style="padding:32px 40px; margin-top:24px; display:flex; align-items:center; gap:32px; flex-wrap:wrap;" class="reveal">
+      <div style="font-size:2rem; flex-shrink:0;"></div>
+      <div style="flex:1; min-width:200px;">
+        <h4 style="margin-bottom:8px;">Individuelles Wunschpaket?</h4>
+        <p style="font-size:0.875rem; color:var(--text-muted);">Kein Paket passt perfekt? Kein Problem, wir schnüren euer ganz persönliches Angebot. Einfach anrufen oder anfragen.</p>
+      </div>
+      <a href="#buchung" class="btn btn-outline-gold" style="flex-shrink:0;">Individuell anfragen</a>
+    </div>
+  </div>
+</section>
+
+<!-- KALKULATOR -->
+<section id="kalkulator">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">Preistransparenz</span>
+      <h2>Preis&shy;kalkulator</h2>
+      <p>Berechne deinen ungefähren Preis live, inkl. Produkte, Personal und Anfahrt. Das Angebot ist unverbindlich.</p>
+    </div>
+
+    <div class="calc-layout">
+      <!-- FORM -->
+      <div class="glass calc-panel reveal">
+
+        <!-- Pakete Auswahl -->
+        <div class="form-group">
+          <label class="form-label">1. Grillbuffet-Paket wählen</label>
+          <select class="form-input" id="calc-paket" aria-label="Grillbuffet-Paket wählen" onchange="calcUpdate()">
+            <option value="25">Eber Klassik — 25 €/Person</option>
+            <option value="30" selected>Eber Royal — 30 €/Person (Empfohlen)</option>
+            <option value="38">Goldener Eber — 38 €/Person</option>
+          </select>
+        </div>
+
+        <!-- Zusatzprodukte -->
+        <div class="form-group">
+          <label class="form-label">2. Zusatzprodukte (optional)</label>
+          <div class="product-checks">
+            <label class="check-item" id="check-schwan">
+              <input type="checkbox" value="3.5" onchange="toggleCheck(this); calcUpdate()">
+              <div><div class="check-name">Goldprämierter Eber</div><div class="check-price">+ 3,50 €/Pers.</div></div>
+            </label>
+            <label class="check-item" id="check-spareribs">
+              <input type="checkbox" value="4.0" onchange="toggleCheck(this); calcUpdate()">
+              <div><div class="check-name"> Extra Spareribs</div><div class="check-price">+ 4,00 €/Pers.</div></div>
+            </label>
+            <label class="check-item" id="check-salat">
+              <input type="checkbox" value="1.5" onchange="toggleCheck(this); calcUpdate()">
+              <div><div class="check-name"> Extra Salatauswahl</div><div class="check-price">+ 1,50 €/Pers.</div></div>
+            </label>
+            <label class="check-item" id="check-dessert">
+              <input type="checkbox" value="2.5" onchange="toggleCheck(this); calcUpdate()">
+              <div><div class="check-name"> Dessert-Buffet</div><div class="check-price">+ 2,50 €/Pers.</div></div>
+            </label>
+            <label class="check-item" id="check-veggie">
+              <input type="checkbox" value="1.8" onchange="toggleCheck(this); calcUpdate()">
+              <div><div class="check-name"> Veggie-Ergänzung</div><div class="check-price">+ 1,80 €/Pers.</div></div>
+            </label>
+            <label class="check-item" id="check-getraenke">
+              <input type="checkbox" value="4.0" onchange="toggleCheck(this); calcUpdate()">
+              <div><div class="check-name"> Getränkepauschale</div><div class="check-price">+ 4,00 €/Pers.</div></div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Personenanzahl -->
+        <div class="form-group">
+          <label class="form-label">3. Personenanzahl</label>
+          <div class="range-row">
+            <input type="range" id="calc-persons" aria-label="Personenanzahl" min="20" max="300" value="40" step="5" oninput="calcUpdate()">
+            <span class="range-val"><span id="val-persons">40</span> Pers.</span>
+          </div>
+          <div class="calc-minhint" id="calc-minhint" style="font-size:0.75rem; color:var(--text-muted); margin-top:8px;">Mindestbestellmenge: 20 Personen</div>
+        </div>
+
+        <!-- Personal & Auf-/Abbau (Festpreis) -->
+        <div class="form-group">
+          <label class="form-label">4. Personal &amp; Auf-/Abbau</label>
+          <div style="padding:12px 16px; border-radius:12px; background:rgba(197,160,40,0.07); border:1px solid rgba(197,160,40,0.18); font-size:0.85rem; color:var(--text-muted);">
+            Fester Servicepreis: <strong style="color:var(--text);">160 €</strong> — beinhaltet Auf- und Abbau sowie das Personal vor Ort. Bei jedem Buffet enthalten.
+          </div>
+        </div>
+
+        <!-- Entfernung -->
+        <div class="form-group">
+          <label class="form-label">5. Entfernung (km von Musterstadt)</label>
+          <div class="range-row">
+            <input type="range" id="calc-km" aria-label="Entfernung in Kilometern ab Musterstadt" min="0" max="150" value="20" step="5" oninput="calcUpdate()">
+            <span class="range-val"><span id="val-km">20</span> km</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ERGEBNIS -->
+      <div class="glass calc-result-panel reveal reveal-d1">
+        <div class="calc-result-total">
+          <div class="calc-result-label">Geschätzter Gesamtpreis</div>
+          <div class="calc-result-amount" id="calc-total">880 €</div>
+          <div class="calc-result-sub">* unverbindliche Schätzung · inkl. MwSt.</div>
+        </div>
+
+        <div class="calc-breakdown">
+          <div class="calc-line"><span class="calc-line-name">Buffet-Paket</span><span class="calc-line-val" id="cl-paket">880 €</span></div>
+          <div class="calc-line"><span class="calc-line-name">Zusatzprodukte</span><span class="calc-line-val" id="cl-extras">0 €</span></div>
+          <div class="calc-line"><span class="calc-line-name">Personal &amp; Auf-/Abbau (pauschal)</span><span class="calc-line-val" id="cl-personal">160 €</span></div>
+          <div class="calc-line"><span class="calc-line-name">Anfahrt (Hin & Rück)</span><span class="calc-line-val" id="cl-anfahrt">18 €</span></div>
+          <div class="calc-line calc-line-total"><span class="calc-line-name">Gesamtschätzung</span><span class="calc-line-val" id="cl-total">1.038 €</span></div>
+        </div>
+
+        <a href="#buchung" onclick="applyCalcToBooking()" class="btn btn-red" style="width:100%; justify-content:center; margin-bottom:12px;">Diese Kalkulation anfragen</a>
+        <a id="calcWhats" href="https://wa.me/4915254190819?text=Hallo%20Michael%2C%20ich%20m%C3%B6chte%20einen%20Partyservice%20anfragen." class="btn btn-glass" style="width:100%; justify-content:center;" target="_blank" rel="noopener"> Direkt per WhatsApp</a>
+
+        <div style="margin-top:20px; padding:16px; border-radius:14px; background:rgba(197,160,40,0.07); border:1px solid rgba(197,160,40,0.18);">
+          <div style="font-size:0.78rem; color:var(--text-muted); line-height:1.7;">
+             <strong style="color:var(--gold);">Hinweis:</strong> Dies ist eine Schätzung. Das verbindliche Angebot erhaltet ihr nach Rücksprache mit Michael, meist noch am gleichen Tag.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING SECTION -->
+<section id="buchung">
+  <div class="container">
+    <div class="section-head reveal">
+            <h2>Partyservice anfragen</h2>
+      <p>Wählt euren Wunschtermin und füllt das Formular aus, wir melden uns innerhalb von 24h bei euch.</p>
+    </div>
+
+    <div class="booking-wrap">
+      <!-- KALENDER -->
+      <div class="glass booking-panel reveal">
+        <div class="form-label" style="margin-bottom:20px;">Wunschtermin wählen</div>
+
+        <div class="cal-nav">
+          <button onclick="calPrev()">← Zurück</button>
+          <span class="cal-month" id="cal-month-label"></span>
+          <button onclick="calNext()">Weiter →</button>
+        </div>
+
+        <div class="cal-wrap" id="cal-grid">
+          <!-- JS generated -->
+        </div>
+
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label">Gewähltes Datum</label>
+          <div class="form-input" id="cal-selected-display" style="color:var(--text-muted); cursor:default;">Bitte oben ein Datum auswählen</div>
+        </div>
+      </div>
+
+      <!-- ANFRAGE FORMULAR -->
+      <div class="glass booking-panel reveal reveal-d1">
+        <form id="bookingForm" method="POST" novalidate>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+          <input type="hidden" name="datum" id="formDatum" value="">
+          <input type="hidden" name="datumISO" id="formDatumISO" value="">
+          <input type="hidden" name="kalkulation" id="formKalkulation" value="">
+
+          <div class="form-group">
+            <label class="form-label" for="b-name">Euer Name *</label>
+            <input class="form-input" type="text" id="b-name" name="name" placeholder="Max & Lisa Müller" required>
+          </div>
+
+          <div class="date-row">
+            <div class="form-group">
+              <label class="form-label" for="b-tel">Telefon *</label>
+              <input class="form-input" type="tel" id="b-tel" name="telefon" placeholder="0171 234 567 8" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="b-email">E-Mail</label>
+              <input class="form-input" type="email" id="b-email" name="email" placeholder="ihr@beispiel.de">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="b-anlass">Anlass *</label>
+            <select class="form-input" id="b-anlass" name="anlass" required>
+              <option value="">Anlass auswählen</option>
+              <option>Geburtstagsfeier</option>
+              <option>Hochzeit</option>
+              <option>Firmenevent / Betriebsfeier</option>
+              <option>Vereinsfest</option>
+              <option>Weihnachtsfeier</option>
+              <option>Gartenparty</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+
+          <div class="date-row">
+            <div class="form-group">
+              <label class="form-label" for="b-personen">Personenanzahl *</label>
+              <input class="form-input" type="number" id="b-personen" name="personen" placeholder="ca. 50" min="20" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="b-paket">Gewünschtes Paket</label>
+              <select class="form-input" id="b-paket" name="paket">
+                <option>Eber Klassik (25 €/Pers.)</option>
+                <option selected>Eber Royal (30 €/Pers.)</option>
+                <option>Goldener Eber (38 €/Pers.)</option>
+                <option>Individuell</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="b-ort">Veranstaltungsort / Adresse *</label>
+            <input class="form-input" type="text" id="b-ort" name="ort" placeholder="Straße, PLZ, Ort" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="b-nachricht">Besondere Wünsche oder Anmerkungen</label>
+            <textarea class="form-input" id="b-nachricht" name="nachricht" rows="3" placeholder="z.B. Vegetarier unter den Gästen, Stromaggregat benötigt, besondere Allergien…" style="resize:vertical;"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-red btn-lg" style="width:100%; justify-content:center;">
+            Anfrage absenden
+          </button>
+          <p style="font-size:0.78rem; color:var(--text-muted); text-align:center; margin-top:14px; line-height:1.6;">
+            Ihr erhaltet innerhalb von 24h eine Rückmeldung von Michael. <br>Unverbindlich und ohne Risiko.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section style="padding-top:0; padding-bottom:90px;">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">Impressionen</span>
+      <h2>So könnte euer Event aussehen</h2>
+    </div>
+    <div class="gallery">
+      <div class="gallery-item tall">
+        <img src="assets/img/px-34118827.jpg" alt="Feine Vorspeisen auf der Platte" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/px-29086309.jpg" alt="Wurst-, Schinken- und Käseplatte" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/px-34321369.jpg" alt="Servierte Häppchen auf dem Tablett" loading="lazy">
+      </div>
+      <div class="gallery-item wide">
+        <img src="assets/img/px-34307855.jpg" alt="Kaltes Büfett mit Lachs und Platten" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/px-4959845.jpg" alt="Büfett-Aufbau auf der Feier" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/px-7245469.jpg" alt="Grillspieße und Beilagen am Büfett" loading="lazy">
+      </div>
+      <div class="gallery-item tall">
+        <img src="assets/img/px-2337843.jpg" alt="Gebäck und Desserts im Chafing-Behälter" loading="lazy">
+      </div>
+      <div class="gallery-item">
+        <img src="assets/img/px-10819657.jpg" alt="Warmes Büfett mit Beilagen" loading="lazy">
+      </div>
+      <div class="gallery-item wide">
+        <img src="assets/img/px-4005241.jpg" alt="Warmes Büfett im Chafing-Behälter" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-name">Fleischerei <em>Eichenhof</em></div>
+        <div class="logo-award">Meisterbetrieb · Michael Wendt</div>
+        <p>Handgemachte Fleisch- und Wurstspezialitäten aus Musterstadt.</p>
+        <address>Marktstraße 14, 09000 Musterstadt<br>Tel: <a href="tel:+491234567890" style="color:var(--text-muted);">0123 456 78 90</a></address>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Startseite</a>
+          <a href="shop.html">Shop</a>
+          <a href="partyservice.html">Partyservice</a>
+          <a href="ueber-uns.html">Über uns</a>
+          <a href="kontakt.html">Kontakt</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Partyservice</div>
+        <div class="footer-links">
+          <a href="#pakete">Grillbuffet-Pakete</a>
+          <a href="#kalkulator">Preiskalkulator</a>
+          <a href="#buchung">Termin anfragen</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Kontakt</div>
+        <div class="footer-links">
+          <a href="tel:+491234567890">0123 456 78 90</a>
+          <a href="mailto:info@fleischerei-eichenhof.de">info@fleischerei-eichenhof.de</a>
+          <a href="https://wa.me/4915254190819" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">Facebook</a>
+          <a href="#" target="_blank" rel="noopener">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span class="year"></span> Fleischerei Eichenhof</div>
+      <div class="footer-legal">
+        <button data-open="impressum">Impressum</button>
+        <button data-open="datenschutz">Datenschutz</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FAB -->
+<a class="fab-whatsapp" href="https://wa.me/4915254190819?text=Hallo%20Michael%2C%20ich%20m%C3%B6chte%20einen%20Partyservice%20anfragen." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<div class="drawer-overlay"></div>
+<aside class="legal-drawer" id="drawer-impressum" role="dialog">
+  <button class="drawer-close"></button>
+  <h2>Impressum</h2>
+  <p class="demo-note"><strong>Demo-Seite.</strong> Die Fleischerei Eichenhof ist ein Musterbetrieb von VALORIS Webdesign &amp; SEO. Alle Namen, Anschriften, Telefonnummern und Preise sind Beispieldaten und gehören zu keinem realen Unternehmen. Verantwortlich für diese Demo-Seite: Frederic Bochmann, Bochmann Dienstleistungen, Karl-Kippenhahn-Straße 17, 08058 Zwickau, <a href="mailto:frederic@valoris-auftragsstruktur.de">frederic@valoris-auftragsstruktur.de</a>.</p>
+  <h3>Angaben gemäß § 5 TMG</h3>
+  <address>Michael Wendt — Fleischerei Eichenhof<br>Marktstraße 14, 09000 Musterstadt</address>
+  <h3>Kontakt</h3>
+  <p>Tel: 0123 456 78 90 | E-Mail: <a href="mailto:info@fleischerei-eichenhof.de">info@fleischerei-eichenhof.de</a></p>
+  <h3>USt-IdNr.</h3><p>wird bei Beauftragung ergänzt (Beispieldaten)</p>
+  <h3>Kammer</h3><p>Handwerkskammer Chemnitz, Limbacher Str. 195, 09116 Chemnitz</p>
+</aside>
+<aside class="legal-drawer" id="drawer-datenschutz" role="dialog">
+  <button class="drawer-close"></button>
+  <h2>Datenschutz</h2>
+  <h3>Verantwortlich</h3>
+  <address>Michael Wendt, Marktstraße 14, 09000 Musterstadt | info@fleischerei-eichenhof.de</address>
+  <h3>Kontaktformular</h3>
+  <p>Daten aus dem Formular werden ausschließlich zur Bearbeitung eurer Anfrage gespeichert und nicht weitergegeben.</p>
+  <h3>Eure Rechte</h3>
+  <p>Auskunft, Berichtigung, Löschung: info@fleischerei-eichenhof.de</p>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js?v=rk37"></script>
+<script src="js/premium.js?v=rk37"></script>
+<script src="js/api-config.js?v=rk37"></script>
+<script src="js/demo-backend.js?v=rk37"></script>
+<script>
+/* === KONFIG · zentral änderbar (nach 18:00 mit Michael bestätigen) === */
+const CFG = {
+  MIN_PERSONS:    20,     // Mindestpersonenzahl Buffet      (TODO 18:00 bestätigen)
+  PERSONAL_FLAT:  160,    // Personal + Auf-/Abbau pauschal (sichtbar)
+  ANFAHRT_PER_KM: 0.806,  // intern, hin+zurück; Satz wird NICHT angezeigt
+  VORLAUF_TAGE:   14       // Buffet-Vorlauf in Tagen         (TODO 18:00 bestätigen)
+  // Wochenend-Kapazität Fr–So: max 2 Grill + 1 normal = 3 Buffets/WE
+};
+
+/* === KALKULATOR === */
+function toggleCheck(input) {
+  input.closest('.check-item').classList.toggle('active', input.checked);
+}
+
+/* Range-Balken-Füllung (rot bis zum Regler) */
+function setRangeFill(el) {
+  if (!el) return;
+  const min = parseFloat(el.min) || 0, max = parseFloat(el.max) || 100;
+  const p = ((parseFloat(el.value) - min) / (max - min)) * 100;
+  el.style.setProperty('--_p', p + '%');
+}
+
+function calcUpdate() {
+  const paketSel = document.getElementById('calc-paket');
+  const paket    = parseFloat(paketSel.value);
+  const persons  = parseInt(document.getElementById('calc-persons').value);
+  const km       = parseInt(document.getElementById('calc-km').value);
+
+  document.getElementById('val-persons').textContent = persons;
+  document.getElementById('val-km').textContent = km;
+  setRangeFill(document.getElementById('calc-persons'));
+  setRangeFill(document.getElementById('calc-km'));
+
+  // Mindestpersonenzahl-Hinweis + Abrechnung ab Minimum
+  const minHint = document.getElementById('calc-minhint');
+  if (minHint) {
+    const under = persons < CFG.MIN_PERSONS;
+    minHint.style.color = under ? 'var(--red-vivid)' : 'var(--text-muted)';
+    minHint.textContent = under
+      ? 'Mindestbestellmenge: ' + CFG.MIN_PERSONS + ' Personen — wird ab ' + CFG.MIN_PERSONS + ' berechnet'
+      : 'Mindestbestellmenge: ' + CFG.MIN_PERSONS + ' Personen';
+  }
+  const persBill = Math.max(persons, CFG.MIN_PERSONS);
+
+  // Extras (Preis + Namen sammeln)
+  let extras = 0; const extraNames = [];
+  document.querySelectorAll('.product-checks input[type="checkbox"]:checked').forEach(cb => {
+    extras += parseFloat(cb.value);
+    const n = cb.closest('.check-item').querySelector('.check-name');
+    if (n) extraNames.push(n.textContent.trim());
+  });
+
+  const paketTotal    = paket * persBill;
+  const extrasTotal   = extras * persBill;
+  const personalTotal = CFG.PERSONAL_FLAT;              // Festpreis Personal + Auf-/Abbau
+  const anfahrtTotal  = km * 2 * CFG.ANFAHRT_PER_KM;    // hin + zurück (Satz intern)
+
+  const gesamt = paketTotal + extrasTotal + personalTotal + anfahrtTotal;
+  const fmt = v => v.toLocaleString('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
+
+  document.getElementById('cl-paket').textContent    = fmt(paketTotal);
+  document.getElementById('cl-extras').textContent   = fmt(extrasTotal);
+  document.getElementById('cl-personal').textContent = fmt(personalTotal);
+  document.getElementById('cl-anfahrt').textContent  = fmt(anfahrtTotal);
+  document.getElementById('cl-total').textContent    = fmt(gesamt);
+  document.getElementById('calc-total').textContent  = fmt(gesamt);
+
+  // Zusammenfassung für Anfrage (Formular + WhatsApp)
+  const paketLabel = paketSel.selectedOptions[0].textContent.split('—')[0].trim();
+  const summary = `Paket: ${paketLabel} · ${persBill} Personen`
+    + (extraNames.length ? ` · Extras: ${extraNames.join(', ')}` : '')
+    + ` · Personal & Auf-/Abbau pauschal (160 €) · Anfahrt ${km} km · ca. ${fmt(gesamt)} (unverbindliche Schätzung)`;
+  window.__calc = { persons: persBill, paketVal: paket, summary };
+
+  const wa = document.getElementById('calcWhats');
+  if (wa) wa.href = 'https://wa.me/4915254190819?text=' + encodeURIComponent('Hallo Michael, ich möchte einen Partyservice anfragen.\n\n' + summary);
+}
+calcUpdate();
+
+/* Kalkulation in das Buchungsformular übernehmen */
+function applyCalcToBooking() {
+  const c = window.__calc; if (!c) return;
+  const pers = document.getElementById('b-personen'); if (pers) pers.value = c.persons;
+  const paketSel = document.getElementById('b-paket');
+  if (paketSel) { const map = {25:'Eber Klassik', 30:'Eber Royal', 38:'Goldener Eber'}; const want = map[c.paketVal];
+    [...paketSel.options].forEach(o => { if (want) o.selected = o.text.startsWith(want); }); }
+  const note = document.getElementById('b-nachricht');
+  if (note && note.value.indexOf('Meine Kalkulation:') === -1) note.value = 'Meine Kalkulation: ' + c.summary + '\n\n' + note.value;
+  const hidden = document.getElementById('formKalkulation'); if (hidden) hidden.value = c.summary;
+}
+
+/* === KALENDER (Wochenend-Kapazität Fr–So + Vorlauf) === */
+const _heute = new Date();
+let calDate = new Date(_heute.getFullYear(), _heute.getMonth(), 1); // immer aktueller Monat
+let selectedDate = null;
+
+const MONTHS = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const DAYS_SHORT = ['Mo','Di','Mi','Do','Fr','Sa','So'];
+
+const _sod = d => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+// Samstag des zugehörigen Wochenendes (Fr/Sa/So teilen sich die Kapazität)
+function _satOf(date){
+  const d = _sod(date), dow = d.getDay(); // 0 So, 5 Fr, 6 Sa
+  if (dow === 5) d.setDate(d.getDate() + 1);
+  else if (dow === 0) d.setDate(d.getDate() - 1);
+  return d;
+}
+// Echte Wochenend-Belegung aus dem Backend { satISO: {free, full} }
+let PARTY_AVAIL = {};
+const PARTY_CAP_TOTAL = 3;   // 2 Grill + 1 normal
+const _isoOf = d => { const s = _satOf(d); return s.toISOString().slice(0,10); };
+function _wkCap(date){
+  const iso = _isoOf(date);
+  const w = PARTY_AVAIL[iso];
+  return w ? { free: w.free, full: w.full } : { free: PARTY_CAP_TOTAL, full: false };
+}
+async function loadPartyAvail(){
+  try {
+    const res = await fetch(`${window.EICHENHOF_API}/party/availability`);
+    const data = await res.json();
+    PARTY_AVAIL = data.weekends || {};
+  } catch(e) { PARTY_AVAIL = {}; }   // offline → alle Wochenenden als frei anzeigen, Server prüft beim Absenden
+  renderCal();
+}
+const _isWeekend = dow => dow === 5 || dow === 6 || dow === 0;
+
+function renderCal() {
+  const grid = document.getElementById('cal-grid');
+  const label = document.getElementById('cal-month-label');
+  label.textContent = MONTHS[calDate.getMonth()] + ' ' + calDate.getFullYear();
+
+  grid.innerHTML = '';
+  DAYS_SHORT.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-day header';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+
+  const firstDay = new Date(calDate.getFullYear(), calDate.getMonth(), 1);
+  let startDow = firstDay.getDay();
+  startDow = startDow === 0 ? 6 : startDow - 1; // Mon=0
+  for (let i = 0; i < startDow; i++) {
+    const el = document.createElement('div');
+    el.className = 'cal-day disabled';
+    grid.appendChild(el);
+  }
+
+  const daysInMonth = new Date(calDate.getFullYear(), calDate.getMonth() + 1, 0).getDate();
+  const today  = _sod(new Date());
+  const cutoff = _sod(new Date()); cutoff.setDate(cutoff.getDate() + CFG.VORLAUF_TAGE); // frühester Termin
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(calDate.getFullYear(), calDate.getMonth(), d);
+    const el = document.createElement('div');
+    el.className = 'cal-day';
+    el.innerHTML = '<span>' + d + '</span>';
+
+    const dow = date.getDay();
+    const weekend = _isWeekend(dow);
+    const tooSoon = date < cutoff;      // Vorlauf nicht erreicht
+    const isMonday = dow === 1;         // Ruhetag
+    const cap = (weekend && !tooSoon) ? _wkCap(date) : null;
+    const full = cap && cap.full;
+
+    if (tooSoon || isMonday || full) {
+      el.classList.add('disabled');
+      if (full) {
+        el.style.flexDirection = 'column';
+        el.innerHTML = '<span>' + d + '</span><span style="font-size:0.5rem;letter-spacing:0;text-transform:none;color:var(--red-vivid);font-weight:700;">ausgebucht</span>';
+      }
+    } else {
+      if (date.toDateString() === new Date().toDateString()) el.classList.add('today');
+      if (selectedDate && date.toDateString() === selectedDate.toDateString()) el.classList.add('selected');
+      if (cap) {
+        el.style.flexDirection = 'column';
+        el.innerHTML = '<span>' + d + '</span><span style="font-size:0.52rem;letter-spacing:0;text-transform:none;color:#1e7a4a;font-weight:700;">' + cap.free + ' frei</span>';
+      }
+      const fmtd = date.toLocaleDateString('de-DE', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+      el.setAttribute('role', 'button');
+      el.tabIndex = 0;
+      el.setAttribute('aria-label', fmtd + (cap ? ', noch ' + cap.free + ' Buffet-Platz frei' : ''));
+      const pick = () => {
+        selectedDate = date;
+        renderCal();
+        const disp = document.getElementById('cal-selected-display');
+        disp.textContent = fmtd + (cap ? ' · noch ' + cap.free + ' Buffet-Platz frei' : '');
+        disp.style.color = 'var(--text)';
+        document.getElementById('formDatum').value = fmtd;
+        const iso = new Date(date.getTime() - date.getTimezoneOffset()*60000).toISOString().slice(0,10);
+        document.getElementById('formDatumISO').value = iso;
+      };
+      el.addEventListener('click', pick);
+      el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
+    }
+    grid.appendChild(el);
+  }
+}
+
+function calPrev() {
+  const thisMonth = new Date(_heute.getFullYear(), _heute.getMonth(), 1);
+  if (calDate > thisMonth) { calDate.setMonth(calDate.getMonth() - 1); renderCal(); }
+}
+function calNext() { calDate.setMonth(calDate.getMonth() + 1); renderCal(); }
+renderCal();
+loadPartyAvail();   // echte Belegung nachladen und Kalender aktualisieren
+
+/* === ANFRAGE ans Backend senden === */
+const bookingForm = document.getElementById('bookingForm');
+bookingForm?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const f = this;
+  const btn = f.querySelector('button[type=submit]');
+  const oldTxt = btn.textContent;
+  btn.textContent = 'Wird gesendet…'; btn.disabled = true;
+
+  const g = n => (f.elements[n] ? f.elements[n].value.trim() : '');
+  const payload = {
+    website:   g('website'),                 // Honeypot
+    name:      g('name'),
+    telefon:   g('telefon'),
+    email:     g('email'),
+    anlass:    g('anlass'),
+    personen:  g('personen'),
+    paket:     g('paket'),
+    ort:       g('ort'),
+    nachricht: g('nachricht'),
+    kalkulation: g('kalkulation'),
+    datumText: g('datum'),
+    datumISO:  g('datumISO'),
+  };
+
+  try {
+    const res = await fetch(`${window.EICHENHOF_API}/party/request`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      btn.textContent = oldTxt; btn.disabled = false;
+      alert(data.error || 'Es gab ein Problem. Bitte per WhatsApp oder Telefon anfragen.');
+      return;
+    }
+    const nr = data.id ? ' <span style="color:var(--text-muted);font-size:.85rem;">(' + data.id + ')</span>' : '';
+    f.innerHTML = '<div style="text-align:center; padding:40px;"><div style="font-size:3rem; margin-bottom:16px;">✓</div><h3>Anfrage gesendet!' + nr + '</h3><p style="color:var(--text-muted); margin-top:12px;">Michael meldet sich innerhalb von 24h bei euch und bestätigt den Termin. Wir freuen uns auf euer Event!</p></div>';
+  } catch (err) {
+    btn.textContent = oldTxt; btn.disabled = false;
+    alert('Verbindung fehlgeschlagen. Bitte per WhatsApp oder Telefon anfragen.');
+  }
+});
+</script>
+
+
+<!-- ===== VALORIS DEMO-LEISTE (nur Showcase — beim Kundenprojekt entfernen) ===== -->
+<div class="vd-bar" role="complementary" aria-label="Hinweis: Demo-Website">
+  <div class="vd-bar__text">
+    <span class="vd-bar__dot" aria-hidden="true"></span>
+    <span class="vd-bar__label"><b>Demo-Website</b> — Musterbetrieb, kein echtes Unternehmen.
+      <span>So kann Ihre Fleischerei online aussehen.</span></span>
+  </div>
+  <div class="vd-bar__actions">
+    <a class="vd-bar__cta" href="https://wa.me/4915254190819" target="_blank" rel="noopener">Für meinen Betrieb anfragen</a>
+    <a class="vd-bar__link" href="https://www.valoris-auftragsstruktur.de" target="_blank" rel="noopener">VALORIS Webdesign &amp; SEO</a>
+  </div>
+</div>
+</body>
+</html>

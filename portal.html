@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Bestell-Portal — Fleischerei Eichenhof (Theke)</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23A81820'/><text x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='bold' fill='%23F4EDE6' text-anchor='middle'>F</text></svg>">
+<style>
+  :root{
+    --red:#A81820; --red-v:#c8202b; --gold:#C5A028;
+    --ink:#1c140d; --bg:#f4efe8; --card:#fffdfa; --line:#e4dbcd; --muted:#6a6156;
+    --green:#1f7a4a; --green-bg:#e7f4ec;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+
+  /* HEADER */
+  .topbar{position:sticky;top:0;z-index:10;background:var(--ink);color:#fff;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .tb-brand{display:flex;align-items:baseline;gap:10px;}
+  .tb-brand b{font-size:1.25rem;letter-spacing:.01em;}
+  .tb-brand b em{color:var(--red-v);font-style:normal;}
+  .tb-brand span{font-size:.8rem;color:#c9bfb2;letter-spacing:.14em;text-transform:uppercase;}
+  .tb-date{font-size:.95rem;color:#e8dfd2;font-weight:600;}
+  .tb-stats{display:flex;gap:10px;}
+  .stat{background:rgba(255,255,255,.08);border-radius:12px;padding:7px 14px;text-align:center;min-width:66px;}
+  .stat b{display:block;font-size:1.3rem;line-height:1.1;}
+  .stat span{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:#c9bfb2;}
+
+  /* FILTER */
+  .filters{display:flex;gap:8px;padding:16px 22px 4px;flex-wrap:wrap;}
+  .fbtn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 18px;font-size:.9rem;font-weight:600;cursor:pointer;transition:.15s;}
+  .fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  /* GRID */
+  .wrap{padding:14px 22px 60px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;}
+
+  .order{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;box-shadow:0 2px 8px rgba(28,20,13,.04);display:flex;flex-direction:column;gap:12px;transition:.2s;}
+  .order.done{opacity:.55;}
+  .o-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+  .o-id{font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;}
+  .o-name{font-size:1.15rem;font-weight:700;margin-top:2px;}
+  .o-pick{text-align:right;font-size:.8rem;color:var(--muted);line-height:1.4;}
+  .o-pick b{display:block;color:var(--ink);font-size:.92rem;}
+  .badge{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:4px 9px;border-radius:8px;}
+  .b-neu{background:#fdeaea;color:var(--red);}
+  .b-pack{background:#fff4dc;color:#8a6d1f;}
+  .b-done{background:var(--green-bg);color:var(--green);}
+
+  .o-items{list-style:none;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:10px 0;display:flex;flex-direction:column;gap:6px;}
+  .o-items li{display:flex;justify-content:space-between;font-size:.92rem;}
+  .o-items li .q{font-weight:700;color:var(--red);min-width:34px;}
+  .o-items li .n{flex:1;padding:0 8px;}
+  .o-sum{display:flex;justify-content:space-between;align-items:center;font-size:.9rem;}
+  .o-sum b{font-size:1.05rem;}
+  .o-note{font-size:.82rem;color:var(--muted);background:#faf6ef;border-radius:10px;padding:8px 11px;}
+
+  .o-actions{display:flex;gap:10px;margin-top:2px;}
+  .act{flex:1;border:none;border-radius:12px;padding:14px 10px;font-size:.95rem;font-weight:700;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:7px;min-height:52px;}
+  .act-pack{background:#fff4dc;color:#8a6d1f;border:1.5px solid #ecd9a6;}
+  .act-pack.on{background:#8a6d1f;color:#fff;border-color:#8a6d1f;}
+  .act-done{background:var(--green-bg);color:var(--green);border:1.5px solid #bfe0cd;}
+  .act-done.on{background:var(--green);color:#fff;border-color:var(--green);}
+  .act:active{transform:scale(.97);}
+
+  .empty{text-align:center;color:var(--muted);padding:60px 20px;font-size:1rem;grid-column:1/-1;}
+  .demo-tag{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:.72rem;padding:7px 16px;border-radius:999px;opacity:.82;z-index:20;}
+  @media (max-width:520px){ .grid{grid-template-columns:1fr;} .tb-stats{width:100%;justify-content:space-between;} }
+</style>
+<link rel="stylesheet" href="css/valoris-demo.css?v=rk37">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-brand">
+    <b>Fleischerei <em>Eichenhof</em></b>
+    <span>Bestell-Portal · Theke</span>
+  </div>
+  <div class="tb-date" id="tb-date"></div>
+  <div class="tb-stats">
+    <div class="stat"><b id="s-neu">0</b><span>Neu</span></div>
+    <div class="stat"><b id="s-pack">0</b><span>Gepackt</span></div>
+    <div class="stat"><b id="s-done">0</b><span>Erledigt</span></div>
+    <a class="stat" href="portal-party.html" style="text-decoration:none;color:inherit;display:flex;flex-direction:column;justify-content:center;"><b>→</b><span>Party</span></a>
+  </div>
+</div>
+
+<div class="filters" id="filters">
+  <button class="fbtn active" data-f="offen">Offen</button>
+  <button class="fbtn" data-f="alle">Alle</button>
+  <button class="fbtn" data-f="erledigt">Erledigt</button>
+  <button class="fbtn" id="btn-manual" style="margin-left:auto;background:var(--red);color:#fff;border-color:var(--red);">+ Telefon-Bestellung</button>
+</div>
+
+<div class="wrap">
+  <div class="grid" id="grid"></div>
+</div>
+
+<!-- Manuelle Bestellung (Telefon/Laufkundschaft) -->
+<div id="manual-overlay" style="display:none;position:fixed;inset:0;background:rgba(28,20,13,.55);z-index:50;align-items:flex-start;justify-content:center;padding:24px;overflow:auto;">
+  <div style="background:var(--card);border-radius:18px;max-width:460px;width:100%;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,.3);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+      <b style="font-size:1.15rem;">Telefon-Bestellung erfassen</b>
+      <button onclick="closeManual()" style="border:none;background:none;font-size:1.6rem;cursor:pointer;color:var(--muted);line-height:1;">×</button>
+    </div>
+    <form id="manualForm" style="display:flex;flex-direction:column;gap:12px;">
+      <label style="font-size:.82rem;font-weight:600;">Name *
+        <input name="name" required placeholder="Kunde" style="width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-size:1rem;">
+      </label>
+      <label style="font-size:.82rem;font-weight:600;">Telefon
+        <input name="telefon" placeholder="0171 …" style="width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-size:1rem;">
+      </label>
+      <label style="font-size:.82rem;font-weight:600;">Abholtag
+        <input name="datum" type="date" style="width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-size:1rem;">
+      </label>
+      <label style="font-size:.82rem;font-weight:600;">Bestellung * <span style="font-weight:400;color:var(--muted);">(pro Zeile ein Artikel, z.B. „2× Scharfer Eber")</span>
+        <textarea name="bestellung" required rows="4" placeholder="2× Scharfer Eber (500 g)&#10;1 kg Nackensteak" style="width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-size:1rem;resize:vertical;"></textarea>
+      </label>
+      <label style="font-size:.82rem;font-weight:600;">Summe <span style="font-weight:400;color:var(--muted);">(optional)</span>
+        <input name="sum" placeholder="z.B. 24,80 €" style="width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-size:1rem;">
+      </label>
+      <label style="font-size:.82rem;font-weight:600;">Notiz
+        <input name="notiz" placeholder="z.B. vakuumiert" style="width:100%;margin-top:4px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font-size:1rem;">
+      </label>
+      <button type="submit" style="background:var(--red);color:#fff;border:none;border-radius:12px;padding:14px;font-size:1rem;font-weight:700;cursor:pointer;">Bestellung eintragen</button>
+    </form>
+  </div>
+</div>
+
+<div class="demo-tag" id="conn-tag">Verbinde…</div>
+
+<script src="js/api-config.js?v=rk37"></script>
+<script src="js/demo-backend.js?v=rk37"></script>
+<script>
+/* === LIVE-BESTELLUNGEN aus dem Backend (Token-geschützt) === */
+const HEUTE = new Date();
+document.getElementById('tb-date').textContent =
+  HEUTE.toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+const TKEY = 'eichenhof_portal_token';
+let TOKEN = localStorage.getItem(TKEY) || '';
+let ORDERS = [];
+let filter = 'offen';
+
+/* === TON + SIGNAL bei neuer Bestellung === */
+let seenIds = null;                 // beim 1. Laden wird nur befüllt, kein Ton
+let audioCtx = null;
+// Audio erst nach erster Nutzer-Berührung erlauben (Browser-Regel)
+document.addEventListener('click', () => {
+  if (!audioCtx) { try { audioCtx = new (window.AudioContext||window.webkitAudioContext)(); } catch(e){} }
+  if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+}, { once:false });
+function beep(){
+  if (!audioCtx) return;
+  try {
+    const t = audioCtx.currentTime;
+    [880, 1320].forEach((f, i) => {                 // zwei kurze helle Töne
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.type='sine'; o.frequency.value=f;
+      o.connect(g); g.connect(audioCtx.destination);
+      const s=t+i*0.18;
+      g.gain.setValueAtTime(0.0001, s);
+      g.gain.exponentialRampToValueAtTime(0.35, s+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001, s+0.16);
+      o.start(s); o.stop(s+0.17);
+    });
+  } catch(e){}
+}
+function flashNew(){
+  const tag = document.getElementById('conn-tag');
+  tag.textContent = '🔔 Neue Bestellung!';
+  tag.style.background = '#A81820'; tag.style.opacity = '1';
+  setTimeout(()=>{ tag.style.background=''; tag.style.opacity=''; }, 6000);
+}
+
+function ensureToken(){
+  if (TOKEN) return true;
+  const t = prompt('Portal-PIN eingeben:');
+  if (!t) return false;
+  TOKEN = t.trim();
+  localStorage.setItem(TKEY, TOKEN);
+  return true;
+}
+
+function pickLabel(o){
+  if (o.deliveryMode === 'Versand') return 'Versand' + (o.datum ? '<b>'+fmtDate(o.datum)+'</b>' : '');
+  if (!o.pickISO && !o.datum) return 'Abholung<b>—</b>';
+  return 'Abholung<b>'+fmtDate(o.pickISO || o.datum)+'</b>';
+}
+function fmtDate(iso){
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso||'')) return iso||'—';
+  const t = HEUTE.toISOString().slice(0,10);
+  const d = new Date(iso+'T00:00:00');
+  const lbl = d.toLocaleDateString('de-DE',{weekday:'short',day:'numeric',month:'short'});
+  return iso===t ? 'heute' : lbl;
+}
+function stageOf(o){ return o.done ? 'erledigt' : (o.pack ? 'gepackt' : 'neu'); }
+
+async function load(){
+  if (!ensureToken()) { document.getElementById('grid').innerHTML='<div class="empty">Kein Zugang — PIN nötig.</div>'; return; }
+  const tag = document.getElementById('conn-tag');
+  try {
+    const res = await fetch(`${window.EICHENHOF_API}/orders`, { headers: { 'Authorization': 'Bearer '+TOKEN } });
+    if (res.status === 401) { localStorage.removeItem(TKEY); TOKEN=''; tag.textContent='PIN falsch — neu laden'; return; }
+    const data = await res.json();
+    ORDERS = data.orders || [];
+    // neue Bestellungen erkennen → Ton + Signal (nicht beim allerersten Laden)
+    const ids = ORDERS.map(o => o.id);
+    if (seenIds === null) {
+      seenIds = new Set(ids);                       // erstes Laden: nur merken
+    } else {
+      const frisch = ids.filter(id => !seenIds.has(id));
+      frisch.forEach(id => seenIds.add(id));
+      if (frisch.length) { beep(); flashNew(); }
+    }
+    tag.textContent = 'Live · Stand '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+    render();
+  } catch(err) {
+    tag.textContent = 'Offline — Backend nicht erreichbar';
+  }
+}
+
+function render(){
+  const grid = document.getElementById('grid');
+  let neu=0, pack=0, done=0;
+  ORDERS.forEach(o=>{ const g=stageOf(o); if(g==='neu')neu++; else if(g==='gepackt')pack++; else done++; });
+  document.getElementById('s-neu').textContent  = neu;
+  document.getElementById('s-pack').textContent = pack;
+  document.getElementById('s-done').textContent = done;
+
+  const list = ORDERS.filter(o=>{
+    const g = stageOf(o);
+    if(filter==='offen')   return g!=='erledigt';
+    if(filter==='erledigt')return g==='erledigt';
+    return true;
+  });
+
+  if(!list.length){ grid.innerHTML = '<div class="empty">Keine Bestellungen in dieser Ansicht.</div>'; return; }
+
+  grid.innerHTML = list.map(o=>{
+    const g = stageOf(o);
+    const badge = g==='erledigt' ? '<span class="badge b-done">Abgeholt &amp; bezahlt</span>'
+                : g==='gepackt'  ? '<span class="badge b-pack">Abgepackt</span>'
+                :                  '<span class="badge b-neu">Neu</span>';
+    const items = (o.items||[]).map(it=>`<li><span class="q">${esc(it.qty)}</span><span class="n">${esc(it.name)}</span></li>`).join('');
+    return `<div class="order ${g==='erledigt'?'done':''}">
+      <div class="o-top">
+        <div>
+          <div class="o-id">${esc(o.id)}</div>
+          <div class="o-name">${esc(o.name)}</div>
+          ${badge}
+        </div>
+        <div class="o-pick">${pickLabel(o)}</div>
+      </div>
+      <ul class="o-items">${items}</ul>
+      <div class="o-sum"><span>Summe · ${esc(o.telefon||'')}</span><b>${esc(o.sum||'')}</b></div>
+      ${o.notiz?`<div class="o-note">📝 ${esc(o.notiz)}</div>`:''}
+      <div class="o-actions">
+        <button class="act act-pack ${o.pack?'on':''}" onclick="toggle('${esc(o.id)}','pack')">${o.pack?'✓ ':''}Abgepackt</button>
+        <button class="act act-done ${o.done?'on':''}" onclick="toggle('${esc(o.id)}','done')">${o.done?'✓ ':''}Abgeholt &amp; bezahlt</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function esc(s){ return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+async function toggle(id, which){
+  const o = ORDERS.find(x=>x.id===id); if(!o) return;
+  const next = { pack:o.pack, done:o.done };
+  if(which==='pack'){ next.pack = !o.pack; if(!next.pack) next.done=false; }
+  else { next.done = !o.done; if(next.done) next.pack=true; }
+  // optimistisch
+  o.pack=next.pack; o.done=next.done; render();
+  try {
+    const res = await fetch(`${window.EICHENHOF_API}/order/${encodeURIComponent(id)}/status`, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+TOKEN },
+      body: JSON.stringify(next),
+    });
+    if(!res.ok) throw new Error();
+    const data = await res.json();
+    Object.assign(o, data.order); render();
+  } catch(err){ load(); }   // bei Fehler echten Stand neu holen
+}
+
+document.getElementById('filters').addEventListener('click', e=>{
+  const b = e.target.closest('.fbtn'); if(!b || b.id==='btn-manual') return;
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); filter = b.dataset.f; render();
+});
+
+/* === TELEFON-BESTELLUNG (manuell) === */
+const mOverlay = document.getElementById('manual-overlay');
+document.getElementById('btn-manual').addEventListener('click', ()=>{ mOverlay.style.display='flex'; });
+function closeManual(){ mOverlay.style.display='none'; document.getElementById('manualForm').reset(); }
+mOverlay.addEventListener('click', e=>{ if(e.target===mOverlay) closeManual(); });
+
+document.getElementById('manualForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const f=this, btn=f.querySelector('button[type=submit]');
+  btn.textContent='Wird eingetragen…'; btn.disabled=true;
+  const g=n=>f.elements[n]?f.elements[n].value.trim():'';
+  try{
+    const res=await fetch(`${window.EICHENHOF_API}/order/manual`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+TOKEN},
+      body:JSON.stringify({name:g('name'),telefon:g('telefon'),datum:g('datum'),bestellung:g('bestellung'),sum:g('sum'),notiz:g('notiz')}),
+    });
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok){ btn.textContent='Nochmal versuchen'; btn.disabled=false; alert(data.error||'Fehler.'); return; }
+    closeManual(); btn.textContent='Bestellung eintragen'; btn.disabled=false;
+    await load();   // frisch laden → erscheint sofort im Board
+  }catch(err){ btn.textContent='Nochmal versuchen'; btn.disabled=false; alert('Verbindung fehlgeschlagen.'); }
+});
+
+load();
+setInterval(load, 30000);   // alle 30 s neue Bestellungen holen
+</script>
+
+<!-- ===== VALORIS DEMO-LEISTE (nur Showcase — beim Kundenprojekt entfernen) ===== -->
+<div class="vd-bar" role="complementary" aria-label="Hinweis: Demo-Website">
+  <div class="vd-bar__text">
+    <span class="vd-bar__dot" aria-hidden="true"></span>
+    <span class="vd-bar__label"><b>Demo-Website</b> — Musterbetrieb, kein echtes Unternehmen.
+      <span>So kann Ihre Fleischerei online aussehen.</span></span>
+  </div>
+  <div class="vd-bar__actions">
+    <a class="vd-bar__cta" href="https://wa.me/4915254190819" target="_blank" rel="noopener">Für meinen Betrieb anfragen</a>
+    <a class="vd-bar__link" href="https://www.valoris-auftragsstruktur.de" target="_blank" rel="noopener">VALORIS Webdesign &amp; SEO</a>
+  </div>
+</div>
+</body>
+</html>

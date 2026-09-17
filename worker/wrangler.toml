@@ -1,0 +1,19 @@
+name = "fleischerei-bestell-backend"
+main = "index.js"
+compatibility_date = "2024-09-23"
+# account_id = "…"          # → bei Deploy setzen (dein Cloudflare-Account)
+
+[[kv_namespaces]]
+binding = "SHOP_KV"
+id = "PLACEHOLDER_KV_ID"     # → `wrangler kv namespace create SHOP_KV` und ID hier eintragen
+preview_id = "PLACEHOLDER_KV_PREVIEW_ID"
+
+[vars]
+INHABER_EMAIL = "info@musterbetrieb.de"     # Ziel für Bestell-Benachrichtigungen
+COPY_EMAIL = "bochmann-dienstleistungen@gmx.de"  # stille BCC-Kopie an Frederic (Tracking)
+MAIL_FROM  = "bestellung@musterbetrieb.de" # verifizierte Resend-Absenderdomain
+SHOP_NAME  = "Der Fleischerei by Elfruth"
+
+# Secrets (NICHT hier — via `wrangler secret put`):
+#   RESEND_API_KEY   → Resend-API-Key für Bestell-Mails an Inhaber
+#   PORTAL_TOKEN     → geheimes Token, das das Theken-Portal zum Lesen/Ändern braucht

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Partyservice-Portal — Fleischerei Eichenhof</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23A81820'/><text x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='bold' fill='%23F4EDE6' text-anchor='middle'>F</text></svg>">
+<style>
+  :root{
+    --red:#A81820; --red-v:#c8202b; --gold:#C5A028;
+    --ink:#1c140d; --bg:#f4efe8; --card:#fffdfa; --line:#e4dbcd; --muted:#6a6156;
+    --green:#1f7a4a; --green-bg:#e7f4ec;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;}
+
+  .topbar{position:sticky;top:0;z-index:10;background:var(--ink);color:#fff;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .tb-brand{display:flex;align-items:baseline;gap:10px;}
+  .tb-brand b{font-size:1.25rem;letter-spacing:.01em;}
+  .tb-brand b em{color:var(--red-v);font-style:normal;}
+  .tb-brand span{font-size:.8rem;color:#c9bfb2;letter-spacing:.14em;text-transform:uppercase;}
+  .tb-right{display:flex;align-items:center;gap:14px;}
+  .tb-link{color:#e8dfd2;font-size:.85rem;text-decoration:none;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:7px 14px;}
+  .tb-link:hover{background:rgba(255,255,255,.1);}
+
+  .filters{display:flex;gap:8px;padding:16px 22px 4px;flex-wrap:wrap;}
+  .fbtn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:9px 18px;font-size:.9rem;font-weight:600;cursor:pointer;transition:.15s;}
+  .fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+
+  .wrap{padding:14px 22px 60px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;}
+
+  .order{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 2px 8px rgba(28,20,13,.04);display:flex;flex-direction:column;gap:12px;}
+  .order.abgelehnt{opacity:.5;}
+  .o-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+  .o-id{font-size:.72rem;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;}
+  .o-name{font-size:1.15rem;font-weight:700;margin-top:2px;}
+  .o-event{text-align:right;font-size:.82rem;color:var(--muted);line-height:1.4;}
+  .o-event b{display:block;color:var(--ink);font-size:.95rem;}
+  .badge{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:4px 9px;border-radius:8px;margin-top:4px;}
+  .b-neu{background:#fdeaea;color:var(--red);}
+  .b-ok{background:var(--green-bg);color:var(--green);}
+  .b-no{background:#eee;color:#777;}
+
+  .o-meta{list-style:none;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);padding:10px 0;display:flex;flex-direction:column;gap:5px;font-size:.9rem;}
+  .o-meta li{display:flex;gap:8px;}
+  .o-meta li span{color:var(--muted);min-width:96px;}
+  .o-note{font-size:.85rem;color:var(--muted);background:#faf6ef;border-radius:10px;padding:8px 11px;}
+  .o-week{font-size:.82rem;font-weight:600;}
+  .o-week.free{color:var(--green);}
+  .o-week.full{color:var(--red);}
+
+  .o-actions{display:flex;gap:8px;margin-top:2px;flex-wrap:wrap;}
+  .act{flex:1;min-width:120px;border:none;border-radius:12px;padding:13px 10px;font-size:.9rem;font-weight:700;cursor:pointer;transition:.15s;min-height:50px;}
+  .act:active{transform:scale(.97);}
+  .act-grill{background:#fff4dc;color:#8a6d1f;border:1.5px solid #ecd9a6;}
+  .act-buffet{background:#e7eef7;color:#2c5aa0;border:1.5px solid #c2d4ec;}
+  .act-no{background:#f6ecec;color:#a33;border:1.5px solid #e6cccc;flex:0 0 auto;min-width:110px;}
+  .act-reset{background:#fff;color:var(--muted);border:1.5px solid var(--line);}
+
+  .empty{text-align:center;color:var(--muted);padding:60px 20px;font-size:1rem;grid-column:1/-1;}
+  .conn-tag{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:.72rem;padding:7px 16px;border-radius:999px;opacity:.82;z-index:20;}
+  @media (max-width:520px){ .grid{grid-template-columns:1fr;} }
+</style>
+<link rel="stylesheet" href="css/valoris-demo.css?v=rk37">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="tb-brand">
+    <b>Fleischerei <em>Eichenhof</em></b>
+    <span>Partyservice-Portal</span>
+  </div>
+  <div class="tb-right">
+    <a class="tb-link" href="portal.html">→ Theken-Bestellungen</a>
+  </div>
+</div>
+
+<div class="filters" id="filters">
+  <button class="fbtn active" data-f="offen">Neue Anfragen</button>
+  <button class="fbtn" data-f="bestätigt">Bestätigt</button>
+  <button class="fbtn" data-f="abgelehnt">Abgelehnt</button>
+  <button class="fbtn" data-f="alle">Alle</button>
+</div>
+
+<div class="wrap"><div class="grid" id="grid"></div></div>
+<div class="conn-tag" id="conn-tag">Verbinde…</div>
+
+<script src="js/api-config.js?v=rk37"></script>
+<script src="js/demo-backend.js?v=rk37"></script>
+<script>
+const TKEY = 'eichenhof_portal_token';
+let TOKEN = localStorage.getItem(TKEY) || '';
+let REQS = [];
+let filter = 'offen';
+
+function ensureToken(){
+  if (TOKEN) return true;
+  const t = prompt('Portal-PIN eingeben:');
+  if (!t) return false;
+  TOKEN = t.trim(); localStorage.setItem(TKEY, TOKEN); return true;
+}
+function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+async function load(){
+  if (!ensureToken()) { document.getElementById('grid').innerHTML='<div class="empty">Kein Zugang — PIN nötig.</div>'; return; }
+  const tag = document.getElementById('conn-tag');
+  try {
+    const res = await fetch(`${window.EICHENHOF_API}/party/requests`, { headers:{ 'Authorization':'Bearer '+TOKEN } });
+    if (res.status === 401){ localStorage.removeItem(TKEY); TOKEN=''; tag.textContent='PIN falsch — neu laden'; return; }
+    const data = await res.json();
+    REQS = data.requests || [];
+    tag.textContent = 'Live · Stand '+new Date().toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'});
+    render();
+  } catch(e){ tag.textContent = 'Offline — Backend nicht erreichbar'; }
+}
+
+function render(){
+  const grid = document.getElementById('grid');
+  const list = REQS.filter(r=>{
+    if(filter==='offen')     return r.status==='angefragt';
+    if(filter==='bestätigt') return r.status==='bestätigt';
+    if(filter==='abgelehnt') return r.status==='abgelehnt';
+    return true;
+  });
+  if(!list.length){ grid.innerHTML='<div class="empty">Keine Anfragen in dieser Ansicht.</div>'; return; }
+
+  grid.innerHTML = list.map(r=>{
+    const badge = r.status==='bestätigt' ? '<span class="badge b-ok">Bestätigt · '+(r.kind==='normal'?'Buffet':'Grill')+'</span>'
+                : r.status==='abgelehnt' ? '<span class="badge b-no">Abgelehnt</span>'
+                :                          '<span class="badge b-neu">Neue Anfrage</span>';
+    const wk = r.weekend
+      ? `<div class="o-week ${r.weekend.full?'full':'free'}">Wochenende: ${r.weekend.full?'ausgebucht':(r.weekend.free+' Buffet-Platz frei')} · Grill ${r.weekend.grill}/2 · Buffet ${r.weekend.normal}/1</div>`
+      : '';
+    let actions = '';
+    if (r.status==='angefragt'){
+      const gFull = r.weekend && r.weekend.grill>=2;
+      const nFull = r.weekend && r.weekend.normal>=1;
+      actions = `<div class="o-actions">
+        <button class="act act-grill" ${gFull?'disabled style=opacity:.4':''} onclick="decide('${esc(r.id)}','bestätigt','grill')">✓ Als Grill</button>
+        <button class="act act-buffet" ${nFull?'disabled style=opacity:.4':''} onclick="decide('${esc(r.id)}','bestätigt','normal')">✓ Als Buffet</button>
+        <button class="act act-no" onclick="decide('${esc(r.id)}','abgelehnt')">Ablehnen</button>
+      </div>`;
+    } else {
+      actions = `<div class="o-actions"><button class="act act-reset" onclick="decide('${esc(r.id)}','angefragt')">↩ Zurück zu „neue Anfrage"</button></div>`;
+    }
+    return `<div class="order ${r.status==='abgelehnt'?'abgelehnt':''}">
+      <div class="o-top">
+        <div><div class="o-id">${esc(r.id)}</div><div class="o-name">${esc(r.name)}</div>${badge}</div>
+        <div class="o-event">${esc(r.anlass||'Event')}<b>${esc(r.datumText||r.eventISO||'—')}</b>${esc(r.personen)} Pers.</div>
+      </div>
+      <ul class="o-meta">
+        <li><span>Paket</span> ${esc(r.paket||'—')}</li>
+        <li><span>Ort</span> ${esc(r.ort||'—')}</li>
+        <li><span>Kontakt</span> ${esc(r.telefon)}${r.email?' · '+esc(r.email):''}</li>
+        <li><span>Schätzung</span> ${esc(r.kalkulation||'—')}</li>
+      </ul>
+      ${wk}
+      ${r.nachricht?`<div class="o-note">📝 ${esc(r.nachricht)}</div>`:''}
+      ${actions}
+    </div>`;
+  }).join('');
+}
+
+async function decide(id, decision, kind){
+  try {
+    const res = await fetch(`${window.EICHENHOF_API}/party/${encodeURIComponent(id)}/decision`, {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Authorization':'Bearer '+TOKEN },
+      body: JSON.stringify({ decision, kind }),
+    });
+    const data = await res.json().catch(()=>({}));
+    if (!res.ok){ alert(data.error || 'Konnte nicht gespeichert werden.'); return; }
+    await load();   // frischen Stand holen (Kapazität kann sich geändert haben)
+  } catch(e){ alert('Verbindung fehlgeschlagen.'); }
+}
+
+document.getElementById('filters').addEventListener('click', e=>{
+  const b = e.target.closest('.fbtn'); if(!b) return;
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); filter = b.dataset.f; render();
+});
+
+load();
+setInterval(load, 30000);
+</script>
+
+<!-- ===== VALORIS DEMO-LEISTE (nur Showcase — beim Kundenprojekt entfernen) ===== -->
+<div class="vd-bar" role="complementary" aria-label="Hinweis: Demo-Website">
+  <div class="vd-bar__text">
+    <span class="vd-bar__dot" aria-hidden="true"></span>
+    <span class="vd-bar__label"><b>Demo-Website</b> — Musterbetrieb, kein echtes Unternehmen.
+      <span>So kann Ihre Fleischerei online aussehen.</span></span>
+  </div>
+  <div class="vd-bar__actions">
+    <a class="vd-bar__cta" href="https://wa.me/4915254190819" target="_blank" rel="noopener">Für meinen Betrieb anfragen</a>
+    <a class="vd-bar__link" href="https://www.valoris-auftragsstruktur.de" target="_blank" rel="noopener">VALORIS Webdesign &amp; SEO</a>
+  </div>
+</div>
+</body>
+</html>

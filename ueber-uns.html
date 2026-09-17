@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Über uns — Fleischerei Eichenhof | Michael Wendt, Goldprämiert Fleischermeister</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23A81820'/><text x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='bold' fill='%23F4EDE6' text-anchor='middle'>F</text></svg>">
+<meta name="description" content="Die Geschichte von Fleischerei Eichenhof — Fleischermeister und Lehrmeister aus Musterstadt. Handwerk, Leidenschaft, Qualität.">
+<link rel="stylesheet" href="css/styles.css?v=rk37">
+<link rel="stylesheet" href="css/premium.css?v=rk37">
+<link rel="stylesheet" href="css/light.css?v=rk37">
+
+<style>
+.page-hero { min-height:55vh; display:flex; align-items:flex-end; position:relative; overflow:hidden; padding:120px 32px 64px; }
+.page-hero-bg { position:absolute; inset:0; background:url('assets/img/px-3217156.jpg') center 30%/cover; filter:brightness(0.3) saturate(1.1); z-index:0; }
+.page-hero-overlay { position:absolute; inset:0; background:linear-gradient(10deg, rgba(7,7,7,0.95) 20%, rgba(7,7,7,0.4) 70%, rgba(168,24,32,0.15) 100%); z-index:1; }
+.page-hero-content { position:relative; z-index:2; max-width:780px; }
+
+/* Award-Showcase + Bio kommen jetzt aus premium.css */
+
+.team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.team-card { padding:28px; text-align:center; }
+.team-avatar {
+  width:80px; height:80px; border-radius:50%; margin:0 auto 20px;
+  background:var(--glass-red); border:1px solid var(--glass-red-b);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.5rem; font-weight:800; color:#F28B8B;
+  font-family:'Playfair Display', serif;
+}
+.team-name { font-size:1rem; font-weight:700; margin-bottom:4px; }
+.team-role { font-size:0.78rem; color:var(--gold); font-weight:600; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:10px; }
+.team-bio { font-size:0.82rem; color:var(--text-muted); line-height:1.65; }
+
+.value-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.value-card { padding:32px; }
+.value-icon { width:32px; height:2px; background:var(--red); display:block; margin-bottom:18px; border-radius:1px; }
+.value-title { font-size:1.1rem; font-weight:700; margin-bottom:10px; }
+.value-text { font-size:0.875rem; color:var(--text-muted); line-height:1.75; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Fleischerei Eichenhof","description":"Handgemachte Fleisch- und Wurstspezialitäten aus dem Meisterbetrieb, goldprämierte Wurstqualität.","address":{"@type":"PostalAddress","streetAddress":"Marktstraße 14","addressLocality":"Musterstadt","postalCode":"09000","addressCountry":"DE"},"telephone":"+491234567890","email":"info@fleischerei-eichenhof.de","openingHours":["Tu 11:00-18:00","We 10:00-18:00","Th 08:00-18:00","Fr 08:00-18:00","Sa 08:00-12:00"]}</script>
+<link rel="stylesheet" href="css/valoris-demo.css?v=rk37">
+</head>
+<body class="page-about">
+
+<!-- PAGE LOADER -->
+<div id="page-loader" aria-hidden="true">
+  <div class="loader-mark">
+    <span>D</span><span>e</span><span>r</span>
+    <em><span style="display:inline-block;width:0.4em"></span></em>
+    <span style="color:var(--red-vivid)">F</span><span style="color:var(--red-vivid)">l</span><span style="color:var(--red-vivid)">e</span><span style="color:var(--red-vivid)">i</span><span style="color:var(--red-vivid)">s</span><span style="color:var(--red-vivid)">c</span><span style="color:var(--red-vivid)">h</span><span style="color:var(--red-vivid)">i</span>
+  </div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  <div class="loader-sub">Goldprämiert · Musterstadt</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav glass">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-name">Fleischerei <em>Eichenhof</em></span>
+      <span class="logo-award">Meisterbetrieb · Musterstadt</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Start</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="partyservice.html">Partyservice</a></li>
+      <li><a href="ueber-uns.html" class="active">Über uns</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="shop.html" class="btn btn-red btn-sm">Shop</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <button class="mobile-nav-close" aria-label="Schliessen">&#x2715;</button>
+  <a href="index.html">Start</a>
+  <a href="shop.html">Shop</a>
+  <a href="partyservice.html">Partyservice</a>
+  <a href="ueber-uns.html">Über uns</a>
+  <a href="kontakt.html">Kontakt</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="container page-hero-content">
+    <span class="label">Hinter dem Eichenhof</span>
+    <h1 style="margin-bottom:20px;">Handwerk,<br><span class="text-red">Leidenschaft</span> &<br>echtes Handwerk.</h1>
+    <p style="font-size:1.05rem; color:rgba(244,237,230,0.72); max-width:580px;">
+      Was 2019 als Traum begann, ist heute ein ausgezeichneter Meisterbetrieb: Michael Wendt und sein Team aus Musterstadt.
+    </p>
+  </div>
+</div>
+
+<!-- TILO BIO — Editorial Portrait -->
+<section class="tilo-story" id="bio">
+  <div class="tilo-grid">
+    <div class="tilo-portrait reveal">
+      <img src="assets/img/px-16276491.jpg" alt="Michael Wendt, Fleischermeister">
+      <div class="tilo-portrait-meta">
+        <div>
+          <div class="who">Michael Wendt</div>
+          <div class="role">Fleischermeister · Lehrmeister</div>
+        </div>
+        <div class="since">— seit 2019</div>
+      </div>
+    </div>
+    <div class="tilo-text reveal reveal-d1">
+      <span class="label">Der Mann dahinter</span>
+      <h2>Handwerker. <em>Lehrmeister.</em> Goldprämiert.</h2>
+      <p>
+        Michael Wendt ist nicht einfach Fleischer. Er ist Handwerker aus Leidenschaft, Lehrmeister aus Überzeugung und Goldprämiert aus purem Können. 2019 eröffnete er seinen Laden in der Marktstraße 2A, und seitdem steht er nahezu täglich selbst hinter dem Tresen.
+      </p>
+      <p>
+        Was ihn antreibt: das Handwerk so zu betreiben, wie es einmal war: mit Rohgewürzen statt Fertigmischungen, regionalen Tieren die er persönlich auf der Weide auswählt, und Rezepten die Jahrzehnte alt sind, aber niemals altbacken schmecken.
+      </p>
+      <p>
+        Sein "Scharfer Eber", mit Jalapeños und Cheddar verfeinert, ist heute die meistverkaufte Sorte im Laden. Kunden fahren dafür aus dem ganzen Umland an: bis zu 5.000 Stück am Wochenende, mit Lieferungen bis nach Rom.
+      </p>
+      <div class="btn-row mt-32">
+        <a href="shop.html" class="btn btn-red btn-lg">Zum Shop</a>
+        <a href="kontakt.html" class="btn btn-glass btn-lg">Kontakt aufnehmen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUSZEICHNUNGEN -->
+<section class="award-showcase" id="auszeichnungen">
+  <div class="award-showcase-head reveal">
+    <span class="label">Auszeichnungen</span>
+    <h2>Mehr als nur eine <em>Medaille</em>.</h2>
+    <p class="text-lead" style="margin-top:20px;">Anerkennung der Fachwelt für das, was wir täglich machen.</p>
+  </div>
+  <div class="award-grid-pro">
+    <div class="glass award-item-pro reveal">
+      <div class="award-medallion"><span class="yr">'22</span></div>
+      <div class="award-title-pro">Goldene Grillwurst</div>
+      <div class="award-place-pro">Qualitätsprüfung · Gold</div>
+      <div class="award-desc-pro">Mit dem "Scharfen Eber" (Jalapeños, Cheddar, Rohgewürze) holten wir den ersten Platz beim European Butchers Championship.</div>
+    </div>
+    <div class="glass award-item-pro reveal reveal-d1">
+      <div class="award-medallion"><span class="yr">'23</span></div>
+      <div class="award-title-pro">Bester Sächsischer Fleischer</div>
+      <div class="award-place-pro">Innungsehrung · Dresden</div>
+      <div class="award-desc-pro">Anerkennung der sächsischen Fleischer-Innung für herausragendes Handwerk und Lehrlingsausbildung.</div>
+    </div>
+    <div class="glass award-item-pro reveal reveal-d2">
+      <div class="award-medallion"><span class="yr">'24</span></div>
+      <div class="award-title-pro">Lehrbetrieb des Jahres</div>
+      <div class="award-place-pro">HWK Chemnitz</div>
+      <div class="award-desc-pro">Auszeichnung der Handwerkskammer Chemnitz für die Ausbildung junger Fleischer in Sachsen.</div>
+    </div>
+  </div>
+
+  <!-- Press Quote -->
+  <div class="press-quote reveal">
+    <div class="press-mark">&ldquo;</div>
+    <blockquote>
+      Wer einmal beim Eichenhof gekauft hat, kommt wieder. So einfach ist das.
+    </blockquote>
+    <div class="press-source">— Regionalzeitung · Beispielzitat</div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section style="padding-top:0; padding-bottom:90px;">
+  <div class="container">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start;">
+      <div>
+        <div class="section-head reveal">
+                    <h2>Von Musterstadt in die Welt</h2>
+        </div>
+        <div class="timeline reveal reveal-d1">
+          <div class="tl-item">
+            <div class="tl-year">2019</div>
+            <div class="tl-title">Eröffnung Fleischerei Eichenhof</div>
+            <div class="tl-text">Michael Wendt eröffnet die Fleischerei in der Marktstraße 14, Musterstadt. Der Traum vom eigenen Betrieb wird wahr: mit Handwerk und Leidenschaft als Fundament.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2020–21</div>
+            <div class="tl-title">Krisenzeit, aber kein Stillstand</div>
+            <div class="tl-text">Corona und steigende Energiekosten bringen den Betrieb an seine Grenzen. Michael hält durch: mit Qualität, treue Kunden und eiserne Überzeugung.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2022</div>
+            <div class="tl-title">Erste Auszeichnungen</div>
+            <div class="tl-text">Die Fleischerei sammelt erste Titel auf nationalen Wettbewerben. Der Scharfe Eber entwickelt sich zur Hauskreation — Jalapeños, Cheddar, Rohgewürze.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2023</div>
+            <div class="tl-title">Goldprämiert!</div>
+            <div class="tl-text">Bei der Qualitätsprüfung der Fleischer-Innung: Gold für die Hausmacher-Linie, ausgezeichnet mit dem Scharfen Eber. Die Regionalpresse berichten groß.</div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2024–heute</div>
+            <div class="tl-title">Europaweit bekannt</div>
+            <div class="tl-text">Schlangen vor dem Laden, bis zu 5.000 Würste am Wochenende. Bestellungen aus ganz Deutschland, bis nach Rom. TikTok und Facebook wachsen organisch. Eine neue Website mit Shop entsteht.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Values -->
+      <div class="reveal reveal-d1" style="margin-top:80px;">
+        <div class="value-grid">
+          <div class="glass value-card">
+            <span class="value-icon"></span>
+            <div class="value-title">Regionalität</div>
+            <div class="value-text">Michael wählt die Tiere persönlich auf der Weide aus. Kurze Wege, volle Transparenz.</div>
+          </div>
+          <div class="glass value-card">
+            <span class="value-icon"></span>
+            <div class="value-title">Handwerk</div>
+            <div class="value-text">Kein Fertiggewürz. Kein Kompromiss. Jedes Produkt mit Rohgewürzen und Erfahrung.</div>
+          </div>
+          <div class="glass value-card">
+            <span class="value-icon"></span>
+            <div class="value-title">Weitergeben</div>
+            <div class="value-text">Michael unterrichtet am BSZ Wilkau-Haßlau und sitzt im Prüfungsausschuss der HWK Chemnitz.</div>
+          </div>
+          <div class="glass value-card">
+            <span class="value-icon"></span>
+            <div class="value-title">Leidenschaft</div>
+            <div class="value-text">Seit 2019 steht Michael täglich selbst hinter dem Tresen, mit vollem Einsatz für jedes Produkt.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section style="padding-top:0; padding-bottom:90px;">
+  <div class="container">
+    <div class="section-head text-center reveal">
+      <span class="label">Das Team</span>
+      <h2>7 Menschen. Eine Leidenschaft.</h2>
+    </div>
+    <div class="team-grid">
+      <div class="glass team-card reveal">
+        <div class="team-avatar">TE</div>
+        <div class="team-name">Michael Wendt</div>
+        <div class="team-role">Fleischermeister & Inhaber</div>
+        <div class="team-bio">Goldprämiert, Lehrmeister, Handwerker aus Leidenschaft. Wählt Tiere persönlich aus, entwickelt Rezepte, steht täglich im Laden.</div>
+      </div>
+      <div class="glass team-card reveal reveal-d1">
+        <div class="team-avatar"></div>
+        <div class="team-name">Das Team</div>
+        <div class="team-role">6 Leidenschaftliche</div>
+        <div class="team-bio">Sechs erfahrene Mitarbeiterinnen und Mitarbeiter, die täglich mit Herzblut für eure Zufriedenheit sorgen.</div>
+      </div>
+      <div class="glass team-card reveal reveal-d2">
+        <div class="team-avatar"></div>
+        <div class="team-name">Nachwuchs</div>
+        <div class="team-role">Ausbildungsbetrieb</div>
+        <div class="team-bio">Wir bilden aus, und Michael setzt sich im Prüfungsausschuss der HWK Chemnitz für den Nachwuchs des Fleischerhandwerks ein.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="padding-top:0; padding-bottom:90px;">
+  <div class="container">
+    <div class="glass glass-red" style="padding:60px; text-align:center; border-radius:var(--radius-lg);" class="reveal">
+      <span class="label" style="justify-content:center; display:flex;">Überzeugt?</span>
+      <h2 style="margin-bottom:20px;">Komm vorbei oder<br>bestell direkt online</h2>
+      <p style="color:rgba(28,20,13,0.74); max-width:540px; margin:0 auto 36px;">Marktstraße 14, 09000 Musterstadt. Oder einfach per Shop bestellen und abholen.</p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="shop.html" class="btn btn-gold btn-lg">Zum Shop</a>
+        <a href="partyservice.html" class="btn btn-glass btn-lg">Partyservice</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-name">Fleischerei <em>Eichenhof</em></div>
+        <div class="logo-award">Meisterbetrieb · Michael Wendt</div>
+        <p>Handgemachte Fleisch- und Wurstspezialitäten aus Musterstadt.</p>
+        <address>Marktstraße 14, 09000 Musterstadt<br>Tel: <a href="tel:+491234567890" style="color:var(--text-muted);">0123 456 78 90</a></address>
+      </div>
+      <div><div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Startseite</a><a href="shop.html">Shop</a>
+          <a href="partyservice.html">Partyservice</a><a href="ueber-uns.html">Über uns</a><a href="kontakt.html">Kontakt</a>
+        </div>
+      </div>
+      <div><div class="footer-col-title">Über uns</div>
+        <div class="footer-links">
+          <a href="#bio">Michael Wendt</a><a href="#auszeichnungen">Auszeichnungen</a>
+          <a href="#timeline">Geschichte</a><a href="#team">Team</a>
+        </div>
+      </div>
+      <div><div class="footer-col-title">Kontakt</div>
+        <div class="footer-links">
+          <a href="tel:+491234567890">0123 456 78 90</a>
+          <a href="mailto:info@fleischerei-eichenhof.de">info@fleischerei-eichenhof.de</a>
+          <a href="https://wa.me/4915254190819" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">Facebook</a>
+          <a href="#" target="_blank" rel="noopener">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span class="year"></span> Fleischerei Eichenhof</div>
+      <div class="footer-legal">
+        <button data-open="impressum">Impressum</button>
+        <button data-open="datenschutz">Datenschutz</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" href="https://wa.me/4915254190819" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div class="drawer-overlay"></div>
+<aside class="legal-drawer" id="drawer-impressum" role="dialog"><button class="drawer-close"></button><h2>Impressum</h2><h3>§ 5 TMG</h3><address>Michael Wendt — Fleischerei Eichenhof<br>Marktstraße 14, 09000 Musterstadt<br>Tel: 0123 456 78 90 | info@fleischerei-eichenhof.de</address><h3>USt-IdNr.</h3><p>wird bei Beauftragung ergänzt (Beispieldaten)</p><h3>Kammer</h3><p>Handwerkskammer Chemnitz, Limbacher Str. 195, 09116 Chemnitz</p></aside>
+<aside class="legal-drawer" id="drawer-datenschutz" role="dialog"><button class="drawer-close"></button><h2>Datenschutz</h2><h3>Verantwortlich</h3><address>Michael Wendt, Marktstraße 14, 09000 Musterstadt | info@fleischerei-eichenhof.de</address><h3>Kontaktformular</h3><p>Daten aus dem Formular werden nur zur Bearbeitung eurer Anfrage gespeichert.</p><h3>Eure Rechte</h3><p>Auskunft, Berichtigung, Löschung: info@fleischerei-eichenhof.de</p></aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js?v=rk37"></script>
+<script src="js/premium.js?v=rk37"></script>
+
+<!-- ===== VALORIS DEMO-LEISTE (nur Showcase — beim Kundenprojekt entfernen) ===== -->
+<div class="vd-bar" role="complementary" aria-label="Hinweis: Demo-Website">
+  <div class="vd-bar__text">
+    <span class="vd-bar__dot" aria-hidden="true"></span>
+    <span class="vd-bar__label"><b>Demo-Website</b> — Musterbetrieb, kein echtes Unternehmen.
+      <span>So kann Ihre Fleischerei online aussehen.</span></span>
+  </div>
+  <div class="vd-bar__actions">
+    <a class="vd-bar__cta" href="https://wa.me/4915254190819" target="_blank" rel="noopener">Für meinen Betrieb anfragen</a>
+    <a class="vd-bar__link" href="https://www.valoris-auftragsstruktur.de" target="_blank" rel="noopener">VALORIS Webdesign &amp; SEO</a>
+  </div>
+</div>
+</body>
+</html>

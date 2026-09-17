@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Fleischerei Eichenhof Musterstadt | Goldprämiert Spezialitäten</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23A81820'/><text x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='bold' fill='%23F4EDE6' text-anchor='middle'>F</text></svg>">
+<meta name="description" content="Wurst- und Fleischspezialitäten aus dem Meisterbetrieb online bestellen. Abholung oder Versand in Thermboxen. Fleischerei Eichenhof, Musterstadt.">
+<link rel="stylesheet" href="css/styles.css?v=rk37">
+<link rel="stylesheet" href="css/premium.css?v=rk37">
+<link rel="stylesheet" href="css/light.css?v=rk37">
+<link rel="stylesheet" href="css/editorial.css?v=rk37">
+<link rel="stylesheet" href="css/shop.css?v=rk37">
+
+<style>
+.page-hero { min-height:46vh; display:flex; align-items:center; position:relative; overflow:hidden; padding:clamp(110px,15vh,150px) 32px clamp(56px,8vh,80px); }
+/* scharfes, appetitliches Bild rechts — kein Milchglas mehr (überschreibt light.css) */
+.page-hero-bg { position:absolute; inset:0; background:url('assets/img/eber-2.webp') center right/cover !important; filter:saturate(1.06) contrast(1.03) !important; z-index:0; transform:scale(1.02); }
+/* Creme links (Text sitzt sauber), Bild scharf nach rechts offen, unten weicher Übergang in die Creme-Sektion */
+.page-hero-overlay { position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(180deg, rgba(243,237,226,0) 62%, rgba(243,237,226,0.55) 84%, var(--ed-paper,#f3ede2) 100%),
+    linear-gradient(96deg, var(--ed-paper,#f3ede2) 0%, var(--ed-paper,#f3ede2) 38%, rgba(243,237,226,0.72) 55%, rgba(243,237,226,0.28) 74%, rgba(243,237,226,0.06) 100%) !important;
+}
+.page-hero-content { position:relative; z-index:2; }
+
+.shop-filters { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:40px; }
+.filter-btn { padding:9px 20px; border-radius:var(--radius-pill); font-size:0.8rem; font-weight:600; letter-spacing:0.05em; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:var(--text-muted); cursor:pointer; transition:all 0.2s; }
+.filter-btn:hover, .filter-btn.active { background:rgba(168,24,32,0.15); border-color:rgba(168,24,32,0.4); color:var(--text); }
+
+/* CART PANEL */
+.cart-panel { position:sticky; top:90px; }
+.cart-item { display:flex; align-items:center; gap:12px; padding:14px 0; border-bottom:1px solid rgba(255,255,255,0.07); }
+.cart-item-info { flex:1; }
+.cart-item-name { font-size:0.875rem; font-weight:600; margin-bottom:2px; }
+.cart-item-price { font-size:0.8rem; color:var(--gold); }
+.cart-item-remove { background:none; border:none; color:var(--text-muted); font-size:1rem; cursor:pointer; padding:4px 8px; border-radius:6px; transition:all 0.2s; }
+.cart-item-remove:hover { color:#F28B8B; background:rgba(239,68,68,0.1); }
+/* Mengen-Stepper */
+.qty-ctrl { display:flex; align-items:center; gap:8px; }
+.qty-ctrl button { width:26px; height:26px; border-radius:8px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.06); color:var(--text); font-size:1rem; line-height:1; cursor:pointer; transition:background 0.2s; }
+.qty-ctrl button:hover { background:rgba(255,255,255,0.14); }
+.qty-ctrl span { min-width:18px; text-align:center; font-weight:700; font-size:0.9rem; }
+.cart-item-line { min-width:62px; text-align:right; font-weight:700; color:var(--gold); font-size:0.85rem; }
+/* So läuft's ab — Schritt-Karten */
+.shop-steps .step-card { padding:26px; text-align:center; }
+.step-num { display:inline-flex; align-items:center; justify-content:center; width:38px; height:38px; border-radius:50%; background:rgba(197,160,40,0.16); color:var(--gold); font-weight:800; font-size:1.05rem; margin-bottom:12px; }
+.shop-steps .step-card h4 { margin-bottom:6px; }
+.shop-steps .step-card p { font-size:0.85rem; color:var(--text-muted); line-height:1.6; }
+
+.cart-empty { text-align:center; padding:40px 20px; color:var(--text-muted); font-size:0.875rem; }
+
+/* VERSAND OPTIONS */
+.delivery-opts { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+.delivery-opt { padding:16px; border-radius:14px; background:rgba(255,255,255,0.04); border:2px solid rgba(255,255,255,0.08); cursor:pointer; transition:all 0.2s; }
+.delivery-opt:hover, .delivery-opt.selected { background:rgba(168,24,32,0.1); border-color:rgba(168,24,32,0.4); }
+.delivery-opt-icon { display:none; }
+.delivery-opt-name { font-size:0.875rem; font-weight:700; margin-bottom:4px; }
+.delivery-opt-desc { font-size:0.75rem; color:var(--text-muted); }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Fleischerei Eichenhof","description":"Handgemachte Fleisch- und Wurstspezialitäten aus dem Meisterbetrieb, goldprämierte Wurstqualität.","address":{"@type":"PostalAddress","streetAddress":"Marktstraße 14","addressLocality":"Musterstadt","postalCode":"09000","addressCountry":"DE"},"telephone":"+491234567890","email":"info@fleischerei-eichenhof.de","openingHours":["Tu 11:00-18:00","We 10:00-18:00","Th 08:00-18:00","Fr 08:00-18:00","Sa 08:00-12:00"]}</script>
+<link rel="stylesheet" href="css/valoris-demo.css?v=rk37">
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader" aria-hidden="true">
+  <div class="loader-mark">
+    <span>D</span><span>e</span><span>r</span>
+    <em><span style="display:inline-block;width:0.4em"></span></em>
+    <span style="color:var(--red-vivid)">F</span><span style="color:var(--red-vivid)">l</span><span style="color:var(--red-vivid)">e</span><span style="color:var(--red-vivid)">i</span><span style="color:var(--red-vivid)">s</span><span style="color:var(--red-vivid)">c</span><span style="color:var(--red-vivid)">h</span><span style="color:var(--red-vivid)">i</span>
+  </div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+  <div class="loader-sub">Goldprämiert · Musterstadt</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav glass">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-name">Fleischerei <em>Eichenhof</em></span>
+      <span class="logo-award">Meisterbetrieb · Musterstadt</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Start</a></li>
+      <li><a href="shop.html" class="active">Shop</a></li>
+      <li><a href="partyservice.html">Partyservice</a></li>
+      <li><a href="ueber-uns.html">Über uns</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn btn-gold btn-sm" onclick="openCart()">
+        Warenkorb <span id="nav-cart-count" style="background:var(--red);color:#fff;border-radius:6px;padding:2px 7px;font-size:0.75rem;margin-left:4px;">0</span>
+      </button>
+    </div>
+    <button class="nav-toggle" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-nav">
+  <button class="mobile-nav-close" aria-label="Schliessen">&#x2715;</button>
+  <a href="index.html">Start</a>
+  <a href="shop.html">Shop</a>
+  <a href="partyservice.html">Partyservice</a>
+  <a href="ueber-uns.html">Über uns</a>
+  <a href="kontakt.html">Kontakt</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="container page-hero-content">
+    <span class="label">Direkt vom Meister</span>
+    <h1>Der <em>Shop</em>.</h1>
+    <p class="text-lead" style="max-width:540px; margin-top:18px;">
+      Handgemachte Spezialitäten, Goldprämiert-Produkte und täglich frisches Sortiment, zur Abholung oder bequem nach Hause.
+    </p>
+  </div>
+</div>
+
+<!-- SO LÄUFT'S AB -->
+<section style="padding-top:48px; padding-bottom:0;">
+  <div class="container">
+    <div class="grid-3 shop-steps">
+      <div class="glass step-card reveal"><span class="step-num">1</span><h4>Aussuchen</h4><p>Produkte in den Warenkorb legen: Wurst, Fleisch, Salate oder die Versand-Box.</p></div>
+      <div class="glass step-card reveal reveal-d1"><span class="step-num">2</span><h4>Abholung oder Versand</h4><p>Im Warenkorb wählen: kostenlos abholen in Musterstadt oder DE-weit in der Thermbox.</p></div>
+      <div class="glass step-card reveal reveal-d2"><span class="step-num">3</span><h4>Bestätigen lassen</h4><p>Unverbindlich absenden, keine Online-Vorkasse. Michael bestätigt, meist am selben Tag.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section style="padding-top:56px;">
+  <div class="container">
+    <div style="margin-bottom:36px;">
+      <span class="ed-kicker">Online bestellen</span>
+      <h2 class="ed-h2" style="margin-top:14px;">Frisch aus der <em>Manufaktur</em>.</h2>
+    </div>
+    <div class="shop-filters" id="shop-filters">
+      <button class="filter-btn active" data-filter="alle">Alle Produkte</button>
+      <button class="filter-btn" data-filter="highlights">Goldprämiert-Highlights</button>
+      <button class="filter-btn" data-filter="wurst">Wurst</button>
+      <button class="filter-btn" data-filter="fleisch">Fleisch</button>
+      <button class="filter-btn" data-filter="salate">Salate</button>
+      <button class="filter-btn" data-filter="versand">Versand</button>
+    </div>
+    <div class="product-grid" id="product-grid"><!-- JS-gerendert --></div>
+  </div>
+</section>
+
+<!-- INFO STRIP -->
+<section style="padding-top:0; padding-bottom:90px;">
+  <div class="container">
+    <div class="grid-3">
+      <div class="glass usp-card reveal">
+        <div class="usp-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 3h13v11H1z"/><path d="M14 7h4l3 3v4h-7z"/><circle cx="5.5" cy="18" r="1.8"/><circle cx="17.5" cy="18" r="1.8"/></svg></div>
+        <h4>Thermbox Versand</h4>
+        <p>Frisch und sicher in hochwertigen Thermboxen, deutschlandweit. Versandkosten nach Gewicht.</p>
+      </div>
+      <div class="glass usp-card reveal reveal-d1">
+        <div class="usp-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v10h16V9"/><path d="M3 9h18"/><path d="M9 19v-5h6v5"/></svg></div>
+        <h4>Abholung kostenlos</h4>
+        <p>Online bestellen, im Laden abholen, kostenlos. Marktstraße 14, Musterstadt. Di–Sa geöffnet.</p>
+      </div>
+      <div class="glass usp-card reveal reveal-d2">
+        <div class="usp-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3h4l2 5-3 2a12 12 0 0 0 6 6l2-3 5 2v4a2 2 0 0 1-2 2A17 17 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></div>
+        <h4>Vorbestellung Telefon</h4>
+        <p>Große Mengen oder individuelle Wünsche? Einfach anrufen: <a href="tel:+491234567890" style="color:var(--gold);">0123 456 78 90</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIRMENKUNDEN -->
+<section id="firmenkunden">
+  <div class="container">
+    <div class="glass" style="padding:40px; display:flex; gap:32px; align-items:center; flex-wrap:wrap; justify-content:space-between;">
+      <div style="flex:1; min-width:260px;">
+        <span class="label">Für Unternehmen</span>
+        <h2 style="margin:8px 0 14px;">Firmenkunden-Vorteile</h2>
+        <ul class="pkg-features" style="margin:0;">
+          <li><span class="check"></span>Persönliche Konditionen &amp; Staffelpreise ab Menge</li>
+          <li><span class="check"></span>Feste Ansprechpartnerin, Bestellung auf Rechnung</li>
+          <li><span class="check"></span>Vorrang in der Grillsaison &amp; bei Events</li>
+          <li><span class="check"></span>Individuelle Pakete für Kantine, Team &amp; Kundengeschenke</li>
+        </ul>
+      </div>
+      <div style="flex-shrink:0; text-align:center;">
+        <a class="btn btn-red btn-lg" href="mailto:firmenkunden@fleischerei-eichenhof.de?subject=Firmenkunden-Anfrage%20Der%20Eichenhof">Firmenkunden-Zugang anfragen</a>
+        <div style="font-size:.78rem; color:var(--text-muted); margin-top:10px;">exklusiv über <strong>firmenkunden@fleischerei-eichenhof.de</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-name">Fleischerei <em>Eichenhof</em></div>
+        <div class="logo-award">Meisterbetrieb · Michael Wendt</div>
+        <p>Handgemachte Fleisch- und Wurstspezialitäten aus Musterstadt.</p>
+        <address>Marktstraße 14, 09000 Musterstadt<br>Tel: <a href="tel:+491234567890" style="color:var(--text-muted);">0123 456 78 90</a></address>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Startseite</a>
+          <a href="shop.html">Shop</a>
+          <a href="partyservice.html">Partyservice</a>
+          <a href="ueber-uns.html">Über uns</a>
+          <a href="kontakt.html">Kontakt</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <div class="footer-links">
+          <a href="#" onclick="jumpFilter('highlights');return false;">Highlights</a>
+          <a href="#" onclick="jumpFilter('wurst');return false;">Wurst</a>
+          <a href="#" onclick="jumpFilter('fleisch');return false;">Fleisch</a>
+          <a href="#" onclick="jumpFilter('versand');return false;">Versand</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Kontakt</div>
+        <div class="footer-links">
+          <a href="tel:+491234567890">0123 456 78 90</a>
+          <a href="mailto:info@fleischerei-eichenhof.de">info@fleischerei-eichenhof.de</a>
+          <a href="https://wa.me/4915254190819" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">Facebook</a>
+          <a href="#" target="_blank" rel="noopener">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© <span class="year"></span> Fleischerei Eichenhof</div>
+      <div class="footer-legal">
+        <button data-open="impressum">Impressum</button>
+        <button data-open="datenschutz">Datenschutz</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="fab-whatsapp" href="https://wa.me/4915254190819" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<div class="drawer-overlay"></div>
+<aside class="legal-drawer" id="drawer-impressum" role="dialog">
+  <button class="drawer-close"></button>
+  <h2>Impressum</h2>
+  <p class="demo-note"><strong>Demo-Seite.</strong> Die Fleischerei Eichenhof ist ein Musterbetrieb von VALORIS Webdesign &amp; SEO. Alle Namen, Anschriften, Telefonnummern und Preise sind Beispieldaten und gehören zu keinem realen Unternehmen. Verantwortlich für diese Demo-Seite: Frederic Bochmann, Bochmann Dienstleistungen, Karl-Kippenhahn-Straße 17, 08058 Zwickau, <a href="mailto:frederic@valoris-auftragsstruktur.de">frederic@valoris-auftragsstruktur.de</a>.</p>
+  <h3>§ 5 TMG</h3>
+  <address>Michael Wendt — Fleischerei Eichenhof<br>Marktstraße 14, 09000 Musterstadt<br>Tel: 0123 456 78 90 | info@fleischerei-eichenhof.de</address>
+  <h3>USt-IdNr.</h3><p>wird bei Beauftragung ergänzt (Beispieldaten)</p>
+  <h3>Kammer</h3><p>Handwerkskammer Chemnitz, Limbacher Str. 195, 09116 Chemnitz</p>
+</aside>
+<aside class="legal-drawer" id="drawer-datenschutz" role="dialog">
+  <button class="drawer-close"></button>
+  <h2>Datenschutz</h2>
+  <h3>Verantwortlich</h3>
+  <address>Michael Wendt, Marktstraße 14, 09000 Musterstadt | info@fleischerei-eichenhof.de</address>
+  <h3>Bestelldaten</h3>
+  <p>Daten aus dem Bestellformular werden nur zur Auftragsabwicklung gespeichert und nicht an Dritte weitergegeben.</p>
+  <h3>Eure Rechte</h3><p>Auskunft, Berichtigung, Löschung: info@fleischerei-eichenhof.de</p>
+</aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js?v=rk37"></script>
+<script src="js/premium.js?v=rk37"></script>
+<script src="js/api-config.js?v=rk37"></script>
+<script src="js/demo-backend.js?v=rk37"></script>
+<script>
+/* ===== PRODUKTDATEN ===== */
+const PRODUCTS = [
+  {id:'schwan', name:'Scharfer Eber', size:'500 g', price:7.90, unit:'/ 500 g', cat:['highlights','versand','wurst'], tag:'Goldprämiert', champ:true, img:'assets/img/eber-2.webp', desc:'Jalapeños, Cheddar, Rohgewürze: die goldprämierte Bratwurst und unsere meistverkaufte Sorte. Handgefüllt, Versand DE-weit in der Thermbox.'},
+  {id:'klassik', name:'Bratwurst Klassisch', size:'500 g', price:5.90, unit:'/ 500 g', cat:['highlights','wurst'], tag:'Bestseller', img:'assets/img/px-8508107.jpg', desc:'Nach DDR-Originalrezept, handgefüllt und täglich frisch. Die sächsische Tradition pur, mit Rohgewürzen statt Fertigmischung.'},
+  {id:'box', name:'Goldprämiert Box', size:'1,5 kg', price:21.90, unit:'inkl. Verpackung', cat:['versand','highlights'], tag:'Versandpaket', champ:true, img:'assets/img/hero-eber.webp', desc:'3× Scharfer Eber + 3× Bratwurst Klassisch in der Thermbox. Das perfekte Geschenk, deutschlandweit verschickt.'},
+  {id:'nacken', name:'Nackensteak mariniert', size:'kg', price:12.90, unit:'/ kg', cat:['fleisch','highlights'], tag:'', img:'assets/img/px-12473068.jpg', desc:'Schweinefleisch aus regionaler Haltung, hausmariniert. Für den perfekten Grillabend.'},
+  {id:'ribs', name:'Spareribs Hausrezept', size:'kg', price:14.90, unit:'/ kg', cat:['fleisch'], tag:'Hausrezept', img:'assets/img/px-1251198.jpg', desc:'Langsam marinierte Rippchen nach Michaels Geheimrezept. Nur auf Vorbestellung erhältlich.'},
+  {id:'rind', name:'Rindersteak', size:'200–300 g/Stück', price:8.90, unit:'ab, / Stück', cat:['fleisch'], tag:'', img:'assets/img/px-1307658.jpg', desc:'Regionales Rind, sorgfältig ausgewählt und trocken gereift. Für Fleischliebhaber.'},
+  {id:'mix', name:'Grillwurst-Mix Party', size:'1 kg', price:13.90, unit:'/ kg', cat:['wurst','highlights'], tag:'Party-Paket', img:'assets/img/steaks.webp', desc:'4 verschiedene Wurstspezialitäten im Mix, inklusive Scharfer Eber, Klassisch und 2 Hauskreationen.'},
+  {id:'salat', name:'Delikatesssalat Hausmix', size:'250 g', price:3.20, unit:'/ 250 g', cat:['salate'], tag:'Täglich frisch', img:'assets/img/px-1640777.jpg', desc:'Täglich frisch zubereitet, wechselnde Sorten. Nur im Laden erhältlich, kein Versand.'},
+  {id:'fleischwurst', name:'Fleischwurst hausgemacht', size:'500 g', price:4.90, unit:'/ 500 g', cat:['wurst'], tag:'', img:'assets/img/px-769289.jpg', desc:'Klassische Fleischwurst nach bewährtem Rezept. Rohgewürze, ohne Zusatzstoffe.'},
+  {id:'sortiment', name:'Wurst-Käse-Platte', size:'ab 10 Pers.', price:0, unit:'auf Anfrage', cat:['salate','highlights'], tag:'Vorbestellung', img:'assets/img/sortiment.webp', desc:'Wurst-, Käse- und Schinkenplatten auf Vorbestellung. Perfekt für Events ab 10 Personen, individuell zusammengestellt.'}
+];
+
+const eur = v => v.toFixed(2).replace('.', ',') + ' €';
+const byId = id => PRODUCTS.find(p => p.id === id);
+
+/* ===== SHOP-KONFIG · zentral änderbar (06:00 mit Michael final) ===== */
+const SHOPCFG = {
+  MIN_ORDER_VALUE:    25,   // Mindestbestellwert € (Abholung)
+  PICKUP_LEAD_DAYS:    2,   // Vorlauf in Tagen bis frühester Abholtermin
+  MAX_ORDERS_PER_DAY: 10    // Tageskontingent Abhol-Bestellungen
+};
+// Mindestabnahme (Einheiten) je Sorte — gegen „einer von jeder Wurst"; Rest = 1
+const PROD_MIN  = { schwan:2, klassik:2, fleischwurst:2 };
+const PROD_SOLD = { ribs:true };   // Demo: ausverkauft (im Backend live aus Bestand)
+PRODUCTS.forEach(p => { p.min = PROD_MIN[p.id] || 1; p.sold = !!PROD_SOLD[p.id]; });
+
+/* ===== WARENKORB-STATE (mit Migration alter Einträge) ===== */
+let cart = [];
+(JSON.parse(localStorage.getItem('eichenhof_cart') || '[]')).forEach(it => {
+  const ex = cart.find(c => c.id === it.id);
+  const q = it.qty || 1;
+  if (ex) ex.qty += q; else if (it.id) cart.push({ id: it.id, qty: q });
+});
+let deliveryMode = 'Abholung';
+const saveCart = () => localStorage.setItem('eichenhof_cart', JSON.stringify(cart));
+
+/* ===== PRODUKTRASTER ===== */
+function renderProducts(filter = 'alle') {
+  const grid = document.getElementById('product-grid');
+  grid.innerHTML = PRODUCTS
+    .filter(p => filter === 'alle' || p.cat.includes(filter))
+    .map(p => `
+      <article class="pcard" data-id="${p.id}">
+        <div class="pcard-img" onclick="openQV('${p.id}')">
+          <img src="${p.img}" alt="${p.name}" loading="lazy">
+          ${p.sold ? `<span class="pcard-tag" style="background:#7a1414;color:#fff;">Ausverkauft</span>` : (p.tag ? `<span class="pcard-tag ${p.champ?'champ':''}">${p.tag}</span>` : '')}
+          <div class="pcard-quick"><span>Ansehen</span></div>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-name">${p.name}</div>
+          <div class="pcard-desc">${p.desc}</div>
+          <div class="pcard-foot">
+            <div class="pcard-price">${p.price ? eur(p.price) : 'Anfrage'} <small>${p.unit}${p.min>1?` · Mind. ${p.min}`:''}</small></div>
+            ${p.sold
+              ? `<button class="pcard-add" disabled style="opacity:.45;cursor:not-allowed;">Ausverkauft</button>`
+              : `<button class="pcard-add" onclick="addToCart('${p.id}', this)">+ Korb</button>`}
+          </div>
+        </div>
+      </article>`).join('');
+}
+
+function setFilter(btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(btn.dataset.filter);
+}
+
+/* ===== WARENKORB ===== */
+function addToCart(id, btn) {
+  const p = byId(id); if (!p || p.sold) return;
+  const ex = cart.find(c => c.id === id);
+  if (ex) ex.qty++; else cart.push({ id, qty: p.min || 1 });   // startet bei Mindestabnahme
+  saveCart(); renderCart();
+  if (btn) { btn.textContent = '✓ Drin'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = '+ Korb'; btn.classList.remove('done'); }, 1100); }
+}
+function changeQty(id, d) {
+  const ex = cart.find(c => c.id === id); if (!ex) return;
+  const min = (byId(id) && byId(id).min) || 1;
+  ex.qty += d;
+  if (ex.qty < min) cart = cart.filter(c => c !== ex);        // unter Mindestabnahme -> raus
+  saveCart(); renderCart();
+}
+function removeItem(id) { cart = cart.filter(c => c.id !== id); saveCart(); renderCart(); }
+
+function cartCount() { return cart.reduce((s, i) => s + i.qty, 0); }
+function cartTotal() { return cart.reduce((s, i) => { const p = byId(i.id); return s + (p ? p.price * i.qty : 0); }, 0); }
+
+function renderCart() {
+  const count = cartCount(), total = cartTotal();
+  // Nav + FAB
+  document.getElementById('nav-cart-count').textContent = count;
+  document.getElementById('cf-count').textContent = count;
+  document.getElementById('cf-total').textContent = eur(total);
+  document.getElementById('cart-fab').classList.toggle('show', count > 0);
+  // Drawer
+  const body = document.getElementById('cart-dbody');
+  const foot = document.getElementById('cart-dfoot');
+  if (count === 0) {
+    body.innerHTML = '<div class="cart-empty2"><div class="ce-icon">🛒</div>Dein Warenkorb ist noch leer.<br>Leg deine Lieblingsstücke rein.</div>';
+    foot.style.display = 'none';
+    document.getElementById('cart-dtitle').textContent = 'Dein Warenkorb';
+    return;
+  }
+  foot.style.display = 'block';
+  document.getElementById('cart-dtitle').textContent = `Warenkorb · ${count}`;
+  body.innerHTML = cart.map(i => {
+    const p = byId(i.id); if (!p) return '';
+    return `<div class="citem">
+      <img class="citem-img" src="${p.img}" alt="${p.name}">
+      <div class="citem-mid">
+        <div class="citem-name">${p.name}</div>
+        <div class="citem-unit">${p.size} · ${p.price ? eur(p.price) : 'auf Anfrage'}</div>
+        <div class="citem-bottom">
+          <div class="stepper">
+            <button onclick="changeQty('${p.id}',-1)" aria-label="Weniger">−</button>
+            <span>${i.qty}</span>
+            <button onclick="changeQty('${p.id}',1)" aria-label="Mehr">+</button>
+          </div>
+          <div class="citem-line">${p.price ? eur(p.price * i.qty) : '—'}</div>
+        </div>
+        <button class="citem-rm" onclick="removeItem('${p.id}')">Entfernen</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('cart-total').textContent = eur(total);
+
+  // Mindestbestellwert-Gate (nur Abholung ohne Online-Zahlung)
+  const btnCheckout = document.getElementById('to-checkout');
+  if (btnCheckout) {
+    const gap = SHOPCFG.MIN_ORDER_VALUE - total;
+    const under = gap > 0;
+    btnCheckout.disabled = under;
+    btnCheckout.style.opacity = under ? 0.5 : 1;
+    btnCheckout.style.cursor = under ? 'not-allowed' : 'pointer';
+    btnCheckout.textContent = under ? `Noch ${eur(gap)} bis Mindestbestellwert` : 'Bestellung absenden';
+  }
+}
+
+/* ===== DRAWER ===== */
+function openCart() {
+  document.getElementById('cart-drawer').classList.add('open');
+  document.getElementById('cart-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  document.getElementById('cart-drawer').classList.remove('open');
+  document.getElementById('cart-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  resetCheckout();
+}
+function setDeliv(mode, el) {
+  deliveryMode = mode;
+  document.querySelectorAll('.deliv-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+/* ===== QUICK-VIEW ===== */
+let qvId = null, qvQuantity = 1;
+function openQV(id) {
+  const p = byId(id); if (!p) return;
+  qvId = id; qvQuantity = p.min || 1;
+  document.getElementById('qv-img').src = p.img;
+  document.getElementById('qv-img').alt = p.name;
+  document.getElementById('qv-tag').textContent = p.sold ? 'Ausverkauft' : (p.tag || 'Aus der Manufaktur');
+  document.getElementById('qv-name').textContent = p.name;
+  document.getElementById('qv-price').innerHTML = (p.price ? eur(p.price) : 'Preis auf Anfrage') + ` <small>${p.unit}${p.min>1?` · Mind. ${p.min}`:''}</small>`;
+  document.getElementById('qv-desc').textContent = p.desc;
+  document.getElementById('qv-qty').textContent = qvQuantity;
+  const qvBtn = document.querySelector('#qv .qv-actions .btn');
+  if (qvBtn){ qvBtn.disabled = p.sold; qvBtn.textContent = p.sold ? 'Ausverkauft' : 'In den Warenkorb'; qvBtn.style.opacity = p.sold ? .45 : 1; }
+  document.getElementById('qv').classList.add('open');
+  document.getElementById('qv-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeQV() {
+  document.getElementById('qv').classList.remove('open');
+  document.getElementById('qv-overlay').classList.remove('open');
+  if (!document.getElementById('cart-drawer').classList.contains('open')) document.body.style.overflow = '';
+}
+function qvQty(d) { const min = (byId(qvId) && byId(qvId).min) || 1; qvQuantity = Math.max(min, qvQuantity + d); document.getElementById('qv-qty').textContent = qvQuantity; }
+function qvAdd() {
+  const p = byId(qvId); if (!p || p.sold) return;
+  const addQty = Math.max(qvQuantity, p.min || 1);
+  const ex = cart.find(c => c.id === qvId);
+  if (ex) ex.qty += addQty; else cart.push({ id: qvId, qty: addQty });
+  saveCart(); renderCart(); closeQV(); openCart();
+}
+
+/* ===== CHECKOUT (im Drawer) ===== */
+function showCheckout() {
+  const body = document.getElementById('cart-dbody');
+  const foot = document.getElementById('cart-dfoot');
+  foot.style.display = 'none';
+  document.getElementById('cart-dtitle').textContent = 'Bestelldaten';
+  const items = cart.map(i => { const p = byId(i.id); return `${i.qty}× ${p.name} (${p.price ? eur(p.price) : 'Anfrage'})`; }).join(', ');
+  const _mp = new Date(); _mp.setDate(_mp.getDate() + SHOPCFG.PICKUP_LEAD_DAYS);
+  const minISO = _mp.toISOString().slice(0,10);
+  const minLabel = _mp.toLocaleDateString('de-DE',{weekday:'long',day:'numeric',month:'long'});
+  const dateField = deliveryMode === 'Abholung'
+    ? `<div class="form-group"><label class="form-label">Abholtermin *</label><input class="form-input" type="date" name="datum" id="pickup-date" min="${minISO}" required onchange="checkPickupSlot()"><div id="pickup-slot" style="font-size:.78rem;color:#5f574c;margin-top:6px;">Frühester Termin: ${minLabel} · Bestellschluss 12:00 Uhr am Vortag</div></div>`
+    : `<div class="form-group"><label class="form-label">Wunschtermin Versand</label><input class="form-input" type="date" name="datum" min="${minISO}"></div>`;
+  body.innerHTML = `
+    <button class="cart-back" onclick="renderCart()">← Zurück zum Warenkorb</button>
+    <div class="checkout-wrap open">
+      <form id="orderForm" method="POST" novalidate>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;" aria-hidden="true">
+        <div class="form-group"><label class="form-label">Name *</label><input class="form-input" type="text" name="name" required placeholder="Max Mustermann"></div>
+        <div class="form-group"><label class="form-label">Telefon *</label><input class="form-input" type="tel" name="telefon" required placeholder="0171 234 567 8"></div>
+        ${deliveryMode === 'Versand' ? '<div class="form-group"><label class="form-label">Lieferadresse *</label><input class="form-input" type="text" name="adresse" required placeholder="Straße, PLZ, Ort"></div>' : ''}
+        ${dateField}
+        <div class="form-group"><label class="form-label">Anmerkungen</label><textarea class="form-input" name="notiz" rows="2" placeholder="Besondere Wünsche…"></textarea></div>
+        <button type="submit" class="btn btn-red" style="width:100%;justify-content:center;">Verbindlich bestellen (${deliveryMode})</button>
+      </form>
+    </div>`;
+  document.getElementById('orderForm').addEventListener('submit', handleOrder);
+}
+function resetCheckout() { /* Drawer zeigt beim nächsten Öffnen wieder den Warenkorb */ }
+
+/* Tageskontingent + Bestellschluss — LIVE aus dem Backend (Fallback: Ruhetag-Check clientseitig) */
+async function checkPickupSlot(){
+  const inp = document.getElementById('pickup-date');
+  const note = document.getElementById('pickup-slot');
+  const sub = document.querySelector('#orderForm button[type=submit]');
+  if (!inp || !note || !inp.value) return;
+  const d = new Date(inp.value + 'T00:00:00');
+  const dow = d.getDay();
+  if (dow === 1 || dow === 0) {                 // Mo Ruhetag, So geschlossen
+    note.innerHTML = '<span style="color:#b23a3a;font-weight:600;">An diesem Tag keine Abholung — bitte anderen Tag wählen.</span>';
+    if (sub){ sub.disabled = true; sub.style.opacity = .5; } return;
+  }
+  note.textContent = 'Verfügbarkeit wird geprüft…';
+  try {
+    const res = await fetch(`${window.EICHENHOF_API}/slots?date=${inp.value}`);
+    const data = await res.json();
+    if (data.geschlossen) {
+      note.innerHTML = '<span style="color:#b23a3a;font-weight:600;">An diesem Tag keine Abholung — bitte anderen Tag wählen.</span>';
+      if (sub){ sub.disabled = true; sub.style.opacity = .5; } return;
+    }
+    if (data.frei <= 0) {
+      note.innerHTML = '<span style="color:#b23a3a;font-weight:600;">Dieser Tag ist ausgebucht ('+data.max+'/'+data.max+') — bitte anderen Tag wählen.</span>';
+      if (sub){ sub.disabled = true; sub.style.opacity = .5; }
+    } else {
+      note.innerHTML = 'Noch <strong>'+data.frei+' von '+data.max+'</strong> Abhol-Bestellungen an diesem Tag frei.';
+      if (sub){ sub.disabled = false; sub.style.opacity = 1; }
+    }
+  } catch (err) {
+    // Backend nicht erreichbar → Bestellung trotzdem zulassen, Prüfung serverseitig beim Absenden
+    note.innerHTML = 'Frühester Termin geprüft. Verfügbarkeit wird beim Absenden final bestätigt.';
+    if (sub){ sub.disabled = false; sub.style.opacity = 1; }
+  }
+}
+
+async function handleOrder(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type=submit]');
+  btn.textContent = 'Wird gesendet…'; btn.disabled = true;
+
+  const payload = {
+    website:      form.website ? form.website.value : '',   // Honeypot
+    name:         form.name.value.trim(),
+    telefon:      form.telefon.value.trim(),
+    adresse:      form.adresse ? form.adresse.value.trim() : '',
+    deliveryMode: deliveryMode,
+    datum:        form.datum ? form.datum.value : '',
+    notiz:        form.notiz ? form.notiz.value.trim() : '',
+    sum:          cartTotal() ? eur(cartTotal()) : 'auf Anfrage',
+    items:        cart.map(i => { const p = byId(i.id); return { qty: i.qty + '×', name: p ? p.name : i.id }; }),
+  };
+
+  try {
+    const res = await fetch(`${window.EICHENHOF_API}/order`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      btn.textContent = 'Erneut versuchen'; btn.disabled = false;
+      const note = document.getElementById('pickup-slot');
+      if (note && data.error) note.innerHTML = '<span style="color:#b23a3a;font-weight:600;">'+data.error+'</span>';
+      return;
+    }
+    cart = []; saveCart();
+    const nr = data.id ? ' <span style="color:var(--sh-muted);font-size:.85rem;">('+data.id+')</span>' : '';
+    document.getElementById('cart-dbody').innerHTML = '<div class="cart-empty2"><div class="ce-icon">✓</div><strong style="color:var(--sh-ink);font-size:1.05rem;">Bestellung erhalten!'+nr+'</strong><br>Michael meldet sich innerhalb von 24 h mit der Bestätigung. Danke!</div>';
+    document.getElementById('cart-dtitle').textContent = 'Danke!';
+    document.getElementById('nav-cart-count').textContent = 0;
+    document.getElementById('cart-fab').classList.remove('show');
+  } catch (err) {
+    btn.textContent = 'Erneut versuchen'; btn.disabled = false;
+  }
+}
+
+/* ===== INIT ===== */
+function jumpFilter(cat){
+  const btn=[...document.querySelectorAll('.filter-btn')].find(b=>b.dataset.filter===cat);
+  if(btn){ setFilter(btn); document.getElementById('product-grid').scrollIntoView({behavior:'smooth',block:'start'}); }
+}
+function initShop(){
+  document.getElementById('shop-filters').addEventListener('click', e => {
+    const b = e.target.closest('.filter-btn'); if (b) setFilter(b);
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeQV(); closeCart(); } });
+  renderProducts();
+  renderCart();
+}
+if (document.readyState !== 'loading') initShop();
+else document.addEventListener('DOMContentLoaded', initShop);
+</script>
+
+<!-- CART-FAB -->
+<button class="cart-fab" id="cart-fab" onclick="openCart()" aria-label="Warenkorb öffnen">
+  <span class="cf-ico">🛒</span>
+  <span>Warenkorb</span>
+  <span class="cf-count" id="cf-count">0</span>
+  <span class="cf-total" id="cf-total">0,00 €</span>
+</button>
+
+<!-- CART-DRAWER -->
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-label="Warenkorb">
+  <div class="cart-dhead">
+    <h3 id="cart-dtitle">Dein Warenkorb</h3>
+    <button class="cart-dclose" onclick="closeCart()" aria-label="Schließen">✕</button>
+  </div>
+  <div class="cart-dbody" id="cart-dbody"><!-- Items oder Leer / Checkout --></div>
+  <div class="cart-dfoot" id="cart-dfoot" style="display:none;">
+    <div class="cart-deliv" id="cart-deliv">
+      <button type="button" class="deliv-opt sel" data-deliv="Abholung" onclick="setDeliv('Abholung',this)">
+        <div class="dn">Abholung</div><div class="dd">Gratis · Marktstraße 14</div>
+      </button>
+      <button type="button" class="deliv-opt" data-deliv="Versand" onclick="setDeliv('Versand',this)">
+        <div class="dn">Versand</div><div class="dd">Thermbox DE-weit</div>
+      </button>
+    </div>
+    <div class="cart-totalrow"><span class="t-l">Gesamt</span><span class="t-v" id="cart-total">0,00 €</span></div>
+    <div class="cart-hint"><strong>Keine Online-Vorkasse.</strong> Du bestellst unverbindlich, Bezahlung bei Abholung. Mindestbestellwert 25 €, Abholung ab 2 Tagen Vorlauf. Versandkosten klärt Michael vorab, Bestätigung meist am selben Tag.</div>
+    <button class="btn btn-red btn-checkout" id="to-checkout" onclick="showCheckout()">Bestellung absenden</button>
+  </div>
+</aside>
+
+<!-- QUICK-VIEW -->
+<div class="qv-overlay" id="qv-overlay" onclick="closeQV()"></div>
+<div class="qv" id="qv" role="dialog" aria-label="Produktdetail">
+  <button class="qv-close" onclick="closeQV()" aria-label="Schließen">✕</button>
+  <div class="qv-img"><img id="qv-img" src="" alt=""></div>
+  <div class="qv-body">
+    <div class="qv-tag" id="qv-tag"></div>
+    <div class="qv-name" id="qv-name"></div>
+    <div class="qv-price" id="qv-price"></div>
+    <p class="qv-desc" id="qv-desc"></p>
+    <div class="qv-actions">
+      <div class="stepper">
+        <button onclick="qvQty(-1)" aria-label="Weniger">−</button>
+        <span id="qv-qty">1</span>
+        <button onclick="qvQty(1)" aria-label="Mehr">+</button>
+      </div>
+      <button class="btn btn-red" style="flex:1;justify-content:center;" onclick="qvAdd()">In den Warenkorb</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== VALORIS DEMO-LEISTE (nur Showcase — beim Kundenprojekt entfernen) ===== -->
+<div class="vd-bar" role="complementary" aria-label="Hinweis: Demo-Website">
+  <div class="vd-bar__text">
+    <span class="vd-bar__dot" aria-hidden="true"></span>
+    <span class="vd-bar__label"><b>Demo-Website</b> — Musterbetrieb, kein echtes Unternehmen.
+      <span>So kann Ihre Fleischerei online aussehen.</span></span>
+  </div>
+  <div class="vd-bar__actions">
+    <a class="vd-bar__cta" href="https://wa.me/4915254190819" target="_blank" rel="noopener">Für meinen Betrieb anfragen</a>
+    <a class="vd-bar__link" href="https://www.valoris-auftragsstruktur.de" target="_blank" rel="noopener">VALORIS Webdesign &amp; SEO</a>
+  </div>
+</div>
+</body>
+</html>

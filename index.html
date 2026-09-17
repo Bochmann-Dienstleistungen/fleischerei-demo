@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fleischerei Eichenhof — Fleischerei &amp; Meisterbetrieb Musterstadt</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23A81820'/><text x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='bold' fill='%23F4EDE6' text-anchor='middle'>F</text></svg>">
+<meta name="description" content="Fleischerei Eichenhof — Meisterbetrieb mit goldprämierter Wurstqualität. Handgemachte Spezialitäten, Partyservice & Online-Shop. Marktstraße 14, 09000 Musterstadt.">
+<meta property="og:title" content="Fleischerei Eichenhof — Fleischerei &amp; Meisterbetrieb Musterstadt">
+<meta property="og:description" content="Handgemachte Wurst- und Fleischspezialitäten aus dem Meisterbetrieb.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="css/styles.css?v=rk37">
+<link rel="stylesheet" href="css/premium.css?v=rk37">
+<link rel="stylesheet" href="css/light.css?v=rk37">
+<link rel="stylesheet" href="css/editorial.css?v=rk37">
+
+<style>
+  /* HERO USP NUMBERS — Editorial Italic Gold */
+  .usp-num {
+    font-family: 'Bricolage Grotesque', serif;
+    font-size: 2rem; font-weight: 800; line-height: 1;
+    color: var(--gold); font-style: italic;
+    margin-bottom: 22px;
+    letter-spacing: -0.02em;
+    opacity: 0.82;
+  }
+  /* PRODUCT TAG */
+  .product-tag {
+    position: absolute; top: 14px; left: 14px;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 5px 12px; border-radius: 6px;
+    backdrop-filter: blur(16px);
+  }
+  .product-tag.champ {
+    background: rgba(197,160,40,0.18);
+    border: 1px solid rgba(197,160,40,0.35);
+    color: var(--gold);
+  }
+  .product-tag.hot {
+    background: rgba(168,24,32,0.18);
+    border: 1px solid rgba(168,24,32,0.35);
+    color: #F28B8B;
+  }
+  /* PKG CHECK */
+  .pkg-features li::before {
+    content: '';
+    display: inline-block; width: 12px; height: 1.5px;
+    background: var(--gold); flex-shrink: 0; margin-top: 10px;
+  }
+  /* REVIEW */
+  .review-card { padding: 32px; }
+  /* SPECIAL TAG */
+  .special-tag { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; display: block; }
+  /* Medaille als Foto (Higgsfield) — warmer Goldschein dahinter */
+  .award-medal-photo { position: relative; width: min(300px, 70vw); margin: 8px auto 56px; }
+  .award-medal-photo::before {
+    content: ''; position: absolute; inset: -22% -30%; z-index: 0;
+    background: radial-gradient(ellipse 50% 46% at 50% 42%, rgba(232,201,106,0.28) 0%, rgba(197,160,40,0.10) 40%, transparent 70%);
+    filter: blur(16px);
+  }
+  .award-medal-photo img {
+    position: relative; z-index: 1; display: block; width: 100%; height: auto;
+    filter: drop-shadow(0 26px 40px rgba(0,0,0,0.6));
+    animation: medalFloat 6s ease-in-out infinite;
+  }
+  @keyframes medalFloat { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-12px) rotate(1deg); } }
+  @media (prefers-reduced-motion: reduce) { .award-medal-photo img { animation: none; } }
+  /* Live "heute geöffnet"-Badge im Hero */
+  .hero-status { margin-top: 22px; display: inline-flex; align-items: center; gap: 9px;
+    font-size: 14px; font-weight: 600; color: #ece6da; letter-spacing: 0.01em;
+    padding: 8px 16px; border-radius: 100px; background: rgba(255,255,255,0.07);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.12); }
+  .hs-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 10px currentColor; }
+  .hs-dot.on { background: #43d17a; color: #43d17a; }
+  .hs-dot.off { background: #e0a23a; color: #e0a23a; }
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Fleischerei Eichenhof","description":"Handgemachte Fleisch- und Wurstspezialitäten aus dem Meisterbetrieb, goldprämierte Wurstqualität.","address":{"@type":"PostalAddress","streetAddress":"Marktstraße 14","addressLocality":"Musterstadt","postalCode":"09000","addressCountry":"DE"},"telephone":"+491234567890","email":"info@fleischerei-eichenhof.de","openingHours":["Tu 11:00-18:00","We 10:00-18:00","Th 08:00-18:00","Fr 08:00-18:00","Sa 08:00-12:00"]}</script>
+<link rel="preload" as="image" href="assets/loader/paar.webp">
+<link rel="preload" as="image" href="assets/loader/ring.webp">
+<link rel="preload" as="image" href="assets/loader/salami.webp">
+<link rel="preload" as="image" href="assets/loader/schinken.webp">
+<link rel="preload" as="image" href="assets/loader/eber.webp">
+<link rel="stylesheet" href="css/valoris-demo.css?v=rk37">
+</head>
+<body class="page-home">
+
+<!-- PAGE LOADER — Reifekammer (1:1 wie loader.html) -->
+<div id="page-loader" aria-hidden="true">
+  <div class="ld-stage">
+    <div class="ld-licht"></div>
+    <div class="ld-rackzone">
+      <div class="ld-rack"></div>
+      <div class="ld-haenger s1"><div class="drop"><div class="swing"><img src="assets/loader/paar.webp" alt="" decoding="async"></div></div></div>
+      <div class="ld-haenger s2"><div class="drop"><div class="swing"><img src="assets/loader/ring.webp" alt="" decoding="async"></div></div></div>
+      <div class="ld-haenger s3"><div class="drop"><div class="swing"><img src="assets/loader/salami.webp" alt="" decoding="async"></div></div></div>
+      <div class="ld-haenger s4"><div class="drop"><div class="swing"><img src="assets/loader/schinken.webp" alt="" decoding="async"></div></div></div>
+      <div class="ld-haenger s5"><div class="drop"><div class="swing"><img src="assets/loader/eber.webp" alt="" decoding="async"></div></div></div>
+      <div class="ld-haenger s6"><div class="drop"><div class="swing"><img src="assets/loader/ring.webp" alt="" decoding="async"></div></div></div>
+      <div class="ld-haenger s7"><div class="drop"><div class="swing"><img src="assets/loader/paar.webp" alt="" decoding="async"></div></div></div>
+      <div class="ld-haenger s8"><div class="drop"><div class="swing"><img src="assets/loader/salami.webp" alt="" decoding="async"></div></div></div>
+      <div class="ld-haenger s9"><div class="drop"><div class="swing"><img src="assets/loader/paar.webp" alt="" decoding="async"></div></div></div>
+    </div>
+    <div class="ld-center">
+      <div class="ld-logo" id="loader-logo">
+        <div class="ld-eyebrow">Fleischerei</div>
+        <div class="ld-wordwrap">
+          <div class="ld-word" aria-label="EICHENHOF"><span class="ch">E</span><span class="ch">I</span><span class="ch">C</span><span class="ch">H</span><span class="ch">E</span><span class="ch">N</span><span class="ch">H</span><span class="ch">O</span><span class="ch">F</span></div>
+          <div class="ld-shimmer" aria-hidden="true">EICHENHOF</div>
+        </div>
+        <div class="ld-sub">Meisterbetrieb <span class="ld-star">★</span> Goldprämiert <span class="ld-star">★</span> Musterstadt</div>
+      </div>
+    </div>
+    <div class="ld-bar"></div>
+    <div class="ld-grain"></div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav glass">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-name">Fleischerei <em>Eichenhof</em></span>
+      <span class="logo-award">Meisterbetrieb · Musterstadt</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Start</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="partyservice.html">Partyservice</a></li>
+      <li><a href="ueber-uns.html">Über uns</a></li>
+      <li><a href="kontakt.html">Kontakt</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="shop.html" class="btn btn-red btn-sm">Online bestellen</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menü öffnen"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-nav">
+  <button class="mobile-nav-close" aria-label="Schließen">&#x2715;</button>
+  <a href="index.html">Start</a>
+  <a href="shop.html">Shop</a>
+  <a href="partyservice.html">Partyservice</a>
+  <a href="ueber-uns.html">Über uns</a>
+  <a href="kontakt.html">Kontakt</a>
+</div>
+
+<!-- HERO — Editorial Split -->
+<section class="hero hero-editorial">
+  <div class="he-grid">
+    <div class="he-text">
+      <span class="ed-kicker he-eyebrow">Meisterbetrieb · Hausmacher Qualität</span>
+      <h1>Fleischkunst,<br>die man <em>schmeckt</em>.</h1>
+      <p class="he-lead">
+        Handgemachte Spezialitäten aus dem Meisterbetrieb: <strong>online bestellen &amp; abholen</strong>,
+        deutschlandweit liefern lassen oder den <strong>Partyservice</strong> in 30 Sekunden kalkulieren.
+      </p>
+      <div class="he-actions">
+        <a href="shop.html" class="btn btn-red btn-lg">Online bestellen</a>
+        <a href="partyservice.html#kalkulator" class="btn btn-ghost btn-lg">Partyservice berechnen</a>
+      </div>
+      <div class="he-meta">
+        <div class="he-meta-item"><div class="n">5.000+</div><div class="l">Würste / Wochenende</div></div>
+        <div class="he-meta-item"><div class="n">7</div><div class="l">Meister im Team</div></div>
+        <div class="he-meta-item"><div class="n">Gold</div><div class="l">Qualitätsprüfung</div></div>
+      </div>
+      <div class="he-social">
+        <span class="he-social-label">Folgt &amp; schreibt uns</span>
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">Facebook</a>
+        <a href="#" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://wa.me/4915254190819" target="_blank" rel="noopener" class="he-wa">WhatsApp</a>
+      </div>
+    </div>
+    <div class="he-photo">
+      <div class="he-photo-frame">
+        <img src="assets/img/hero-eber.webp" alt="Scharfer Eber — goldprämierte Bratwurst mit Cheddar und Jalapeños, frisch vom Grill" width="886" height="1100">
+      </div>
+      <div class="he-seal">
+        <span class="star">★</span>
+        <span class="big">Gold-<br>prämiert</span>
+        <span class="sm">Qualitätsprüfung</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARD TICKER -->
+<div class="award-strip">
+  <div class="award-ticker">
+    <div class="award-item">Meisterbetrieb · Hausmacher Qualität</div><span class="award-sep"></span>
+    <div class="award-item">Scharfer Eber · Hauskreation</div><span class="award-sep"></span>
+    <div class="award-item">Gold bei der Qualitätsprüfung</div><span class="award-sep"></span>
+    <div class="award-item">Versand deutschlandweit in Thermbox</div><span class="award-sep"></span>
+    <div class="award-item">Handgemacht seit 2019 · Musterstadt</div><span class="award-sep"></span>
+    <div class="award-item">Meisterbetrieb · Hausmacher Qualität</div><span class="award-sep"></span>
+    <div class="award-item">Scharfer Eber · Hauskreation</div><span class="award-sep"></span>
+    <div class="award-item">Gold bei der Qualitätsprüfung</div><span class="award-sep"></span>
+    <div class="award-item">Versand deutschlandweit in Thermbox</div><span class="award-sep"></span>
+    <div class="award-item">Handgemacht seit 2019 · Musterstadt</div><span class="award-sep"></span>
+  </div>
+</div>
+
+<!-- TILO STORY — Editorial Portrait -->
+<!-- SHOP TEASER -->
+<section class="sect">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="label">Online bestellen</span>
+      <h2>Direkt vom <em>Fleischermeister</em></h2>
+      <p>Meister-Spezialitäten und handgemachte Produkte, zur Abholung oder versendet in Thermboxen.</p>
+    </div>
+    <div class="grid-4 mb-36">
+      <div class="glass product-card reveal">
+        <div class="product-img-wrap">
+          <img src="assets/img/px-32228060.jpg" alt="Scharfer Eber — Bratwurst mit Jalapeños und Cheddar" loading="lazy">
+          <span class="product-tag champ">Goldprämiert</span>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Scharfer Eber (500g)</div>
+          <div class="product-desc">Die goldprämierte Bratwurst mit Jalapeños, Cheddar und Rohgewürzen. Versand DE-weit möglich.</div>
+          <div class="product-footer">
+            <div class="product-price">7,90 &#8364; <span>/ 500g</span></div>
+            <button class="add-btn" onclick="addToCart(this,'Scharfer Eber 500g',7.90)" aria-label="In den Warenkorb">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="glass product-card reveal reveal-d1">
+        <div class="product-img-wrap">
+          <img src="assets/img/px-8508107.jpg" alt="Bratwurst Klassisch auf dem Grill" loading="lazy">
+          <span class="product-tag hot">Bestseller</span>
+        </div>
+        <div class="product-body">
+          <div class="product-name">Bratwurst Klassisch (500g)</div>
+          <div class="product-desc">Nach DDR-Originalrezept. Rohgewürze, handgefüllt, täglich frisch. Die sächsische Tradition.</div>
+          <div class="product-footer">
+            <div class="product-price">5,90 &#8364; <span>/ 500g</span></div>
+            <button class="add-btn" onclick="addToCart(this,'Bratwurst Klassisch 500g',5.90)" aria-label="In den Warenkorb">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="glass product-card reveal reveal-d2">
+        <div class="product-img-wrap">
+          <img src="assets/img/px-769289.jpg" alt="Mariniertes Nackensteak, aufgeschnitten serviert" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Nackensteak mariniert (kg)</div>
+          <div class="product-desc">Schweinefleisch aus regionaler Haltung, hausmariniert, für den perfekten Grillabend.</div>
+          <div class="product-footer">
+            <div class="product-price">12,90 &#8364; <span>/ kg</span></div>
+            <button class="add-btn" onclick="addToCart(this,'Nackensteak mariniert',12.90)" aria-label="In den Warenkorb">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="glass product-card reveal reveal-d3">
+        <div class="product-img-wrap">
+          <img src="assets/img/px-1640777.jpg" alt="Delikatesssalat" loading="lazy">
+        </div>
+        <div class="product-body">
+          <div class="product-name">Delikatesssalat Hausmix (250g)</div>
+          <div class="product-desc">Täglich frisch zubereitet, wechselnde Sorten. Nur im Laden erhältlich.</div>
+          <div class="product-footer">
+            <div class="product-price">3,20 &#8364; <span>/ 250g</span></div>
+            <button class="add-btn" onclick="addToCart(this,'Delikatesssalat 250g',3.20)" aria-label="In den Warenkorb">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <a href="shop.html" class="btn btn-red btn-lg">Alle Produkte ansehen</a>
+    </div>
+  </div>
+</section>
+
+<section class="tilo-story" id="tilo">
+  <div class="tilo-grid">
+    <div class="tilo-portrait reveal">
+      <img src="assets/img/px-16276491.jpg" alt="Fleischermeister bei der Arbeit" loading="lazy">
+      <div class="tilo-portrait-meta">
+        <div>
+          <div class="who">Michael Wendt</div>
+          <div class="role">Fleischermeister · Inhaber</div>
+        </div>
+        <div class="since">— seit 2019</div>
+      </div>
+    </div>
+    <div class="tilo-text reveal reveal-d1">
+      <span class="label">Über den Meister</span>
+      <h2>Vom Lehrling zum <em>Meister</em>.</h2>
+      <p>
+        Michael Wendt ist Fleischermeister mit Leib und Seele. Seit 2019 führt er seine eigene Fleischerei in Musterstadt: mit dem klaren Anspruch, sächsisches Handwerk auf höchstem Niveau zu zeigen. Mit dem „Scharfen Eber" hat er der Hausmacher-Tradition eine eigene Handschrift gegeben: Jalapeños, Cheddar und Rohgewürze, von Hand gefüllt.
+      </p>
+      <p>
+        Was ihn antreibt: Rohgewürze statt Fertigmischungen, persönliche Auswahl der Tiere auf der Weide, jede Wurst handgefüllt. Keine Abkürzungen. Keine Kompromisse.
+      </p>
+      <blockquote class="tilo-quote">
+        "Wenn du die Tiere kennst, von denen das Fleisch kommt, schmeckst du den Unterschied. Das ist kein Marketing, das ist Handwerk."
+        <cite>— Michael Wendt</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- USP — Editorial alternating rows -->
+<section class="sect sect-bg-grill" id="usp">
+  <div class="container">
+    <div class="section-head text-center reveal" style="margin-bottom:100px;">
+      <span class="label">Was uns ausmacht</span>
+      <h2>Qualität. <em>Handwerk.</em> Leidenschaft.</h2>
+    </div>
+    <div class="usp-editorial">
+      <div class="usp-row reveal">
+        <div class="usp-row-img">
+          <img src="assets/img/px-33753902.jpg" alt="Goldprämierte Grillwurst vom Rost" loading="lazy">
+          <span class="usp-img-tag">Goldprämiert</span>
+        </div>
+        <div class="usp-row-text">
+          <h3>Goldprämierte <em>Wurstqualität</em>.</h3>
+          <p>
+            Mit dem "Scharfen Eber" (Jalapeños, Cheddar, Rohgewürze, handgefüllt) geht jede Charge durch dieselbe Prüfung wie am ersten Tag: Farbe, Biss, Würzung. Gold bei der Qualitätsprüfung ist die Bestätigung, nicht das Ziel.
+          </p>
+          <span class="row-meta">Qualitätsprüfung · Gold</span>
+        </div>
+      </div>
+
+      <div class="usp-row reverse reveal">
+        <div class="usp-row-img">
+          <img src="assets/img/px-30557313.jpg" alt="Handgefüllte Würste in der Manufaktur" loading="lazy">
+          <span class="usp-img-tag">Tägliche Produktion</span>
+        </div>
+        <div class="usp-row-text">
+          <h3>Jede Wurst von <em>Hand</em>.</h3>
+          <p>
+            Wir verwenden Rohgewürze statt Fertigmischungen. Jede Wurst wird in unserer Manufaktur handgefüllt, nach Rezepten, die seit Jahrzehnten bewährt sind. Massenware kann das nicht. Wir wollen es auch gar nicht können.
+          </p>
+          <span class="row-meta">Rohgewürze · Keine Fertigmischungen</span>
+        </div>
+      </div>
+
+      <div class="usp-row reveal">
+        <div class="usp-row-img">
+          <img src="assets/img/px-32001752.jpg" alt="Rinder auf der Weide" loading="lazy">
+          <span class="usp-img-tag">Regional · Sachsen</span>
+        </div>
+        <div class="usp-row-text">
+          <h3>Tiere persönlich auf der <em>Weide</em>.</h3>
+          <p>
+            Michael fährt selbst zu den Höfen und wählt die Tiere aus. Kurze Wege, maximale Frische, volle Transparenz, vom Stall bis in die Theke. Wir wissen, woher unser Fleisch kommt. Unsere Kunden auch.
+          </p>
+          <span class="row-meta">100 % Regional · Volle Transparenz</span>
+        </div>
+      </div>
+
+      <div class="usp-row reverse reveal">
+        <div class="usp-row-img">
+          <img src="assets/img/px-12488617.jpg" alt="Wurstkammer · Versandvorbereitung" loading="lazy">
+          <span class="usp-img-tag">DE-weit · Italien</span>
+        </div>
+        <div class="usp-row-text">
+          <h3>Versand in der <em>Thermbox</em>.</h3>
+          <p>
+            Den Goldprämierter Eber und ausgewählte Spezialitäten verschicken wir in hochwertigen Thermboxen deutschlandweit. Frisch bei dir zu Hause — schon bis nach Rom gegangen. Bestellung Mo–Mi, Versand Do, Lieferung Fr.
+          </p>
+          <span class="row-meta">Thermbox-Logistik · Mo–Mi bestellen</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SORTIMENT — full-bleed Editorial -->
+<section class="ed-sortiment">
+  <img src="assets/img/sortiment.webp" alt="Premium-Sortiment: marmorierte Steaks und frische Bratwürste auf Metzgerpapier" loading="lazy">
+  <div class="ed-sortiment-inner">
+    <div class="ed-sortiment-box">
+      <span class="ed-kicker">Das Sortiment</span>
+      <h2 class="ed-h2">Vom Steak bis zur <em>Spezialwurst</em>.</h2>
+      <p>Rind, Schwein, Kalb, Lamm, Geflügel und Wild — persönlich auf der Weide ausgewählt, im eigenen Haus zerlegt und verarbeitet. Dazu täglich frische Wurstspezialitäten nach Rezepten, die kein zweiter hat.</p>
+      <a href="shop.html" class="btn btn-red btn-lg">Zum Shop</a>
+    </div>
+  </div>
+</section>
+
+<!-- COUNTERS — Editorial Display -->
+<section class="sect sect-flush-t" id="zahlen">
+  <div class="container">
+    <div class="counter-editorial">
+      <div class="counter-item reveal">
+        <div class="counter-num-xxl"><span data-target="5000">0</span><span class="suffix">+</span></div>
+        <div class="counter-eyebrow">Pro Wochenende</div>
+        <div class="counter-desc">Würste verlassen unsere Manufaktur jedes Wochenende, alle handgefüllt.</div>
+      </div>
+      <div class="counter-item reveal reveal-d1">
+        <div class="counter-num-xxl"><span data-target="2019" data-year="true">0</span></div>
+        <div class="counter-eyebrow">Gegründet</div>
+        <div class="counter-desc">Im Frühjahr 2019 öffnete der Laden in der Marktstraße in Musterstadt.</div>
+      </div>
+      <div class="counter-item reveal reveal-d2">
+        <div class="counter-num-xxl"><span data-target="7">0</span></div>
+        <div class="counter-eyebrow">Im Team</div>
+        <div class="counter-desc">Sieben Köpfe: Fleischer, Verkäufer, Auszubildende. Jeder ein Handwerker.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTYSERVICE TEASER -->
+<section class="sect sect-flush-t sect-party">
+  <div class="container">
+    <div class="two-col-wide">
+      <div class="reveal">
+        <span class="label">Für euren besonderen Abend</span>
+        <h2 class="mb-20">Partyservice &amp;<br>Grillbuffet</h2>
+        <p class="text-lead mb-32">
+          Von der Familienfeier bis zum Firmen-Event: Michael und sein Team kommen zu euch. Grillbuffet-Pakete, frische Produkte aus eigener Herstellung, professioneller Aufbau und Service. <strong>In 30 Sekunden zum unverbindlichen Preis.</strong>
+        </p>
+        <div class="btn-row">
+          <a href="partyservice.html#kalkulator" class="btn btn-red btn-lg">Preis in 30 Sek. berechnen</a>
+          <a href="partyservice.html" class="btn btn-glass btn-lg">Pakete ansehen</a>
+        </div>
+      </div>
+      <div class="feature-list reveal reveal-d2">
+        <div class="glass icon-bar">
+          <div class="icon-bar-line"></div>
+          <div><div class="icon-bar-title">Grillbuffet-Pakete</div><div class="icon-bar-sub">3 Pakete ab 15 Euro pro Person</div></div>
+        </div>
+        <div class="glass icon-bar">
+          <div class="icon-bar-line"></div>
+          <div><div class="icon-bar-title">Anfahrt inklusive Kalkulation</div><div class="icon-bar-sub">Preisrechner auf der Partyservice-Seite</div></div>
+        </div>
+        <div class="glass icon-bar">
+          <div class="icon-bar-line"></div>
+          <div><div class="icon-bar-title">Personal &amp; Aufbau</div><div class="icon-bar-sub">Komplett-Service für 10–500 Personen</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sect sect-bg-fire" id="reviews">
+  <div class="container">
+    <div class="section-head text-center reveal">
+            <h2>Google <em>Bewertungen</em></h2>
+      <div class="rating-row">
+        <span class="rating-stars-anim"><span></span><span></span><span></span><span></span><span></span></span>
+        <span class="rating-score">4,9 / 5</span>
+        <span class="text-muted">· Google Bewertungen</span>
+      </div>
+    </div>
+    <div class="grid-3">
+      <div class="glass review-card reveal">
+        <div class="stars"><span></span><span></span><span></span><span></span><span></span></div>
+        <p class="review-text">"Seit ich den Scharfen Eber kenne, kauf ich woanders nichts mehr. Absolut genial gewürzt, man schmeckt sofort warum das Goldprämiert ist."</p>
+        <div class="reviewer"><div class="reviewer-avatar">MK</div><div><div class="reviewer-name">Markus K.</div><div class="reviewer-meta">Google · vor 2 Wochen</div></div></div>
+      </div>
+      <div class="glass review-card reveal reveal-d1">
+        <div class="stars"><span></span><span></span><span></span><span></span><span></span></div>
+        <p class="review-text">"Partyservice für meine Firmenfeier: alles perfekt organisiert. Das Buffet war so gut, dass unsere Mitarbeiter fragten, wann wir das nächste Mal buchen."</p>
+        <div class="reviewer"><div class="reviewer-avatar">SB</div><div><div class="reviewer-name">Sandra B.</div><div class="reviewer-meta">Google · vor 1 Monat</div></div></div>
+      </div>
+      <div class="glass review-card reveal reveal-d2">
+        <div class="stars"><span></span><span></span><span></span><span></span><span></span></div>
+        <p class="review-text">"Für meinen Geburtstag Würste bestellt und die ganze Familie begeistert. Lieferung in super Verpackung, alles frisch. Absolut empfehlenswert!"</p>
+        <div class="reviewer"><div class="reviewer-avatar">TH</div><div><div class="reviewer-name">Thomas H.</div><div class="reviewer-meta">Google · vor 3 Wochen</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOURS + CONTACT -->
+<section class="sect sect-flush-t">
+  <div class="container">
+    <div class="section-head text-center reveal" style="margin-bottom:34px;">
+            <h2>Mitten in <em>Musterstadt</em></h2>
+    </div>
+    <div class="reveal" style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:44px;">
+      <img src="assets/img/px-35023463.jpg" alt="Verkaufsraum mit Frischetheke" loading="lazy" style="width:100%; height:340px; object-fit:cover; border-radius:18px;">
+      <img src="assets/img/px-12488617.jpg" alt="Hausgemachte Würste in der Reifekammer" loading="lazy" style="width:100%; height:340px; object-fit:cover; border-radius:18px;">
+    </div>
+    <div class="two-col">
+      <div class="glass card-pad reveal">
+        <span class="label">Öffnungszeiten</span>
+        <ul class="hours-list">
+          <li class="hours-row"><span class="hours-day">Montag</span><span class="hours-time closed">Geschlossen</span></li>
+          <li class="hours-row"><span class="hours-day">Dienstag</span><span class="hours-time">11:00 – 18:00</span></li>
+          <li class="hours-row"><span class="hours-day">Mittwoch</span><span class="hours-time">10:00 – 18:00</span></li>
+          <li class="hours-row"><span class="hours-day">Donnerstag</span><span class="hours-time">08:00 – 18:00</span></li>
+          <li class="hours-row"><span class="hours-day">Freitag</span><span class="hours-time">08:00 – 18:00</span></li>
+          <li class="hours-row"><span class="hours-day">Samstag</span><span class="hours-time">08:00 – 12:00</span></li>
+          <li class="hours-row"><span class="hours-day">Sonntag</span><span class="hours-time closed">Geschlossen</span></li>
+        </ul>
+      </div>
+      <div class="glass card-pad reveal reveal-d1">
+        <span class="label">So findest du uns</span>
+        <dl class="info-list">
+          <dt>Adresse</dt><dd>Marktstraße 14, 09000 Musterstadt</dd>
+          <dt>Telefon</dt><dd><a href="tel:+491234567890">0123 456 78 90</a></dd>
+          <dt>E-Mail</dt><dd><a href="mailto:info@fleischerei-eichenhof.de">info@fleischerei-eichenhof.de</a></dd>
+        </dl>
+        <div class="btn-row mt-32">
+          <a href="tel:+491234567890" class="btn btn-red btn-sm">Anrufen</a>
+          <a href="https://wa.me/4915254190819" class="btn btn-glass btn-sm" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="kontakt.html" class="btn btn-outline-gold btn-sm">Kontaktformular</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-name">Fleischerei <em>Eichenhof</em></div>
+        <div class="logo-award">Meisterbetrieb · Michael Wendt</div>
+        <p>Handgemachte Fleisch- und Wurstspezialitäten aus Musterstadt. Goldprämierte Wurstqualität aus dem Meisterbetrieb. Regional. Handwerk. Leidenschaft.</p>
+        <address>Marktstraße 14<br>09000 Musterstadt<br><a href="tel:+491234567890">0123 456 78 90</a></address>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigation</div>
+        <div class="footer-links">
+          <a href="index.html">Startseite</a>
+          <a href="shop.html">Shop</a>
+          <a href="partyservice.html">Partyservice</a>
+          <a href="ueber-uns.html">Über uns</a>
+          <a href="kontakt.html">Kontakt</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Leistungen</div>
+        <div class="footer-links">
+          <a href="shop.html">Online-Shop</a>
+          <a href="partyservice.html">Grillbuffet</a>
+          <a href="partyservice.html">Catering</a>
+          <a href="partyservice.html#buchung">Termin anfragen</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Social Media</div>
+        <div class="footer-links">
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">Facebook</a>
+          <a href="#" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://wa.me/4915254190819" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>&#169; <span class="year"></span> Fleischerei Eichenhof · Musterstadt</div>
+      <div class="footer-legal">
+        <button data-open="impressum">Impressum</button>
+        <button data-open="datenschutz">Datenschutz</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FAB -->
+<a class="fab-whatsapp" href="https://wa.me/4915254190819" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- CART BADGE -->
+<div class="glass cart-badge" id="cartBadge">
+  <div class="cart-count" id="cartCount">0</div>
+  <div class="cart-text">Produkte im Warenkorb</div>
+  <a href="shop.html#warenkorb" class="cart-link">Zur Bestellung</a>
+</div>
+
+<!-- DRAWERS -->
+<div class="drawer-overlay"></div>
+<aside class="legal-drawer" id="drawer-impressum" role="dialog" aria-label="Impressum">
+  <button class="drawer-close" aria-label="Schließen">&#x2715;</button>
+  <h2>Impressum</h2>
+  <p class="demo-note"><strong>Demo-Seite.</strong> Die Fleischerei Eichenhof ist ein Musterbetrieb von VALORIS Webdesign &amp; SEO. Alle Namen, Anschriften, Telefonnummern und Preise sind Beispieldaten und gehören zu keinem realen Unternehmen. Verantwortlich für diese Demo-Seite: Frederic Bochmann, Bochmann Dienstleistungen, Karl-Kippenhahn-Straße 17, 08058 Zwickau, <a href="mailto:frederic@valoris-auftragsstruktur.de">frederic@valoris-auftragsstruktur.de</a>.</p>
+  <h3>Angaben gemäß § 5 TMG</h3>
+  <address>Michael Wendt<br>Fleischerei Eichenhof<br>Marktstraße 14<br>09000 Musterstadt</address>
+  <h3>Kontakt</h3>
+  <p>Telefon: 0123 456 78 90<br>E-Mail: <a href="mailto:info@fleischerei-eichenhof.de">info@fleischerei-eichenhof.de</a></p>
+  <h3>Berufsbezeichnung</h3>
+  <p>Fleischermeister (verliehen in der Bundesrepublik Deutschland)</p>
+  <h3>Zuständige Kammer</h3>
+  <p>Handwerkskammer Chemnitz<br>Limbacher Straße 195, 09116 Chemnitz<br><a href="https://www.hwk-chemnitz.de" target="_blank" rel="noopener">www.hwk-chemnitz.de</a></p>
+  <h3>Umsatzsteuer-ID</h3>
+  <p>wird bei Beauftragung ergänzt (Beispieldaten)</p>
+  <h3>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h3>
+  <p>Michael Wendt, Marktstraße 14, 09000 Musterstadt</p>
+  <h3>Streitschlichtung</h3>
+  <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung bereit: <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p>
+</aside>
+<aside class="legal-drawer" id="drawer-datenschutz" role="dialog" aria-label="Datenschutz">
+  <button class="drawer-close" aria-label="Schließen">&#x2715;</button>
+  <h2>Datenschutz&shy;erklärung</h2>
+  <p class="demo-note"><strong>Demo-Seite.</strong> Diese Seite ist ein Muster von VALORIS Webdesign &amp; SEO und verarbeitet keine echten Kundendaten. Bestellungen, Anfragen und Portal-Einträge bleiben ausschließlich im Speicher Ihres eigenen Browsers.</p>
+  <h3>1. Verantwortliche Stelle</h3>
+  <address>Fleischerei Eichenhof<br>Marktstraße 14, 09000 Musterstadt<br>info@fleischerei-eichenhof.de</address>
+  <h3>2. Datenerfassung</h3>
+  <p>Beim Besuch der Website werden automatisch Informationen wie IP-Adresse, Browsertyp und Zugriffszeit erfasst. Diese Daten werden nicht mit anderen Daten zusammengeführt.</p>
+  <h3>3. Kontaktformular</h3>
+  <p>Angaben aus dem Kontaktformular werden ausschließlich zur Bearbeitung der Anfrage gespeichert und nicht weitergegeben.</p>
+  <h3>4. Google Maps</h3>
+  <p>Die Karte wird erst nach ausdrücklichem Klick auf „Karte laden" geladen (Zwei-Klick-Lösung). Vorher besteht keine Verbindung zu Google. Anbieter: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.</p>
+  <h3>5. Ihre Rechte</h3>
+  <p>Auskunft, Berichtigung, Einschränkung und Löschung: info@fleischerei-eichenhof.de</p>
+</aside>
+
+<!-- GSAP synchron für Pinned Scroll + Parallax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js?v=rk37"></script>
+<script src="js/premium.js?v=rk37"></script>
+<script>
+let cartItems = JSON.parse(localStorage.getItem('eichenhof_cart') || '[]');
+function addToCart(btn, name, price) {
+  cartItems.push({ name, price });
+  localStorage.setItem('eichenhof_cart', JSON.stringify(cartItems));
+  const badge = document.getElementById('cartBadge');
+  document.getElementById('cartCount').textContent = cartItems.length;
+  badge.classList.add('show');
+  btn.textContent = 'OK';
+  btn.style.background = 'var(--gold)';
+  setTimeout(() => { btn.textContent = '+'; btn.style.background = ''; }, 1800);
+}
+
+/* Today highlight in Öffnungszeiten */
+(function() {
+  const days = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  const today = days[new Date().getDay()];
+  document.querySelectorAll('.hours-day').forEach(el => {
+    if (el.textContent.trim() === today) {
+      el.closest('.hours-row')?.classList.add('today');
+      const b = document.createElement('span'); b.className = 'today-badge'; b.textContent = 'Heute';
+      el.appendChild(b);
+    }
+  });
+})();
+
+/* Live "heute geöffnet"-Status im Hero */
+(function(){
+  const el = document.getElementById('heroStatus'); if(!el) return;
+  // Öffnungszeiten je Wochentag (0=So .. 6=Sa): [openH, openM, closeH, closeM] oder null
+  const H = {0:null, 1:null, 2:[11,0,18,0], 3:[10,0,18,0], 4:[8,0,18,0], 5:[8,0,18,0], 6:[8,0,12,0]};
+  const names = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+  const now = new Date(), d = now.getDay(), t = now.getHours()*60 + now.getMinutes();
+  const fmt = (h,m)=> (h<10?'0':'')+h+':'+(m<10?'0':'')+m;
+  const today = H[d]; let open=false, msg='';
+  if (today){ const o=today[0]*60+today[1], c=today[2]*60+today[3];
+    if (t>=o && t<c){ open=true; msg='Heute geöffnet bis '+fmt(today[2],today[3])+' Uhr'; }
+    else if (t<o){ msg='Heute ab '+fmt(today[0],today[1])+' Uhr geöffnet'; }
+  }
+  if (!open && !msg){ for(let i=1;i<=7;i++){ const nd=(d+i)%7; if(H[nd]){ msg=(i===1?'Morgen':names[nd])+' ab '+fmt(H[nd][0],H[nd][1])+' Uhr geöffnet'; break; } } }
+  el.innerHTML = '<span class="hs-dot '+(open?'on':'off')+'"></span>'+msg;
+})();
+</script>
+
+<!-- (Three.js entfernt: Medaille jetzt Foto, Hero-Stats nutzen CSS-Glas) -->
+
+<!-- ===== VALORIS DEMO-LEISTE (nur Showcase — beim Kundenprojekt entfernen) ===== -->
+<div class="vd-bar" role="complementary" aria-label="Hinweis: Demo-Website">
+  <div class="vd-bar__text">
+    <span class="vd-bar__dot" aria-hidden="true"></span>
+    <span class="vd-bar__label"><b>Demo-Website</b> — Musterbetrieb, kein echtes Unternehmen.
+      <span>So kann Ihre Fleischerei online aussehen.</span></span>
+  </div>
+  <div class="vd-bar__actions">
+    <a class="vd-bar__cta" href="https://wa.me/4915254190819" target="_blank" rel="noopener">Für meinen Betrieb anfragen</a>
+    <a class="vd-bar__link" href="https://www.valoris-auftragsstruktur.de" target="_blank" rel="noopener">VALORIS Webdesign &amp; SEO</a>
+  </div>
+</div>
+</body>
+</html>
