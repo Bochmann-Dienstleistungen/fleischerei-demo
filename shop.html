@@ -58,7 +58,7 @@
 .delivery-opt-name { font-size:0.875rem; font-weight:700; margin-bottom:4px; }
 .delivery-opt-desc { font-size:0.75rem; color:var(--text-muted); }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Fleischerei Eichenhof","description":"Handgemachte Fleisch- und Wurstspezialitäten aus dem Meisterbetrieb, goldprämierte Wurstqualität.","address":{"@type":"PostalAddress","streetAddress":"Marktstraße 14","addressLocality":"Musterstadt","postalCode":"09000","addressCountry":"DE"},"telephone":"+491234567890","email":"info@fleischerei-eichenhof.de","openingHours":["Tu 11:00-18:00","We 10:00-18:00","Th 08:00-18:00","Fr 08:00-18:00","Sa 08:00-12:00"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Fleischerei Eichenhof","description":"Handgemachte Fleisch- und Wurstspezialitäten aus dem Meisterbetrieb, goldprämierte Wurstqualität.","address":{"@type":"PostalAddress","streetAddress":"Marktstraße 14","addressLocality":"Musterstadt","postalCode":"09000","addressCountry":"DE"},"telephone":"+491234567890","email":"info@fleischerei-eichenhof.de","openingHours":["Tu 08:00-18:00","We 08:00-18:00","Th 08:00-18:00","Fr 08:00-18:00","Sa 08:00-12:00"]}</script>
 <link rel="stylesheet" href="css/valoris-demo.css?v=rk37">
 </head>
 <body>
@@ -277,13 +277,13 @@
 <script>
 /* ===== PRODUKTDATEN ===== */
 const PRODUCTS = [
-  {id:'schwan', name:'Scharfer Eber', size:'500 g', price:7.90, unit:'/ 500 g', cat:['highlights','versand','wurst'], tag:'Goldprämiert', champ:true, img:'assets/img/eber-2.webp', desc:'Jalapeños, Cheddar, Rohgewürze: die goldprämierte Bratwurst und unsere meistverkaufte Sorte. Handgefüllt, Versand DE-weit in der Thermbox.'},
+  {id:'schwan', name:'Glutwurst', size:'500 g', price:7.90, unit:'/ 500 g', cat:['highlights','versand','wurst'], tag:'Goldprämiert', champ:true, img:'assets/img/eber-2.webp', desc:'Jalapeños, Cheddar, Rohgewürze: die goldprämierte Bratwurst und unsere meistverkaufte Sorte. Handgefüllt, Versand DE-weit in der Thermbox.'},
   {id:'klassik', name:'Bratwurst Klassisch', size:'500 g', price:5.90, unit:'/ 500 g', cat:['highlights','wurst'], tag:'Bestseller', img:'assets/img/px-8508107.jpg', desc:'Nach DDR-Originalrezept, handgefüllt und täglich frisch. Die sächsische Tradition pur, mit Rohgewürzen statt Fertigmischung.'},
-  {id:'box', name:'Goldprämiert Box', size:'1,5 kg', price:21.90, unit:'inkl. Verpackung', cat:['versand','highlights'], tag:'Versandpaket', champ:true, img:'assets/img/hero-eber.webp', desc:'3× Scharfer Eber + 3× Bratwurst Klassisch in der Thermbox. Das perfekte Geschenk, deutschlandweit verschickt.'},
+  {id:'box', name:'Goldprämiert Box', size:'1,5 kg', price:21.90, unit:'inkl. Verpackung', cat:['versand','highlights'], tag:'Versandpaket', champ:true, img:'assets/img/hero-eber.webp', desc:'3× Glutwurst + 3× Bratwurst Klassisch in der Thermbox. Das perfekte Geschenk, deutschlandweit verschickt.'},
   {id:'nacken', name:'Nackensteak mariniert', size:'kg', price:12.90, unit:'/ kg', cat:['fleisch','highlights'], tag:'', img:'assets/img/px-12473068.jpg', desc:'Schweinefleisch aus regionaler Haltung, hausmariniert. Für den perfekten Grillabend.'},
   {id:'ribs', name:'Spareribs Hausrezept', size:'kg', price:14.90, unit:'/ kg', cat:['fleisch'], tag:'Hausrezept', img:'assets/img/px-1251198.jpg', desc:'Langsam marinierte Rippchen nach Michaels Geheimrezept. Nur auf Vorbestellung erhältlich.'},
   {id:'rind', name:'Rindersteak', size:'200–300 g/Stück', price:8.90, unit:'ab, / Stück', cat:['fleisch'], tag:'', img:'assets/img/px-1307658.jpg', desc:'Regionales Rind, sorgfältig ausgewählt und trocken gereift. Für Fleischliebhaber.'},
-  {id:'mix', name:'Grillwurst-Mix Party', size:'1 kg', price:13.90, unit:'/ kg', cat:['wurst','highlights'], tag:'Party-Paket', img:'assets/img/steaks.webp', desc:'4 verschiedene Wurstspezialitäten im Mix, inklusive Scharfer Eber, Klassisch und 2 Hauskreationen.'},
+  {id:'mix', name:'Grillwurst-Mix Party', size:'1 kg', price:13.90, unit:'/ kg', cat:['wurst','highlights'], tag:'Party-Paket', img:'assets/img/steaks.webp', desc:'4 verschiedene Wurstspezialitäten im Mix, inklusive Glutwurst, Klassisch und 2 Hauskreationen.'},
   {id:'salat', name:'Delikatesssalat Hausmix', size:'250 g', price:3.20, unit:'/ 250 g', cat:['salate'], tag:'Täglich frisch', img:'assets/img/px-1640777.jpg', desc:'Täglich frisch zubereitet, wechselnde Sorten. Nur im Laden erhältlich, kein Versand.'},
   {id:'fleischwurst', name:'Fleischwurst hausgemacht', size:'500 g', price:4.90, unit:'/ 500 g', cat:['wurst'], tag:'', img:'assets/img/px-769289.jpg', desc:'Klassische Fleischwurst nach bewährtem Rezept. Rohgewürze, ohne Zusatzstoffe.'},
   {id:'sortiment', name:'Wurst-Käse-Platte', size:'ab 10 Pers.', price:0, unit:'auf Anfrage', cat:['salate','highlights'], tag:'Vorbestellung', img:'assets/img/sortiment.webp', desc:'Wurst-, Käse- und Schinkenplatten auf Vorbestellung. Perfekt für Events ab 10 Personen, individuell zusammengestellt.'}

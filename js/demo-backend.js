@@ -51,7 +51,7 @@
     var t = new Date(); t.setDate(t.getDate() + CFG.PICKUP_LEAD_DAYS);
     while (CFG.RUHETAGE.indexOf(t.getDay()) > -1) t.setDate(t.getDate() + 1);
     var day = iso(t);
-    [['Familie Krause', '0170 1234567', [['2×', 'Scharfer Eber (500 g)'], ['1×', 'Nackensteak mariniert']], '21,70 €'],
+    [['Familie Krause', '0170 1234567', [['2×', 'Glutwurst (500 g)'], ['1×', 'Nackensteak mariniert']], '21,70 €'],
      ['Bäckerei Sommer', '0151 9876543', [['5×', 'Bratwurst Klassisch (500 g)']], '29,50 €'],
      ['Herr Lindner', '0375 555123', [['1×', 'Hausmacher Sülze'], ['2×', 'Fleischwurst am Stück']], '18,40 €']
     ].forEach(function (o, i) {

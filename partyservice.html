@@ -60,7 +60,7 @@
 .cal-nav button:hover { background:rgba(32,26,19,0.10); }
 .cal-month { font-weight:700; font-size:1rem; }
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Fleischerei Eichenhof","description":"Handgemachte Fleisch- und Wurstspezialitäten aus dem Meisterbetrieb, goldprämierte Wurstqualität.","address":{"@type":"PostalAddress","streetAddress":"Marktstraße 14","addressLocality":"Musterstadt","postalCode":"09000","addressCountry":"DE"},"telephone":"+491234567890","email":"info@fleischerei-eichenhof.de","openingHours":["Tu 11:00-18:00","We 10:00-18:00","Th 08:00-18:00","Fr 08:00-18:00","Sa 08:00-12:00"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"Fleischerei Eichenhof","description":"Handgemachte Fleisch- und Wurstspezialitäten aus dem Meisterbetrieb, goldprämierte Wurstqualität.","address":{"@type":"PostalAddress","streetAddress":"Marktstraße 14","addressLocality":"Musterstadt","postalCode":"09000","addressCountry":"DE"},"telephone":"+491234567890","email":"info@fleischerei-eichenhof.de","openingHours":["Tu 08:00-18:00","We 08:00-18:00","Th 08:00-18:00","Fr 08:00-18:00","Sa 08:00-12:00"]}</script>
 <link rel="stylesheet" href="css/valoris-demo.css?v=rk37">
 </head>
 <body>
@@ -135,8 +135,8 @@
       <!-- BASIS -->
       <div class="glass pkg-card reveal">
         <div class="pkg-head">
-          <span class="pkg-label">Eber Klassik</span>
-          <div class="pkg-name">Eber Klassik</div>
+          <span class="pkg-label">Grill Klassik</span>
+          <div class="pkg-name">Grill Klassik</div>
           <div class="pkg-price">
             <span class="amount">25</span>
             <span class="per">€ / Person</span>
@@ -159,8 +159,8 @@
       <div class="glass glass-red pkg-card reveal reveal-d1" style="position:relative;">
         <div class="pkg-tag" style="position:absolute; top:20px; right:20px;">Beliebteste Wahl</div>
         <div class="pkg-head">
-          <span class="pkg-label gold">Eber Royal · Empfohlen</span>
-          <div class="pkg-name">Eber Royal</div>
+          <span class="pkg-label gold">Grill Royal · Empfohlen</span>
+          <div class="pkg-name">Grill Royal</div>
           <div class="pkg-price">
             <span class="amount">30</span>
             <span class="per">€ / Person</span>
@@ -182,8 +182,8 @@
       <!-- PREMIUM -->
       <div class="glass pkg-card reveal reveal-d2">
         <div class="pkg-head">
-          <span class="pkg-label">Goldener Eber</span>
-          <div class="pkg-name">Goldener Eber</div>
+          <span class="pkg-label">Grill Gold</span>
+          <div class="pkg-name">Grill Gold</div>
           <div class="pkg-price">
             <span class="amount">38</span>
             <span class="per">€ / Person</span>
@@ -192,7 +192,7 @@
         <div class="pkg-body">
           <ul class="pkg-features">
             <li><span class="check"></span>Alles aus Klassik</li>
-            <li><span class="check"></span>+ Scharfer Eber (Goldprämiert)</li>
+            <li><span class="check"></span>+ Glutwurst (Goldprämiert)</li>
             <li><span class="check"></span>+ 5 Delikatesssalate</li>
             <li><span class="check"></span>+ Dessert-Buffet</li>
             <li><span class="check"></span>Vollständige Bestuhlung</li>
@@ -234,9 +234,9 @@
         <div class="form-group">
           <label class="form-label">1. Grillbuffet-Paket wählen</label>
           <select class="form-input" id="calc-paket" aria-label="Grillbuffet-Paket wählen" onchange="calcUpdate()">
-            <option value="25">Eber Klassik — 25 €/Person</option>
-            <option value="30" selected>Eber Royal — 30 €/Person (Empfohlen)</option>
-            <option value="38">Goldener Eber — 38 €/Person</option>
+            <option value="25">Grill Klassik — 25 €/Person</option>
+            <option value="30" selected>Grill Royal — 30 €/Person (Empfohlen)</option>
+            <option value="38">Grill Gold — 38 €/Person</option>
           </select>
         </div>
 
@@ -246,7 +246,7 @@
           <div class="product-checks">
             <label class="check-item" id="check-schwan">
               <input type="checkbox" value="3.5" onchange="toggleCheck(this); calcUpdate()">
-              <div><div class="check-name">Goldprämierter Eber</div><div class="check-price">+ 3,50 €/Pers.</div></div>
+              <div><div class="check-name">Goldprämierte Glutwurst</div><div class="check-price">+ 3,50 €/Pers.</div></div>
             </label>
             <label class="check-item" id="check-spareribs">
               <input type="checkbox" value="4.0" onchange="toggleCheck(this); calcUpdate()">
@@ -404,9 +404,9 @@
             <div class="form-group">
               <label class="form-label" for="b-paket">Gewünschtes Paket</label>
               <select class="form-input" id="b-paket" name="paket">
-                <option>Eber Klassik (25 €/Pers.)</option>
-                <option selected>Eber Royal (30 €/Pers.)</option>
-                <option>Goldener Eber (38 €/Pers.)</option>
+                <option>Grill Klassik (25 €/Pers.)</option>
+                <option selected>Grill Royal (30 €/Pers.)</option>
+                <option>Grill Gold (38 €/Pers.)</option>
                 <option>Individuell</option>
               </select>
             </div>
@@ -642,7 +642,7 @@ function applyCalcToBooking() {
   const c = window.__calc; if (!c) return;
   const pers = document.getElementById('b-personen'); if (pers) pers.value = c.persons;
   const paketSel = document.getElementById('b-paket');
-  if (paketSel) { const map = {25:'Eber Klassik', 30:'Eber Royal', 38:'Goldener Eber'}; const want = map[c.paketVal];
+  if (paketSel) { const map = {25:'Grill Klassik', 30:'Grill Royal', 38:'Grill Gold'}; const want = map[c.paketVal];
     [...paketSel.options].forEach(o => { if (want) o.selected = o.text.startsWith(want); }); }
   const note = document.getElementById('b-nachricht');
   if (note && note.value.indexOf('Meine Kalkulation:') === -1) note.value = 'Meine Kalkulation: ' + c.summary + '\n\n' + note.value;
